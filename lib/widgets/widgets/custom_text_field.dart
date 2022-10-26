@@ -13,6 +13,8 @@ class CustomTextField extends StatelessWidget {
   var suffixIcon;
   var hintText;
   bool obscure;
+  var keyboardType;
+  var controller;
   bool readOnly;
   var lines;
   var height;
@@ -23,10 +25,12 @@ class CustomTextField extends StatelessWidget {
       {Key? key,
       this.title,
       this.name,
+        this.keyboardType,
         this.readOnly=false,
       this.color,
       this.height,
       this.hintText,
+        this.controller,
       this.lines,
       this.onSaved,
       this.validate,
@@ -75,9 +79,11 @@ class CustomTextField extends StatelessWidget {
                     obscureText: obscure,
                     onSaved: onSaved,
                     validator: validate,
+                    controller: controller,
                     autofocus: false,
                     maxLines: lines,
                     readOnly: readOnly,
+                    keyboardType: keyboardType,
                     textDirection: TextDirection.ltr,
                     decoration: InputDecoration(
                       prefixIcon: prefixIcon,
@@ -101,7 +107,7 @@ class CustomTextField extends StatelessWidget {
     Padding(
       padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 14.w),
       child: Container(
-        height: height,
+        height: height ?? .07.sh,
         width: 1.sw,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
@@ -110,9 +116,11 @@ class CustomTextField extends StatelessWidget {
         child: Padding(
           padding:  EdgeInsets.only(left: 14.0.w,),
           child: TextFormField(
+            keyboardType: keyboardType,
               obscureText: obscure,
               onSaved: onSaved,
               validator: validate,
+              controller: controller,
               autofocus: false,
               maxLines: lines??1,
               textDirection: TextDirection.ltr,

@@ -20,7 +20,7 @@ class Body extends StatelessWidget {
                     columnSpacing: 1,
                     horizontalMargin: 0,
                     dataRowHeight:
-                        state.vehicleList.length >= 10 ? .06.sh : .09.sh,
+                        state.vehicleList.length <= 10 ? .06.sh : .11.sh,
                     minWidth: 890,
                     columns: const [
                       DataColumn2(
@@ -39,9 +39,9 @@ class Body extends StatelessWidget {
                       DataColumn(
                         label: Center(child: Text('State')),
                       ),
-                      DataColumn(
+                      DataColumn2(
                         label: Center(child: Text('Type')),
-                      ),
+                          size: ColumnSize.L,),
                       DataColumn(
                         label: Center(child: Text('Size')),
                       ),
@@ -115,8 +115,8 @@ class Body extends StatelessWidget {
           } else if (state is AddVehicleLoading) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Center(
+              children:const [
+                 Center(
                   child: CircularProgressIndicator(
                     color: Colors.orange,
                   ),
@@ -133,10 +133,9 @@ class Body extends StatelessWidget {
                 child: DataTable2(
                     columnSpacing: 1,
                     horizontalMargin: 0,
-                    dataRowHeight:
-                    VehiclesCubit.get(context).vehicleList.length >= 10
+                    dataRowHeight: state.vehicleList.length >= 10
                         ? .06.sh
-                        : .09.sh,
+                        : .11.sh,
                     minWidth: 890,
                     columns: const [
                       DataColumn2(
@@ -157,6 +156,7 @@ class Body extends StatelessWidget {
                       ),
                       DataColumn(
                         label: Center(child: Text('Type')),
+
                       ),
                       DataColumn(
                         label: Center(child: Text('Size')),
@@ -257,7 +257,7 @@ class Body extends StatelessWidget {
                     dataRowHeight:
                         VehiclesCubit.get(context).vehicleList.length >= 10
                             ? .06.sh
-                            : .09.sh,
+                            : .11.sh,
                     minWidth: 890,
                     columns: const [
                       DataColumn2(
@@ -322,8 +322,8 @@ class Body extends StatelessWidget {
                                           .title!))),
                                   DataCell(Center(
                                       child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 16.0),
+                                    padding:  EdgeInsets.symmetric(
+                                        vertical:  16.sp),
                                     child: Center(
                                       child: ListView.builder(
                                           physics:

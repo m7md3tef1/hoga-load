@@ -7,11 +7,18 @@ class Validator{
       return null;
     }
   }
+  static String? validateAddress( value) {
+    if (value.isEmpty ) {
+      return 'Enter Address';
+    }else {
+      return null;
+    }
+  }
 
 
 
   static String? validatePhone( value) {
-    String pattern = r'(^[0-9]*$)';
+    var pattern = r'(^[0-9]*$)';
     RegExp regExp =RegExp(pattern);
     if (value.isEmpty) {
       return 'Enter Phone';

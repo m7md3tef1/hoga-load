@@ -50,6 +50,7 @@ class Body extends StatelessWidget {
                     rows: List<DataRow>.generate(
                         state.loadList.length,
                         (index) => DataRow(
+
                                 color: MaterialStateColor.resolveWith(
                                     (states) => index.isEven
                                         ? const Color(0xFFE0E0E0)

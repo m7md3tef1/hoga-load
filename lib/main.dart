@@ -17,6 +17,8 @@ import 'package:provider/provider.dart';
 import 'features/add_vehicle/cubit/getDataForm_cubit.dart';
 import 'features/add_vehicle/cubit/getVehicle_cubit.dart';
 import 'features/blogs/bloc/blog_cubit.dart';
+import 'features/change_password/cubit/changePass_cubit.dart';
+import 'features/dashboard/cubit/updateProfile_cubit.dart';
 import 'features/packages/cubit/package_cubit.dart';
 
 void main() async {
@@ -57,6 +59,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (_) => JopCubit()..getJop()),
         BlocProvider(create: (_) => PackageCubit()..getPackageCubit()),
+        BlocProvider(create: (_)=>ChangePassCubit()),
+        BlocProvider(create: (_)=>UpdateProfileCubit()),
         BlocProvider(
             create: (_) => BlogsCubit()
               ..getBlogsCubit(CacheHelper.getString(SharedKeys.token))..blogList),

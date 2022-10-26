@@ -12,7 +12,7 @@ class Api{
 
        var response=await Dio().get(baseUrl+'$url',options:
            Options(headers:{
-           "Authorization":"Bearer $authToken"
+             "auth":authToken
            } ),
          queryParameters: data
 
@@ -39,7 +39,7 @@ class Api{
     try{
       var response=await Dio().post(baseUrl+'$url',data: data,queryParameters:queryParams,options:
       Options(headers:{
-        "Authorization":"Bearer $authToken"
+        "auth":authToken
       }, )
       );
 
@@ -71,7 +71,7 @@ class Api{
      try{
        var response=await Dio().patch(baseUrl+'$url',data: data,options:
        Options(headers:{
-         "Authorization":"Bearer $authToken"
+         "auth":authToken
        } )
        );
        if(response.statusCode==200){
