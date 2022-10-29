@@ -26,7 +26,26 @@ class Instructions extends StatelessWidget {
         SizedBox(
           height: 23.h,
         ),
-        CustomButton(text: 'Add new vehicle', color: ColorManager.orange),      ],
+        CustomButton(
+            function: (){
+              VehiclesCubit.get(context).addVehicle(VehicleModel(
+                date: '10/27/2022',
+                originCountry: "Canada" ,
+                originState: "British Columbia" ,
+                originCity: "Vancouver",
+                destinationCountry:'Canada' ,
+                destinationState:'Ontario' ,
+                destinationCity: 'Brampton',
+                equipmentTypes: 'Reefer',
+                vehicleAttributes: 'Frozen',
+                vehicleTypes: 'Mini Truck',
+                vehicleSizes:'Full' ,
+                weight: '200',
+                instructions: 'dscdzvzv',
+              ));
+
+            },
+            text: 'Add new vehicle', color: ColorManager.orange),      ],
     );
   }
 }

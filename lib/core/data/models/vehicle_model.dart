@@ -30,13 +30,13 @@ class VehicleModel {
     weight = json['weight'];
     instructions = json['instructions'];
   }
-  String? date;
-  String? originCountry;
-  String? originState;
-  String? originCity;
-  String? destinationCountry;
-  String? destinationState;
-  String? destinationCity;
+  var date;
+  var originCountry;
+  var originState;
+  var originCity;
+  var destinationCountry;
+  var destinationState;
+  var destinationCity;
   var equipmentTypes;
   var vehicleAttributes;
   var vehicleTypes;

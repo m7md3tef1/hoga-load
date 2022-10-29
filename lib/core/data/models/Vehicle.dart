@@ -6,13 +6,13 @@ import 'DestinationState.dart';
 import 'DestinationCity.dart';
 import 'EquipmentTypes.dart';
 import 'Attributes.dart';
-import 'User.dart';
 import 'VehicleSizes.dart';
 import 'VehicleTypes.dart';
+import 'User.dart';
 import 'ViewdBy.dart';
 
-class GetVehicleModel {
-  GetVehicleModel({
+class Vehicle {
+  Vehicle({
       this.id, 
       this.availabilityDate, 
       this.originCountry, 
@@ -33,7 +33,7 @@ class GetVehicleModel {
       this.updatedAt, 
       this.deletedAt,});
 
-  GetVehicleModel.fromJson(dynamic json) {
+  Vehicle.fromJson(dynamic json) {
     id = json['id'];
     availabilityDate = json['availability_date'];
     originCountry = json['origin_country'] != null ? OriginCountry.fromJson(json['origin_country']) : null;
@@ -68,17 +68,7 @@ class GetVehicleModel {
     }
     weight = json['weight'];
     instructions = json['instructions'];
- //   user  = (json['user'] != null ? User.fromJson(json['user']) : null);
-
-
-    if (json['user'] != null) {
-      user = [];
-      json['user'].forEach((v) {
-        user!.add(User.fromJson(v));
-      });
-    }
-
-
+    user = (json['user'] != null ? User.fromJson(json['user']) : null)!;
     if (json['viewd_by'] != null) {
       viewdBy = [];
       json['viewd_by'].forEach((v) {
@@ -103,7 +93,7 @@ class GetVehicleModel {
   List<VehicleTypes>? vehicleTypes;
   String? weight;
   dynamic instructions;
-  List<User>? user;
+  User? user;
   List<ViewdBy>? viewdBy;
   String? createdAt;
   String? updatedAt;
@@ -146,7 +136,7 @@ class GetVehicleModel {
     map['weight'] = weight;
     map['instructions'] = instructions;
     if (user != null) {
-      map['user'] = user!.map((v) => v.toJson()).toList();
+      map['user'] = user!.toJson();
     }
     if (viewdBy != null) {
       map['viewd_by'] = viewdBy!.map((v) => v.toJson()).toList();

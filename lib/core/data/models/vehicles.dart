@@ -6,6 +6,7 @@ import 'DestinationState.dart';
 import 'DestinationCity.dart';
 import 'EquipmentTypes.dart';
 import 'Attributes.dart';
+import 'User.dart';
 import 'VehicleSizes.dart';
 import 'VehicleTypes.dart';
 import 'ViewdBy.dart';
@@ -21,14 +22,12 @@ class Vehicles {
     this.destinationState,
     this.destinationCity,
     this.equipmentTypes,
-    this.equipmentTypes2,
     this.attributes,
     this.vehicleSizes,
-    this.vehicleSizes2,
-
     this.vehicleTypes,
     this.weight,
     this.instructions,
+    this.user,
     this.viewdBy,
     this.createdAt,
     this.updatedAt,
@@ -68,19 +67,17 @@ class Vehicles {
       });
     }
     weight = json['weight'];
-//    instructions = json['instructions'];
-//
-//
-//
-//    if (json['viewd_by'] != null) {
-//      viewdBy = [];
-//      json['viewd_by'].forEach((v) {
-//        viewdBy!.add(ViewdBy.fromJson(v));
-//      });
-//    }
-//    createdAt = json['created_at'];
-//    updatedAt = json['updated_at'];
-//    deletedAt = json['deleted_at'];
+    instructions = json['instructions'];
+    user = (json['user'] != null ? User.fromJson(json['user']) : null)!;
+    if (json['viewd_by'] != null) {
+      viewdBy = [];
+      json['viewd_by'].forEach((v) {
+        viewdBy!.add(ViewdBy.fromJson(v));
+      });
+    }
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    deletedAt = json['deleted_at'];
   }
   int? id;
   String? availabilityDate;
@@ -94,11 +91,9 @@ class Vehicles {
   List<Attributes>? attributes;
   List<VehicleSizes>? vehicleSizes;
   List<VehicleTypes>? vehicleTypes;
-  List<String>? equipmentTypes2=[];
-  List<String>? vehicleSizes2=[];
-
   String? weight;
   dynamic instructions;
+  User? user;
   List<ViewdBy>? viewdBy;
   String? createdAt;
   String? updatedAt;
@@ -140,7 +135,9 @@ class Vehicles {
     }
     map['weight'] = weight;
     map['instructions'] = instructions;
-
+    if (user != null) {
+      map['user'] = user!.toJson();
+    }
     if (viewdBy != null) {
       map['viewd_by'] = viewdBy!.map((v) => v.toJson()).toList();
     }

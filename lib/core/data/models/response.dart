@@ -1,4 +1,5 @@
-import 'user.dart';
+import 'User.dart';
+
 
 class ResponseModel {
   ResponseModel({

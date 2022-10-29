@@ -11,6 +11,7 @@ import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 import 'package:hoga_load/widgets/widgets/custom_text_field.dart';
 
+import '../../core/data/models/vehicle_model.dart';
 import '../../core/widgets/custom_card.dart';
 import 'cubit/getDataForm_cubit.dart';
 import 'cubit/getVehicle_cubit.dart';

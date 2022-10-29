@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hoga_load/core/router/router.dart';
+import 'package:hoga_load/features/vehicles/units/vehicleDetail.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import 'package:hoga_load/widgets/widgets/custom_row.dart';
 import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';

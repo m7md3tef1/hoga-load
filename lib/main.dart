@@ -44,7 +44,6 @@ class MyApp extends StatelessWidget {
               ..getVehicleSizesCubit()
               ..getVehicleTypesCubit()
               ..getVehicleCubit()
-
         ),
         BlocProvider(
             create: (_) => DataFormCubit()

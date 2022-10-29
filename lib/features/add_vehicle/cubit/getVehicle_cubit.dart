@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hoga_load/core/data/models/GetVehicle_model.dart';
 import 'package:hoga_load/core/data/repository/add_vehicle_repo.dart';
 
 import '../../../core/data/api/api.dart';
@@ -19,10 +20,29 @@ class VehiclesCubit extends Cubit<AddVehicleStates> {
   List<AddVehicle> equipmentList = [];
   List<AddVehicle> vehicleSizeList = [];
   List<AddVehicle> vehiclesTypeList = [];
-  List<Vehicles>searchList=[];
-  List<Vehicles>vehicleList=[];
+  List<Vehicles> searchList = [];
+  List<Vehicles> vehicleList = [];
+
+  addVehicle(vehicleModel) async {
+     String token =await CacheHelper.getString(SharedKeys.token);
+    var response = Api().postHttp(
+      url: 'vehicles/add', data: vehicleModel.toJson(), authToken: token
+    );
+
+    print(response);
+    print('kkkkkkkkkkkkkkkkkkkkkkkkmmmmmm');
+print(token);
+    response
+        .then((value) => {print(value), emit(AddSuccess())})
+        .onError((error, stackTrace) => {
+          print('this error sdafsfsdfsdfdsfsdfsdfsdfs ------------------'),
+      print(error.toString()),
+              emit(AddFailed()),
+      print('this error ------------------'),
 
 
+            });
+  }
 
   getAttributesCubit() {
     connectivity.checkConnectivity().then((value) async {
@@ -42,8 +62,6 @@ class VehiclesCubit extends Cubit<AddVehicleStates> {
     });
   }
 
-
-
   getEquipmentsCubit() {
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
@@ -53,7 +71,7 @@ class VehiclesCubit extends Cubit<AddVehicleStates> {
             .then((value) => {
                   print('..................................'),
                   print(value),
-                equipmentList = value,
+                  equipmentList = value,
                   emit(GetEquipmentSuccess(value))
                 })
             .onError((error, stackTrace) =>
@@ -98,74 +116,66 @@ class VehiclesCubit extends Cubit<AddVehicleStates> {
     });
   }
 
-  getVehicleCubit(){
-    connectivity.checkConnectivity().then((value)async{
-      if(ConnectivityResult.none == value){
+  getVehicleCubit() {
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
-      }else{
-        VehicleRepo.getVehicles().then((value) => {
-          print('..................................'),
-          print(value),
-          vehicleList=value,
-          emit(GetVehicleSuccess(value))
-        }).onError((error, stackTrace) => {
-          emit(GetVehicleFailed(error.toString())),
-          print(error)
-
-        });
+      } else {
+        VehicleRepo.getVehicles()
+            .then((value) => {
+                  print('..................................'),
+                  print(value),
+                  vehicleList = value,
+                  emit(GetVehicleSuccess(value))
+                })
+            .onError((error, stackTrace) =>
+                {emit(GetVehicleFailed(error.toString())), print(error)});
       }
-
     });
   }
 
-  searchVehicles(val,context) {
+  searchVehicles(val, context) {
     searchList.clear();
     VehiclesCubit.get(context).vehicleList.forEach((i) {
-      if(i.weight!.toLowerCase().contains(val)||i.weight!.contains(val)){
+      if (i.weight!.toLowerCase().contains(val) || i.weight!.contains(val)) {
         searchList.add(i);
-      }
-      else if(i.availabilityDate!.toLowerCase().contains(val)||i.availabilityDate!.contains(val)){
+      } else if (i.availabilityDate!.toLowerCase().contains(val) ||
+          i.availabilityDate!.contains(val)) {
         searchList.add(i);
-
-      }else if(i.vehicleSizes2.toString().toLowerCase().contains(val)||i.vehicleSizes2.toString().contains(val)){
+      } else if (i.vehicleSizes.toString().toLowerCase().contains(val) ||
+          i.vehicleSizes.toString().contains(val)) {
         searchList.add(i);
-
-      }else if(i.id!.toString().contains(val)){
+      } else if (i.id!.toString().contains(val)) {
         searchList.add(i);
-
-      }else if(i.originState!.title!.toString().toLowerCase().contains(val)||i.originState!.title!.toString().contains(val)){
+      } else if (i.originState!.title!.toString().toLowerCase().contains(val) ||
+          i.originState!.title!.toString().contains(val)) {
         searchList.add(i);
-
-      }else if(i.originCountry!.title!.contains(val)||i.originCountry!.title!.toString().contains(val)){
+      } else if (i.originCountry!.title!.contains(val) ||
+          i.originCountry!.title!.toString().contains(val)) {
         searchList.add(i);
-
-      }else if(i.originCity!.title!.contains(val)||i.originCity!.title!.toString().toLowerCase().contains(val)){
+      } else if (i.originCity!.title!.contains(val) ||
+          i.originCity!.title!.toString().toLowerCase().contains(val)) {
         searchList.add(i);
-
-      }else if(i.equipmentTypes2.toString().contains(val)||i.equipmentTypes2.toString().toLowerCase().contains(val)){
+      } else if (i.equipmentTypes.toString().contains(val) ||
+          i.equipmentTypes.toString().toLowerCase().contains(val)) {
         searchList.add(i);
-
-      }else if(i.destinationCountry!.title!.contains(val)||i.destinationCountry!.title!.toString().contains(val)){
+      } else if (i.destinationCountry!.title!.contains(val) ||
+          i.destinationCountry!.title!.toString().contains(val)) {
         searchList.add(i);
-
-      }else if(i.destinationState!.title!.contains(val)||i.destinationState!.title!.toLowerCase().contains(val)){
+      } else if (i.destinationState!.title!.contains(val) ||
+          i.destinationState!.title!.toLowerCase().contains(val)) {
         searchList.add(i);
-
-      }else if(i.destinationCity!.title!.contains(val)||i.destinationCity!.title!.toLowerCase().contains(val)){
+      } else if (i.destinationCity!.title!.contains(val) ||
+          i.destinationCity!.title!.toLowerCase().contains(val)) {
         searchList.add(i);
-
-      }else{
+      } else {
         null;
-
       }
 
-
-      if(searchList!=null||searchList.length!=0){
+      if (searchList != null || searchList.length != 0) {
         emit(GetSearchSuccess(searchList));
-
-      }else{
+      } else {
         emit(GetSearchFailed('list is empty'));
-
       }
     });
   }
