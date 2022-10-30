@@ -6,7 +6,8 @@ import 'package:hoga_load/features/auth/units/custom_have_account.dart';
 import 'package:hoga_load/features/auth/units/customer_text_field.dart';
 import 'package:hoga_load/features/auth/units/profile_image.dart';
 import 'package:hoga_load/features/home/view.dart';
-import '../../core/data/models/user.dart';
+
+import '../../core/data/models/vehicle/user.dart';
 import '../../core/validator/validator.dart';
 import '../../core/widgets/custom_card.dart';
 import '../../widgets/widgets/custom_appbar.dart';

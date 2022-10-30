@@ -36,6 +36,8 @@ class VehiclesSize extends StatelessWidget {
               itemCount: VehiclesCubit.get(context).vehicleSizeList.length,
               itemBuilder: (BuildContext context, int index) {
                 return CustomCheckBox(
+                  index: index,
+                    boxKey: MasterKeys.vehicleSize.name,
                     value: value4,
                     text: VehiclesCubit.get(context).vehicleSizeList[index].title);
               },

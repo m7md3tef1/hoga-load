@@ -1,4 +1,4 @@
-import 'ProductType.dart';
+import '../ProductType.dart';
 
 class GetProductModel {
   GetProductModel({

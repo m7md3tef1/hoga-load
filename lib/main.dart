@@ -9,12 +9,12 @@ import 'package:hoga_load/features/auth/domain/auth_cubit.dart';
 import 'package:hoga_load/features/home/controller.dart';
 import 'package:hoga_load/features/jobs/cubit/getJop_cubit.dart';
 import 'package:hoga_load/features/loads/cubit/getLoad_cubit.dart';
-import 'package:hoga_load/features/loads/view.dart';
 import 'package:hoga_load/features/search_product/cubit/getProduct_cubit.dart';
 import 'package:hoga_load/features/splash/splash_view.dart';
 import 'package:provider/provider.dart';
 
-import 'features/add_vehicle/cubit/getDataForm_cubit.dart';
+import 'core/bloc_observer.dart';
+import 'core/master_cubit/getDataForm_cubit.dart';
 import 'features/add_vehicle/cubit/getVehicle_cubit.dart';
 import 'features/blogs/bloc/blog_cubit.dart';
 import 'features/change_password/cubit/changePass_cubit.dart';
@@ -24,7 +24,14 @@ import 'features/packages/cubit/package_cubit.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
-  runApp(const MyApp());
+  BlocOverrides.runZoned((){
+    runApp(const MyApp());
+
+  },
+      blocObserver: SimpleBlocObserver()
+
+  );
+
 }
 
 class MyApp extends StatelessWidget {
@@ -43,21 +50,19 @@ class MyApp extends StatelessWidget {
               ..getEquipmentsCubit()
               ..getVehicleSizesCubit()
               ..getVehicleTypesCubit()
-              ..getVehicleCubit()
+             // ..getVehicleCubit()
 
         ),
         BlocProvider(
             create: (_) => DataFormCubit()
-              ..getCity()
               ..getCountry()
-              ..getState()
               ..getProduct()),
         BlocProvider(
-            create: (_) => LoadsCubit()..getLoad()),
+            create: (_) => LoadsCubit()),
         BlocProvider(
-            create: (_) => ProductsCubit()..getProduct()),
+            create: (_) => ProductsCubit()),
         BlocProvider(
-            create: (_) => JopCubit()..getJop()),
+            create: (_) => JopCubit()),
         BlocProvider(create: (_) => PackageCubit()..getPackageCubit()),
         BlocProvider(create: (_)=>ChangePassCubit()),
         BlocProvider(create: (_)=>UpdateProfileCubit()),

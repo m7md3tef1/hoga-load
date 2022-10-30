@@ -1,12 +1,15 @@
-import 'package:hoga_load/core/data/models/GetJop_model.dart';
-import 'package:hoga_load/core/data/models/GetProduct_model.dart';
+import 'package:hoga_load/core/data/local/cacheHelper.dart';
+import 'package:hoga_load/core/keys/keys.dart';
+import 'package:hoga_load/core/master_cubit/getDataForm_cubit.dart';
 
 import '../api/api.dart';
-import '../models/Addvehicle_model.dart';
-import '../models/GetLoads_model.dart';
-import '../models/GetVehicle_model.dart';
 import '../models/Packages.dart';
-import '../models/vehicles.dart';
+import '../models/jobs/GetJop_model.dart';
+import '../models/loads/GetLoads_model.dart';
+import '../models/product/GetProduct_model.dart';
+import '../models/vehicle/Addvehicle_model.dart';
+import '../models/vehicle/GetVehicle_model.dart';
+import '../models/vehicle/vehicles.dart';
 
 class VehicleRepo{
 
@@ -27,21 +30,6 @@ class VehicleRepo{
 
   }
 
-  static Future< List <GetVehicleModel>>  getVehicle(url)async{
-    var response= await Api().getHttp(url: url);
-
-    List<GetVehicleModel>vehiclesList=[];
-    for(int i =0;i<response['records'].length;i++){
-      GetVehicleModel blogModel=GetVehicleModel.fromJson(response['records'][i]);
-      vehiclesList.add(blogModel);
-
-    }
-
-
-    return vehiclesList;
-
-
-  }
 
   static Future< List <Vehicles>>  getVehicles()async {
     var response= await Api().getHttp(url: 'vehicles');
@@ -139,5 +127,73 @@ class VehicleRepo{
 
   }
 
+  static Future< List <Vehicles>>  searchVehicles({search,equipmentSize,attributes,vehicleSize,vehicleType,context})async {
+    String token=await CacheHelper.getString(SharedKeys.token);
+    print("repooo");
+    print("equipment_types"+equipmentSize);
+    print("vehicle_attributes"+attributes);
+    print("vehicleSize"+vehicleSize);
+    print("vehicleType"+vehicleType);
+    print("origin_country_id"+DataFormCubit.get(context).countryOriginID.toString());
+    print("origin_country_id"+DataFormCubit.get(context).stateOriginID.toString());
+    print("origin_country_id"+DataFormCubit.get(context).cityOriginID.toString());
+    print("origin_country_id"+DataFormCubit.get(context).countryDestinationID.toString());
+    print("origin_country_id"+DataFormCubit.get(context).stateDestinationID.toString());
+
+
+
+
+    var response= await Api().getHttp(
+      url: 'vehicles',
+      authToken:token ,
+      data: {
+        "search":search,
+        "equipment_types":equipmentSize,
+        "vehicle_attributes":attributes,
+        "vehicle_sizes":vehicleSize,
+        "vehicle_types":vehicleType,
+        "origin_country_id":DataFormCubit.get(context).countryOriginID,
+        "origin_state_id":DataFormCubit.get(context).stateOriginID,
+        "origin_city_id":DataFormCubit.get(context).cityOriginID,
+        "destination_country_id":DataFormCubit.get(context).countryDestinationID,
+        "destination_state_id":DataFormCubit.get(context).stateDestinationID,
+        "destination_city_id":DataFormCubit.get(context).cityDestinationID,
+
+
+
+      }
+    );
+
+    List<Vehicles>searchList=[];
+
+    for(int i =0;i<response['records'].length;i++){
+      Vehicles blogModel=Vehicles.fromJson(response['records'][i]);
+
+
+      for(var element in blogModel.equipmentTypes!){
+        blogModel.equipmentTypes2!.add(element.title!);
+        print('oooooo${element.title}');
+        print( blogModel.equipmentTypes2);
+
+      }
+      for(var element in blogModel.vehicleSizes!){
+        blogModel.vehicleSizes2!.add(element.title!);
+        print('oooooo${element.title}');
+        print( blogModel.vehicleSizes2);
+
+      }
+      searchList.add(blogModel);
+
+
+
+    }
+
+    print(response.length);
+    print(searchList.length);
+
+    return searchList;
+
 
   }
+
+}

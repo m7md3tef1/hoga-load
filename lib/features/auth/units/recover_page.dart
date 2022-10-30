@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hoga_load/core/dialoges/toast.dart';
 import 'package:hoga_load/core/router/router.dart';
 import 'package:hoga_load/features/auth/units/customer_text_field.dart';
 
@@ -10,7 +9,6 @@ import '../../../core/widgets/custom_card.dart';
 import '../../../widgets/widgets/custom_appbar.dart';
 import '../../../widgets/widgets/custom_button.dart';
 import '../../../widgets/widgets/custom_scaffold.dart';
-import '../../home/view.dart';
 import '../domain/auth_cubit.dart';
 import '../domain/auth_states.dart';
 import '../login.dart';

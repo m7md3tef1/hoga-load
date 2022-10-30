@@ -23,7 +23,7 @@ class UploadProductsView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CustomAppbar(title: 'Uploaded Products'),
-          Expanded(child: const Uploaded()),
+          const Expanded(child: Uploaded()),
         ],
       ),
     );

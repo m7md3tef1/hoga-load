@@ -1,5 +1,5 @@
 
-part of '../view.dart';
+part of '../add_load_view.dart';
 
 class VehicleType extends StatelessWidget {
   bool value3=false;

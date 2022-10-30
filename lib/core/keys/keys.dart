@@ -15,3 +15,11 @@
     id,
 
   }
+
+  enum MasterKeys{
+    equipmentTypes,
+    attributes,
+    vehicleSize,
+    vehicleTypes,
+
+  }

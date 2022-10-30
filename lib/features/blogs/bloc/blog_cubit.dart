@@ -1,8 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hoga_load/core/data/models/blogs.dart';
 
-import '../../../core/data/models/vehicles.dart';
+import '../../../core/data/models/blogs/blogs.dart';
 import '../../../core/data/repository/blog_repo.dart';
 import 'blog_states.dart';
 

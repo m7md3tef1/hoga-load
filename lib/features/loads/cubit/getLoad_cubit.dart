@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hoga_load/core/data/models/GetLoads_model.dart';
-import 'package:hoga_load/core/data/repository/add_vehicle_repo.dart';
+import 'package:hoga_load/core/data/repository/vehicle_repo.dart';
 
+import '../../../core/data/models/loads/GetLoads_model.dart';
 import 'getLoad_states.dart';
 
 

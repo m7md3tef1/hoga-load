@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../core/color_manager/color_manager.dart';
 import '../../../widgets/widgets/custom_text.dart';
 class TitleText extends StatelessWidget {

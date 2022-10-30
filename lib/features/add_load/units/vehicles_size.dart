@@ -1,4 +1,4 @@
-part of '../view.dart';
+part of '../add_load_view.dart';
 
 class VehiclesSize extends StatelessWidget {
   bool value4 = false;

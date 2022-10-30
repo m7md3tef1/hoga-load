@@ -1,11 +1,13 @@
-import '../../../core/data/models/Addvehicle_model.dart';
-import '../../../core/data/models/vehicles.dart';
+import '../../../core/data/models/vehicle/Addvehicle_model.dart';
+import '../../../core/data/models/vehicle/vehicles.dart';
 
 
 
 abstract class AddVehicleStates{}
 
 class VehicleLoading extends AddVehicleStates{}
+class ChangeBox extends AddVehicleStates{}
+
 
 class AddSuccess extends AddVehicleStates{
 }

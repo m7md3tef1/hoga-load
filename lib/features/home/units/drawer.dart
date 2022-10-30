@@ -91,21 +91,7 @@ class OnDrawer extends StatelessWidget {
               icon: Icons.update,
               navigatename: const AddUpdateCardView(),
             ),
-            CustomRowDrawer(
-              text: 'AddProducts',
-              icon: Icons.add,
-              navigatename: const AddProductsView(),
-            ),
-            CustomRowDrawer(
-              text: 'AddLoads',
-              icon: Icons.add,
-              navigatename: const AddLoadsView(),
-            ),
-            CustomRowDrawer(
-              text: 'AddVehicles',
-              icon: Icons.add,
-              navigatename: const AddVehiclesView(),
-            ),
+
             CustomRowDrawer(
               text: 'AboutUs',
               icon: Icons.info_outline,

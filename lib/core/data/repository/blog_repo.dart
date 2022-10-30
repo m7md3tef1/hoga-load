@@ -1,8 +1,7 @@
 
 
-import 'package:hoga_load/core/data/models/blogs.dart';
-
 import '../api/api.dart';
+import '../models/blogs/blogs.dart';
 
 class BlogRepo{
   static Future< List <Blogs>>  getBlogs(token)async{

@@ -1,7 +1,4 @@
-import 'package:hoga_load/core/data/models/GetLoads_model.dart';
-
-import '../../../core/data/models/Addvehicle_model.dart';
-import '../../../core/data/models/vehicles.dart';
+import '../../../core/data/models/loads/GetLoads_model.dart';
 
 abstract class AddLoadStates {}
 

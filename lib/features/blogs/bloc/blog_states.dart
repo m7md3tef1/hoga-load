@@ -1,6 +1,6 @@
 
 
-import '../../../core/data/models/blogs.dart';
+import '../../../core/data/models/blogs/blogs.dart';
 
 abstract class BlogsState{}
 

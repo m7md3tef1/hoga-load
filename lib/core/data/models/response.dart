@@ -1,4 +1,4 @@
-import 'user.dart';
+import 'vehicle/user.dart';
 
 class ResponseModel {
   ResponseModel({

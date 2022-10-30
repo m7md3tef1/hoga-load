@@ -1,11 +1,12 @@
-import 'OriginCountry.dart';
-import 'OriginState.dart';
-import 'OriginCity.dart';
-import 'DestinationCountry.dart';
-import 'DestinationState.dart';
-import 'DestinationCity.dart';
-import 'EquipmentTypes.dart';
-import 'Attributes.dart';
+import 'package:hoga_load/core/data/models/vehicle/Attributes.dart';
+
+import '../master/DestinationCity.dart';
+import '../master/DestinationCountry.dart';
+import '../master/DestinationState.dart';
+import '../master/EquipmentTypes.dart';
+import '../master/OriginCity.dart';
+import '../master/OriginCountry.dart';
+import '../master/OriginState.dart';
 import 'VehicleSizes.dart';
 import 'VehicleTypes.dart';
 import 'ViewdBy.dart';
@@ -68,19 +69,19 @@ class Vehicles {
       });
     }
     weight = json['weight'];
-//    instructions = json['instructions'];
-//
-//
-//
-//    if (json['viewd_by'] != null) {
-//      viewdBy = [];
-//      json['viewd_by'].forEach((v) {
-//        viewdBy!.add(ViewdBy.fromJson(v));
-//      });
-//    }
-//    createdAt = json['created_at'];
-//    updatedAt = json['updated_at'];
-//    deletedAt = json['deleted_at'];
+    instructions = json['instructions'];
+
+
+
+    if (json['viewd_by'] != null) {
+      viewdBy = [];
+      json['viewd_by'].forEach((v) {
+        viewdBy!.add(ViewdBy.fromJson(v));
+      });
+    }
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    deletedAt = json['deleted_at'];
   }
   int? id;
   String? availabilityDate;

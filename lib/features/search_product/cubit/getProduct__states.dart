@@ -1,8 +1,4 @@
-import 'package:hoga_load/core/data/models/GetLoads_model.dart';
-import 'package:hoga_load/core/data/models/GetProduct_model.dart';
-
-import '../../../core/data/models/Addvehicle_model.dart';
-import '../../../core/data/models/vehicles.dart';
+import '../../../core/data/models/product/GetProduct_model.dart';
 
 abstract class AddProductStates {}
 

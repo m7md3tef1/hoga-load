@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/core/router/router.dart';
-import 'package:hoga_load/features/auth/domain/auth_cubit.dart';
 import 'package:hoga_load/features/auth/units/recover_page.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 class NotLogged extends StatelessWidget {

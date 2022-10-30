@@ -4,14 +4,15 @@ import 'package:hoga_load/core/app_images/app_images.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/features/about/units/value_container.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
-import 'units/small_container.dart';
 import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 
+import 'units/small_container.dart';
+
 part 'units/body.dart';
 part 'units/contact.dart';
-part 'units/video.dart';
 part 'units/our_values.dart';
+part 'units/video.dart';
 class AboutUsView extends StatelessWidget {
   const AboutUsView({Key? key}) : super(key: key);
 

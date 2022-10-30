@@ -1,11 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hoga_load/core/data/models/GetLoads_model.dart';
-import 'package:hoga_load/core/data/repository/add_vehicle_repo.dart';
+import 'package:hoga_load/core/data/repository/vehicle_repo.dart';
 import 'package:hoga_load/features/jobs/cubit/getJop_states.dart';
 
-import '../../../core/data/models/GetJop_model.dart';
+import '../../../core/data/models/jobs/GetJop_model.dart';
 
 class JopCubit extends Cubit<AddJopStates> {
   JopCubit() : super(AddJopLoading());

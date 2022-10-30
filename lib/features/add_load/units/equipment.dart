@@ -1,4 +1,4 @@
-part of '../view.dart';
+part of '../add_load_view.dart';
 class Equipment extends StatelessWidget {
   var value=false;
 

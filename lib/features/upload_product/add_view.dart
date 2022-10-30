@@ -8,9 +8,9 @@ import 'package:hoga_load/widgets/widgets/custom_text.dart';
 import 'package:hoga_load/widgets/widgets/custom_text_field.dart';
 
 import '../../core/widgets/custom_card.dart';
-import '../add_vehicle/cubit/getDataForm_cubit.dart';
+import '../../core/master_cubit/getDataForm_cubit.dart';
 
-part 'units/form.dart';
+part 'units/add_product_form.dart';
 
 class AddProductsView extends StatelessWidget {
   const AddProductsView({Key? key}) : super(key: key);

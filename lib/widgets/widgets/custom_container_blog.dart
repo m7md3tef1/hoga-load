@@ -7,7 +7,7 @@ import 'package:hoga_load/core/widgets/custom_card.dart';
 import 'package:hoga_load/features/blogs/blog_details.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 
-import '../../core/data/models/blogs.dart';
+import '../../core/data/models/blogs/blogs.dart';
 import '../../core/router/router.dart';
 
 class CustomContainerBlog extends StatelessWidget {

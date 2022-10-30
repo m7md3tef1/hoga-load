@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../core/app_images/app_images.dart';
-
 class CustomLogo extends StatelessWidget {
   const CustomLogo({Key? key}) : super(key: key);
 

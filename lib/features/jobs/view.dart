@@ -9,8 +9,6 @@ import 'package:hoga_load/widgets/widgets/custom_row.dart';
 import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 
-import '../add_vehicle/cubit/getVehicle_cubit.dart';
-
 part 'units/body.dart';
 class JobsView extends StatelessWidget {
   const JobsView({Key? key}) : super(key: key);

@@ -1,9 +1,11 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hoga_load/core/app_images/app_images.dart';
-import 'package:hoga_load/core/data/local/cacheHelper.dart';
-import 'package:hoga_load/core/keys/keys.dart';
 import 'package:hoga_load/features/auth/login.dart';
+
+import '../../core/data/local/cacheHelper.dart';
+import '../../core/keys/keys.dart';
+import '../home/view.dart';
 
 
 class SplashScreen extends StatelessWidget {
@@ -19,7 +21,7 @@ class SplashScreen extends StatelessWidget {
             splashIconSize: 150,
             splash: Image.asset(AppImages.logo),
             nextScreen:
-           // CacheHelper.getString(SharedKeys.token)!=null?const Home():
+            CacheHelper.getString(SharedKeys.token)!=null?const Home():
             Login(),
             splashTransition: SplashTransition.fadeTransition,
             backgroundColor: Colors.white));

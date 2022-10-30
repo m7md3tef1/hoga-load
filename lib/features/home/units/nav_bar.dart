@@ -11,7 +11,7 @@ class _BottomBar extends StatelessWidget {
 
           currentIndex: HomeCubit.get(context).currentIndex,
           onTap: (i) {
-            HomeCubit.get(context).changeBottom(i);
+            HomeCubit.get(context).changeBottom(i,context);
           },
           showUnselectedLabels: true,
           selectedLabelStyle: TextStyle(

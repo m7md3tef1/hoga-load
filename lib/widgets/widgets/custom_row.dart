@@ -10,8 +10,10 @@ import 'package:hoga_load/features/search_product/cubit/getProduct_cubit.dart';
 import '../../features/add_vehicle/cubit/getVehicle_cubit.dart';
 
 class CustomSearchRow extends StatelessWidget {
-  var index;
-  CustomSearchRow(this.index, {super.key});
+  int index;
+  var function;
+
+  CustomSearchRow(this.index, {super.key,this.function});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class CustomSearchRow extends StatelessWidget {
 
                       index == 1
                           ? VehiclesCubit.get(context)
-                              .searchVehicles(val.trim(), context)
+                              .searchVehicles(context,val:val.trim())
                           : index == 2
                               ? LoadsCubit.get(context)
                                   .searchLoads(val.trim(), context)
@@ -59,14 +61,17 @@ class CustomSearchRow extends StatelessWidget {
           SizedBox(
             width: 10.sp,
           ),
-          Container(
-            height: 50.h,
-            width: 50.w,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.r),
-                color: Colors.orangeAccent),
-            child: Center(
-              child: SvgPicture.asset(AppImages.slider),
+          InkWell(
+            onTap: function,
+            child: Container(
+              height: 50.h,
+              width: 50.w,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12.r),
+                  color: Colors.orangeAccent),
+              child: Center(
+                child: SvgPicture.asset(AppImages.slider),
+              ),
             ),
           )
         ],

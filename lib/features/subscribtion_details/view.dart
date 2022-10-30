@@ -1,13 +1,11 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hoga_load/core/color_manager/color_manager.dart';
-import 'package:hoga_load/core/widgets/custom_card_title.dart';
 import 'package:hoga_load/features/subscribtion_details/units/details.dart';
 import 'package:hoga_load/features/subscribtion_details/units/facilities.dart';
 import 'package:hoga_load/features/subscribtion_details/units/plans.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
+
 import '../../core/widgets/custom_card.dart';
 
 part 'units/body.dart';

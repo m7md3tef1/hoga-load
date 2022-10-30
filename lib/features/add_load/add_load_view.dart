@@ -8,15 +8,16 @@ import 'package:hoga_load/widgets/widgets/custom_checkbox.dart';
 import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 import 'package:hoga_load/widgets/widgets/custom_text_field.dart';
-import '../add_vehicle/cubit/getDataForm_cubit.dart';
+
+import '../../core/master_cubit/getDataForm_cubit.dart';
 import '../add_vehicle/cubit/getVehicle_cubit.dart';
 
-part 'units/form.dart';
-part 'units/equipment.dart';
 part 'units/attributes.dart';
-part 'units/vehicles_size.dart';
-part 'units/vehicle_type.dart';
+part 'units/equipment.dart';
+part 'units/form.dart';
 part 'units/instructon.dart';
+part 'units/vehicle_type.dart';
+part 'units/vehicles_size.dart';
 
 class AddLoadsView extends StatelessWidget {
   const AddLoadsView({Key? key}) : super(key: key);

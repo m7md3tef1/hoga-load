@@ -8,7 +8,6 @@ import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 
 import '../../core/app_images/app_images.dart';
 import '../../core/color_manager/color_manager.dart';
-import '../../widgets/widgets/custom_row.dart';
 import '../../widgets/widgets/custom_text.dart';
 import 'bloc/blog_cubit.dart';
 import 'bloc/blog_states.dart';

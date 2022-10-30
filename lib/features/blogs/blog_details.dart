@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
-import 'package:hoga_load/core/data/models/blogs.dart';
 import 'package:hoga_load/widgets/widgets/custom_container_blog.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
+
+import '../../core/data/models/blogs/blogs.dart';
 class BlogDetails extends StatelessWidget {
   final Blogs? blogs;
   const BlogDetails({super.key,this.blogs});

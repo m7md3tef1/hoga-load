@@ -1,10 +1,14 @@
+
+
+
+
+import 'package:hoga_load/core/data/models/jobs/jopTpe.dart';
 import 'package:hoga_load/core/data/models/state.dart';
 
-import 'Country.dart';
-import 'City.dart';
-import 'User.dart';
+import '../master/City.dart';
+import '../master/Country.dart';
+import '../vehicle/user.dart';
 import 'category.dart';
-import 'jopTpe.dart';
 
 class GetJopModel {
   GetJopModel({

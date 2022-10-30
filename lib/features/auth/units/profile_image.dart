@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../core/color_manager/color_manager.dart';
 import '../../../core/dialoges/pick_image.dart';
 import '../../../widgets/widgets/custom_text.dart';

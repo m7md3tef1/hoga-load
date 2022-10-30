@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/widgets/widgets/custom_button.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
-import 'package:hoga_load/widgets/widgets/custom_text_field.dart';
 
 class CustomPackage extends StatefulWidget {
   CustomPackage({

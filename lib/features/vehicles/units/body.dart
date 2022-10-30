@@ -2,374 +2,258 @@ part of '../view.dart';
 
 class Body extends StatelessWidget {
   Body({Key? key}) : super(key: key);
-
+  List titlesList=[
+    'Available',
+    'Origin',
+    'State',
+    'Destination',
+    'State',
+    'Type',
+    'Size'
+  ];
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<VehiclesCubit, AddVehicleStates>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          if (state is GetSearchFailed) {
-            return Center(child: CustomText(text: state.msg));
-          } else if (state is GetSearchSuccess) {
-            return Container(
-              height: .9.sh,
-              width: 1.sw,
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: DataTable2(
-                    columnSpacing: 1,
-                    horizontalMargin: 0,
-                    dataRowHeight:
-                        state.vehicleList.length <= 10 ? .06.sh : .11.sh,
-                    minWidth: 890,
-                    columns: const [
-                      DataColumn2(
-                        label: Center(child: Text('Available')),
-                        size: ColumnSize.L,
+    return
+      Container(
+        height: 0.7.sh,
+        child: Scrollbar(
+          thickness: 15,
+          trackVisibility: true,
+          child: ListView(
+            physics: const BouncingScrollPhysics(),
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            children: [
+              Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+                    child: Container(
+                      height: 43.h,
+                      width: 0.2.sw*7,
+                      decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15),
+                              topRight: Radius.circular(15))),
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          physics:const NeverScrollableScrollPhysics(),
+                          itemCount: 7,
+                          itemBuilder: (context,index){
+                            return SizedBox(
+                              width: 0.2.sw,
+                              child: CustomText(
+                                text: titlesList[index],
+                                fontSize: 9.sp,
+                                align: TextAlign.start,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            );
+                          }
                       ),
-                      DataColumn(
-                        label: Center(child: Text('Origin')),
-                      ),
-                      DataColumn(
-                        label: Center(child: Text('State')),
-                      ),
-                      DataColumn(
-                        label: Center(child: Text('Destination')),
-                      ),
-                      DataColumn(
-                        label: Center(child: Text('State')),
-                      ),
-                      DataColumn2(
-                        label: Center(child: Text('Type')),
-                          size: ColumnSize.L,),
-                      DataColumn(
-                        label: Center(child: Text('Size')),
-                      ),
-                    ],
-                    rows: List<DataRow>.generate(
-                        state.vehicleList.length,
-                        (index) => DataRow(
-                                color: MaterialStateColor.resolveWith(
-                                    (states) => index.isEven
-                                        ? const Color(0xFFE0E0E0)
-                                        : Colors.white),
-                                cells: [
-                                  DataCell(Center(
-                                      child: Text(state.vehicleList[index]
-                                          .availabilityDate!))),
-                                  DataCell(Center(
-                                      child: Text(state.vehicleList[index]
-                                          .originCountry!.title!))),
-                                  DataCell(Center(
-                                      child: Text(state.vehicleList[index]
-                                          .originState!.title!))),
-                                  DataCell(Center(
-                                      child: Text(state.vehicleList[index]
-                                                  .destinationCity ==
-                                              null
-                                          ? 'other'
-                                          : state.vehicleList[index]
-                                              .destinationCity!.title!))),
-                                  DataCell(Center(
-                                      child: Text(state.vehicleList[index]
-                                          .destinationState!.title!))),
-                                  DataCell(Center(
-                                      child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 16.0),
-                                    child: Center(
-                                      child: ListView.builder(
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
-                                          itemCount: state.vehicleList[index]
-                                              .equipmentTypes?.length,
-                                          itemBuilder: (context, i) => Center(
-                                              child: Text(state
-                                                  .vehicleList[index]
-                                                  .equipmentTypes![i]
-                                                  .title
-                                                  .toString()))),
-                                    ),
-                                  ))),
-                                  DataCell(Center(
-                                      child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 16.0),
-                                    child: Center(
-                                      child: ListView.builder(
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
-                                          itemCount: state.vehicleList[index]
-                                              .vehicleSizes?.length,
-                                          itemBuilder: (context, i) => Center(
-                                              child: Text(state
-                                                  .vehicleList[index]
-                                                  .vehicleSizes![i]
-                                                  .title
-                                                  .toString()))),
-                                    ),
-                                  ))),
-                                ]))),
-              ),
-            );
-          } else if (state is AddVehicleLoading) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:const [
-                 Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.orange,
+                    ),
                   ),
-                ),
-              ],
-            );
-          }
-          else  if (state is GetVehicleSuccess){
-            return Container(
-              height: .9.sh,
-              width: 1.sw,
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: DataTable2(
-                    columnSpacing: 1,
-                    horizontalMargin: 0,
-                    dataRowHeight: state.vehicleList.length >= 10
-                        ? .06.sh
-                        : .11.sh,
-                    minWidth: 890,
-                    columns: const [
-                      DataColumn2(
-                        label: Center(child: Text('Available')),
-                        size: ColumnSize.L,
-                      ),
-                      DataColumn(
-                        label: Center(child: Text('Origin')),
-                      ),
-                      DataColumn(
-                        label: Center(child: Text('State')),
-                      ),
-                      DataColumn(
-                        label: Center(child: Text('Destination')),
-                      ),
-                      DataColumn(
-                        label: Center(child: Text('State')),
-                      ),
-                      DataColumn(
-                        label: Center(child: Text('Type')),
 
-                      ),
-                      DataColumn(
-                        label: Center(child: Text('Size')),
-                      ),
-                    ],
-                    rows: List<DataRow>.generate(
-                        VehiclesCubit.get(context).vehicleList.length,
-                            (index) => DataRow(
-                            color: MaterialStateColor.resolveWith(
-                                    (states) => index.isEven
-                                    ? const Color(0xFFE0E0E0)
-                                    : Colors.white),
-                            cells: [
-                              DataCell(Center(
-                                  child: Text(VehiclesCubit.get(context)
-                                      .vehicleList[index]
-                                      .availabilityDate!))),
-                              DataCell(Center(
-                                  child: Text(VehiclesCubit.get(context)
-                                      .vehicleList[index]
-                                      .originCountry!
-                                      .title!))),
-                              DataCell(Center(
-                                  child: Text(VehiclesCubit.get(context)
-                                      .vehicleList[index]
-                                      .originState!
-                                      .title!))),
-                              DataCell(Center(
-                                  child: Text(VehiclesCubit.get(context)
-                                      .vehicleList[index]
-                                      .destinationCity ==
-                                      null
-                                      ? 'other'
-                                      : VehiclesCubit.get(context)
-                                      .vehicleList[index]
-                                      .destinationCity!
-                                      .title!))),
-                              DataCell(Center(
-                                  child: Text(VehiclesCubit.get(context)
-                                      .vehicleList[index]
-                                      .destinationState!
-                                      .title!))),
-                              DataCell(Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 16.0),
-                                    child: Center(
-                                      child: ListView.builder(
-                                          physics:
-                                          const NeverScrollableScrollPhysics(),
-                                          itemCount: VehiclesCubit.get(context)
-                                              .vehicleList[index]
-                                              .equipmentTypes
-                                              ?.length,
-                                          itemBuilder: (context, i) => Center(
-                                              child: Text(
-                                                  VehiclesCubit.get(context)
-                                                      .vehicleList[index]
-                                                      .equipmentTypes![i]
-                                                      .title
-                                                      .toString()))),
+                  Container(
+                    height: 0.6.sh,
+                    width:0.2.sw*7 ,
+                    child: BlocConsumer<VehiclesCubit,AddVehicleStates>(
+                      builder: (context,state) {
+                        if(state is GetSearchFailed){
+                          return
+                            Center(child: CustomText(text: state.msg));
+                        }else if(state is GetSearchSuccess){
+                          return ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: state.vehicleList.length,
+                              itemBuilder: (context, index) {
+
+                                print(state.vehicleList[index].equipmentTypes2!.toString());
+                                print('nnnnnnnnnnnnn');
+
+                                return
+                                  Container(
+                                    color: index.isEven ? Colors.grey[300] : Colors.white,
+                                    child: Padding(
+                                      padding:  const EdgeInsets.symmetric(vertical: 5),
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          CustomText(
+                                            width: 0.2.sw,
+                                            text: state.vehicleList[index].availabilityDate,
+                                            align: TextAlign.start,
+                                            fontSize: 8.sp,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                          CustomText(
+//                                height: 20.h,o
+                                              width: 0.2.sw,
+                                              text:  state.vehicleList[index].originCity==null?'other':
+                                              state.vehicleList[index].originCity!.title,
+                                              //   text: '',
+
+                                              align: TextAlign.start,
+                                              fontSize: 8.sp,
+                                              fontWeight: FontWeight.w500),
+
+                                          CustomText(
+//                                  height: 20.h,
+                                              width: 0.2.sw,
+                                              text:  state.vehicleList[index].originState==null?'other':
+                                              state.vehicleList[index].originState!.title,
+                                              align: TextAlign.start,
+                                              fontSize: 8.sp,
+                                              fontWeight: FontWeight.w500),
+
+                                          CustomText(
+                                              width:0.2.sw ,
+                                              text: state.vehicleList[index].destinationCity==null?'other':
+                                              state.vehicleList[index].destinationCity!.title,
+
+                                              fontSize: 8.sp,
+                                              align: TextAlign.start,
+                                              fontWeight: FontWeight.w500),
+
+                                          CustomText(
+                                              width: 0.2.sw,
+//                                  height: 20.h,
+                                              text: state.vehicleList[index].destinationState==null?'other':
+                                              state.vehicleList[index].destinationState!.title,
+                                              align: TextAlign.start,
+                                              fontSize: 8.sp,
+                                              fontWeight: FontWeight.w500),
+
+                                          CustomText(
+//                                  height: 30.h,
+                                              width: 0.2.sw,
+                                              text:  state.vehicleList[index].equipmentTypes2.toString(),
+                                              align: TextAlign.end,
+                                              fontSize: 8.sp,
+                                              fontWeight: FontWeight.w500),
+                                          CustomText(
+                                              width: 0.2.sw,
+//                                  height: 20.h,
+                                              text: state.vehicleList[index].vehicleSizes2!.toString(),
+
+                                              align: TextAlign.end,
+                                              color:
+                                              Colors.green ,
+                                              fontSize: 8.sp,
+                                              fontWeight: FontWeight.w500),
+                                        ],
+                                      ),
                                     ),
-                                  ))),
-                              DataCell(Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 16.0),
-                                    child: Center(
-                                      child: ListView.builder(
-                                          physics:
-                                          const NeverScrollableScrollPhysics(),
-                                          itemCount: VehiclesCubit.get(context)
-                                              .vehicleList[index]
-                                              .vehicleSizes
-                                              ?.length,
-                                          itemBuilder: (context, i) => Center(
-                                              child: Text(
-                                                  VehiclesCubit.get(context)
-                                                      .vehicleList[index]
-                                                      .vehicleSizes![i]
-                                                      .title
-                                                      .toString()))),
+                                  );
+
+                              }
+                          );
+
+                        }else{
+                          return ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: VehiclesCubit.get(context).vehicleList.length,
+                              itemBuilder: (context, index) {
+
+                                print(VehiclesCubit.get(context).vehicleList[index].equipmentTypes2!.toString());
+                                print('nnnnnnnnnnnnn');
+
+                                return
+                                  Container(
+                                    color: index.isEven ? Colors.grey[300] : Colors.white,
+                                    child: Padding(
+                                      padding:  const EdgeInsets.symmetric(vertical: 5),
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          CustomText(
+                                            width: 0.2.sw,
+                                            text: VehiclesCubit.get(context).vehicleList[index].availabilityDate,
+                                            align: TextAlign.start,
+                                            fontSize: 8.sp,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                          CustomText(
+//                                height: 20.h,o
+                                              width: 0.2.sw,
+                                              text:  VehiclesCubit.get(context).vehicleList[index].originCity==null?'other':
+                                              VehiclesCubit.get(context).vehicleList[index].originCity!.title,
+                                              //   text: '',
+
+                                              align: TextAlign.start,
+                                              fontSize: 8.sp,
+                                              fontWeight: FontWeight.w500),
+
+                                          CustomText(
+//                                  height: 20.h,
+                                              width: 0.2.sw,
+                                              text:  VehiclesCubit.get(context).vehicleList[index].originState==null?'other':
+                                              VehiclesCubit.get(context).vehicleList[index].originState!.title,
+                                              align: TextAlign.start,
+                                              fontSize: 8.sp,
+                                              fontWeight: FontWeight.w500),
+
+                                          CustomText(
+                                              width:0.2.sw ,
+                                              text: VehiclesCubit.get(context).vehicleList[index].destinationCity==null?'other':
+                                              VehiclesCubit.get(context).vehicleList[index].destinationCity!.title,
+
+                                              fontSize: 8.sp,
+                                              align: TextAlign.start,
+                                              fontWeight: FontWeight.w500),
+
+                                          CustomText(
+                                              width: 0.2.sw,
+//                                  height: 20.h,
+                                              text: VehiclesCubit.get(context).vehicleList[index].destinationState==null?'other':
+                                              VehiclesCubit.get(context).vehicleList[index].destinationState!.title,
+                                              align: TextAlign.start,
+                                              fontSize: 8.sp,
+                                              fontWeight: FontWeight.w500),
+
+                                          CustomText(
+//                                  height: 30.h,
+                                              width: 0.2.sw,
+                                              text:  VehiclesCubit.get(context).vehicleList[index].equipmentTypes2.toString(),
+                                              align: TextAlign.end,
+                                              fontSize: 8.sp,
+                                              fontWeight: FontWeight.w500),
+                                          CustomText(
+                                              width: 0.2.sw,
+//                                  height: 20.h,
+                                              text: VehiclesCubit.get(context).vehicleList[index].vehicleSizes2!.toString(),
+
+                                              align: TextAlign.end,
+                                              color:
+                                              Colors.green ,
+                                              fontSize: 8.sp,
+                                              fontWeight: FontWeight.w500),
+                                        ],
+                                      ),
                                     ),
-                                  ))),
-                            ]))),
+                                  );
+
+                              }
+                          );
+                        }
+                      }, listener: (BuildContext context, Object? state) {  },
+                    ),
+                  )
+
+                ],
               ),
-            );
-          }
-          else {
-            return Container(
-              height: .9.sh,
-              width: 1.sw,
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: DataTable2(
-                    columnSpacing: 1,
-                    horizontalMargin: 0,
-                    dataRowHeight:
-                        VehiclesCubit.get(context).vehicleList.length >= 10
-                            ? .06.sh
-                            : .11.sh,
-                    minWidth: 890,
-                    columns: const [
-                      DataColumn2(
-                        label: Center(child: Text('Available')),
-                        size: ColumnSize.L,
-                      ),
-                      DataColumn(
-                        label: Center(child: Text('Origin')),
-                      ),
-                      DataColumn(
-                        label: Center(child: Text('State')),
-                      ),
-                      DataColumn(
-                        label: Center(child: Text('Destination')),
-                      ),
-                      DataColumn(
-                        label: Center(child: Text('State')),
-                      ),
-                      DataColumn(
-                        label: Center(child: Text('Type')),
-                      ),
-                      DataColumn(
-                        label: Center(child: Text('Size')),
-                      ),
-                    ],
-                    rows: List<DataRow>.generate(
-                        VehiclesCubit.get(context).vehicleList.length,
-                        (index) => DataRow(
-                                color: MaterialStateColor.resolveWith(
-                                    (states) => index.isEven
-                                        ? const Color(0xFFE0E0E0)
-                                        : Colors.white),
-                                cells: [
-                                  DataCell(Center(
-                                      child: Text(VehiclesCubit.get(context)
-                                          .vehicleList[index]
-                                          .availabilityDate!))),
-                                  DataCell(Center(
-                                      child: Text(VehiclesCubit.get(context)
-                                          .vehicleList[index]
-                                          .originCountry!
-                                          .title!))),
-                                  DataCell(Center(
-                                      child: Text(VehiclesCubit.get(context)
-                                          .vehicleList[index]
-                                          .originState!
-                                          .title!))),
-                                  DataCell(Center(
-                                      child: Text(VehiclesCubit.get(context)
-                                                  .vehicleList[index]
-                                                  .destinationCity ==
-                                              null
-                                          ? 'other'
-                                          : VehiclesCubit.get(context)
-                                              .vehicleList[index]
-                                              .destinationCity!
-                                              .title!))),
-                                  DataCell(Center(
-                                      child: Text(VehiclesCubit.get(context)
-                                          .vehicleList[index]
-                                          .destinationState!
-                                          .title!))),
-                                  DataCell(Center(
-                                      child: Padding(
-                                    padding:  EdgeInsets.symmetric(
-                                        vertical:  16.sp),
-                                    child: Center(
-                                      child: ListView.builder(
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
-                                          itemCount: VehiclesCubit.get(context)
-                                              .vehicleList[index]
-                                              .equipmentTypes
-                                              ?.length,
-                                          itemBuilder: (context, i) => Center(
-                                              child: Text(
-                                                  VehiclesCubit.get(context)
-                                                      .vehicleList[index]
-                                                      .equipmentTypes![i]
-                                                      .title
-                                                      .toString()))),
-                                    ),
-                                  ))),
-                                  DataCell(Center(
-                                      child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 16.0),
-                                    child: Center(
-                                      child: ListView.builder(
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
-                                          itemCount: VehiclesCubit.get(context)
-                                              .vehicleList[index]
-                                              .vehicleSizes
-                                              ?.length,
-                                          itemBuilder: (context, i) => Center(
-                                              child: Text(
-                                                  VehiclesCubit.get(context)
-                                                      .vehicleList[index]
-                                                      .vehicleSizes ==
-                                                      null
-                                                      ? 'other'
-                                                      : VehiclesCubit.get(context)
-                                                      .vehicleList[index]
-                                                      .vehicleSizes![i]
-                                                      .title!))),
-                                    ),
-                                  ))),
-                                ]))),
-              ),
-            );
-          }
-        });
+
+
+            ],
+          ),
+        ),
+      );
+
+
+
+
+
+
   }
 }
