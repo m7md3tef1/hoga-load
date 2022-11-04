@@ -1,13 +1,14 @@
 class User {
   User({
     this.password,
-      this.firstName, 
-      this.lastName, 
-      this.email, 
-      this.contactNumber, 
-      this.address, 
-      this.profilePicture,
-      this.id,});
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.contactNumber,
+    this.username,
+    this.address,
+    this.profilePicture,
+    this.id,});
 
   User.fromJson(dynamic json) {
     firstName = json['first_name']??'';
@@ -16,6 +17,7 @@ class User {
     contactNumber = json['contact_number']??'';
     address = json['address']??'';
     profilePicture = json['profile_picture']??'';
+    username = json['username']??'';
     id = json['id'];
   }
   String? firstName;
@@ -26,6 +28,7 @@ class User {
   dynamic profilePicture;
   int? id;
   String?password;
+  String? username;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -37,6 +40,7 @@ class User {
     map['profile_picture'] = profilePicture;
     map['id'] = id;
     map['password']=password;
+    map['username']=username;
     return map;
   }
 

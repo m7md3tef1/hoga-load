@@ -2,10 +2,325 @@ part of '../view.dart';
 
 class Body extends StatelessWidget {
   Body({Key? key}) : super(key: key);
-
+  List titlesList = ['Buy / Sell', 'Product', 'Type', 'Price', ' '];
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProductsCubit, AddProductStates>(
+    return Container(
+      height: 0.7.sh,
+      child: Scrollbar(
+        thickness: 15,
+        trackVisibility: true,
+        child: ListView(
+          physics: const BouncingScrollPhysics(),
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          children: [
+            Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+                  child: Container(
+                    height: 43.h,
+                    width: 0.2.sw * 7,
+                    decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15))),
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: 5,
+                        itemBuilder: (context, index) {
+                          return SizedBox(
+                            width: 0.2.sw,
+                            child: CustomText(
+                              text: titlesList[index],
+                              fontSize: 9.sp,
+                              align: TextAlign.start,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          );
+                        }),
+                  ),
+                ),
+                Container(
+                  height: 0.6.sh,
+                  width: 0.2.sw * 7,
+                  child: BlocConsumer<ProductsCubit, AddProductStates>(
+                    builder: (context, state) {
+                      if (state is GetProductsFailed && state is GetSearchFailed) {
+                        return Center(child: CustomText(text: state.msg));
+                      } else if (state is GetSearchSuccess) {
+                        return ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: state.productList.length,
+                            itemBuilder: (context, index) {
+                              print('lllllllllll');
+
+                              return Container(
+                                color: index.isEven
+                                    ? Colors.grey[300]
+                                    : Colors.white,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 5),
+                                  child: InkWell(
+                                    onTap: () {
+                                      MagicRouter.navigateTo(Detail(
+                                          ProductsCubit.get(context)
+                                              .productList[index]));
+                                    },
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CustomText(
+                                          width: 0.2.sw,
+                                          text:
+                                              state.productList[index].buyOrSell,
+                                          align: TextAlign.start,
+                                          fontSize: 8.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        CustomText(
+//                                height: 20.h,o
+                                            width: 0.2.sw,
+                                            text: state.productList[index]
+                                                    .productName ??
+                                                'other',
+                                            //   text: '',
+
+                                            align: TextAlign.start,
+                                            fontSize: 8.sp,
+                                            fontWeight: FontWeight.w500),
+                                        CustomText(
+//                                  height: 20.h,
+                                            width: 0.2.sw,
+                                            text: state.productList[index]
+                                                        .productType ==
+                                                    null
+                                                ? 'other'
+                                                : state.productList[index]
+                                                    .productType!.title,
+                                            align: TextAlign.start,
+                                            fontSize: 8.sp,
+                                            fontWeight: FontWeight.w500),
+                                        CustomText(
+                                            width: 0.2.sw,
+                                            text:
+                                                '\$ ${state.productList[index].price!} ' ??
+                                                    'other',
+                                            fontSize: 8.sp,
+                                            align: TextAlign.start,
+                                            fontWeight: FontWeight.w500),
+                                        Image(
+                                            height: 50,
+                                            width: 0.2.sw,
+                                            image: NetworkImage(state
+                                                        .productList[index]
+                                                        .productImage ==
+                                                    null
+                                                ? 'https://hegaload.com/uploads/product-images/1657431690.jpg'
+                                                : state.productList[index]
+                                                    .productImage!))
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            });
+                      } else if (state is GetProductsSuccess) {
+                        return ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: state.productList.length,
+                            itemBuilder: (context, index) {
+                              print('llllllll');
+
+                              return Container(
+                                color: index.isEven
+                                    ? Colors.grey[300]
+                                    : Colors.white,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 5),
+                                  child: InkWell(
+                                    onTap: () {
+                                      MagicRouter.navigateTo(Detail(
+                                          ProductsCubit.get(context)
+                                              .productList[index]));
+                                    },
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CustomText(
+                                          width: 0.2.sw,
+                                          text:
+                                              state.productList[index].buyOrSell,
+                                          align: TextAlign.start,
+                                          fontSize: 8.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        CustomText(
+//                                height: 20.h,o
+                                            width: 0.2.sw,
+                                            text: state.productList[index]
+                                                    .productName ??
+                                                'other',
+                                            //   text: '',
+
+                                            align: TextAlign.start,
+                                            fontSize: 8.sp,
+                                            fontWeight: FontWeight.w500),
+                                        CustomText(
+//                                  height: 20.h,
+                                            width: 0.2.sw,
+                                            text: state.productList[index]
+                                                        .productType ==
+                                                    null
+                                                ? 'other'
+                                                : state.productList[index]
+                                                    .productType!.title,
+                                            align: TextAlign.start,
+                                            fontSize: 8.sp,
+                                            fontWeight: FontWeight.w500),
+                                        CustomText(
+                                            width: 0.2.sw,
+                                            text:
+                                                '\$ ${state.productList[index].price!} ' ??
+                                                    'other',
+                                            fontSize: 8.sp,
+                                            align: TextAlign.start,
+                                            fontWeight: FontWeight.w500),
+                                        Image(
+                                          height: 50,
+                                            width: 0.2.sw,
+                                            image: NetworkImage(
+
+                                                state
+                                                        .productList[index]
+                                                        .productImage ==
+                                                    null
+                                                ? 'https://hegaload.com/uploads/product-images/1657431690.jpg'
+                                                : state.productList[index]
+                                                    .productImage!))
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            });
+                      } else if (state is AddProductLoading) {
+                        return Column(
+                          children: const [
+                            Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.orange,
+                              ),
+                            )
+                          ],
+                        );
+                      } else {
+                        return ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount:
+                                ProductsCubit.get(context).productList.length,
+                            itemBuilder: (context, index) {
+                              print('llllllll');
+
+                              return Container(
+                                color: index.isEven
+                                    ? Colors.grey[300]
+                                    : Colors.white,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 5),
+                                  child: InkWell(
+                                    onTap: () {
+                                      MagicRouter.navigateTo(Detail(
+                                          ProductsCubit.get(context)
+                                              .productList[index]));
+                                    },
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CustomText(
+                                          width: 0.2.sw,
+                                          text: ProductsCubit.get(context)
+                                              .productList[index]
+                                              .buyOrSell,
+                                          align: TextAlign.start,
+                                          fontSize: 8.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        CustomText(
+//                                height: 20.h,o
+                                            width: 0.2.sw,
+                                            text: ProductsCubit.get(context)
+                                                    .productList[index]
+                                                    .productName ??
+                                                'other',
+                                            //   text: '',
+
+                                            align: TextAlign.start,
+                                            fontSize: 8.sp,
+                                            fontWeight: FontWeight.w500),
+                                        CustomText(
+//                                  height: 20.h,
+                                            width: 0.2.sw,
+                                            text: ProductsCubit.get(context)
+                                                        .productList[index]
+                                                        .productType ==
+                                                    null
+                                                ? 'other'
+                                                : ProductsCubit.get(context)
+                                                    .productList[index]
+                                                    .productType!
+                                                    .title,
+                                            align: TextAlign.start,
+                                            fontSize: 8.sp,
+                                            fontWeight: FontWeight.w500),
+                                        CustomText(
+                                            width: 0.2.sw,
+                                            text:
+                                                '\$ ${ProductsCubit.get(context).productList[index].price!} ',
+                                            fontSize: 8.sp,
+                                            align: TextAlign.start,
+                                            fontWeight: FontWeight.w500),
+                                        Image(height: 50,
+                                            width: 0.2.sw,
+                                            image: NetworkImage(ProductsCubit.get(
+                                                            context)
+                                                        .productList[index]
+                                                        .productImage ==
+                                                    null
+                                                ? 'https://hegaload.com/uploads/product-images/1657431690.jpg'
+                                                : ProductsCubit.get(context)
+                                                    .productList[index]
+                                                    .productImage!))
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            });
+                      }
+                    },
+                    listener: (BuildContext context, Object? state) {},
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+/*
+BlocConsumer<ProductsCubit, AddProductStates>(
         listener: (context, state) {},
         builder: (context, state) {
           if (state is GetSearchFailed) {
@@ -215,5 +530,4 @@ class Body extends StatelessWidget {
             );
           }
         });
-  }
-}
+ */

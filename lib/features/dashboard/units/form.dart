@@ -11,7 +11,7 @@ class FormView extends StatelessWidget {
   TextEditingController? phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<UpdateProfileCubit,UpdateProfileStates>(
+    return BlocConsumer<UpdateProfileCubit, UpdateProfileStates>(
         builder: (context, state) {
           return CustomCard(
             widget: Padding(
@@ -21,7 +21,7 @@ class FormView extends StatelessWidget {
                 child: Column(
                   children: [
                     CustomTextField(
-                      hintText: 'Satinder',
+                      hintText: UpdateProfileCubit.get(context).profileList!.toString(),
                       controller: firstnameController,
                       validate: Validator.validateName,
                     ),
@@ -66,29 +66,28 @@ class FormView extends StatelessWidget {
                             color: ColorManager.primaryColor),
                       )
                     else
-                    Padding(
-                      padding: const EdgeInsets.only(top: 17, bottom: 27),
-                      child: CustomButton(
-                        function: (){
-                          if (formKey.currentState!.validate()) {
-                            UpdateProfileCubit.get(context).updateProfile(UpdateProfile(
-                              firstName: firstnameController!.text.trim(),
-                              lastName: lastnameController!.text.trim(),
-                              username: usernameController!.text.trim(),
-                              phone: phoneController!.text.trim(),
-                              email: emailController!.text.trim(),
-                              address: addressController!.text.trim(),
-                            ),
-
-                            );
-                            print( CacheHelper.getString(SharedKeys.token));
-
-                          }
-                        },
-                        text: 'Update Profile',
-                        color: ColorManager.orange,
-                      ),
-                    )
+                      Padding(
+                        padding: const EdgeInsets.only(top: 17, bottom: 27),
+                        child: CustomButton(
+                          function: () {
+                            if (formKey.currentState!.validate()) {
+                              UpdateProfileCubit.get(context).updateProfile(
+                                UpdateProfile(
+                                  firstName: firstnameController!.text.trim(),
+                                  lastName: lastnameController!.text.trim(),
+                                  username: usernameController!.text.trim(),
+                                  phone: phoneController!.text.trim(),
+                                  email: emailController!.text.trim(),
+                                  address: addressController!.text.trim(),
+                                ),
+                              );
+                              print(CacheHelper.getString(SharedKeys.token));
+                            }
+                          },
+                          text: 'Update Profile',
+                          color: ColorManager.orange,
+                        ),
+                      )
                   ],
                 ),
               ),
