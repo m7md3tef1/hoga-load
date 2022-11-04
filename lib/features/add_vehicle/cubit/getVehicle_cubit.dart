@@ -181,7 +181,7 @@ class VehiclesCubit extends Cubit<AddVehicleStates> {
           DataFormCubit.get(context).countryDestinationID='',
           DataFormCubit.get(context).stateDestinationID='',
           DataFormCubit.get(context).stateOriginID='',
-          DataFormCubit.get(context).cityDestinationID='',t
+          DataFormCubit.get(context).cityDestinationID='',
           print(error)
 
         });

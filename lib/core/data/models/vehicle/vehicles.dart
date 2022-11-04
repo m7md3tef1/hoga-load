@@ -1,4 +1,5 @@
 import 'package:hoga_load/core/data/models/vehicle/Attributes.dart';
+import 'package:hoga_load/core/data/models/vehicle/user.dart';
 
 import '../master/DestinationCity.dart';
 import '../master/DestinationCountry.dart';
@@ -26,11 +27,11 @@ class Vehicles {
     this.attributes,
     this.vehicleSizes,
     this.vehicleSizes2,
-
     this.vehicleTypes,
     this.weight,
     this.instructions,
     this.viewdBy,
+    this.user,
     this.createdAt,
     this.updatedAt,
     this.deletedAt,});
@@ -71,7 +72,7 @@ class Vehicles {
     weight = json['weight'];
     instructions = json['instructions'];
 
-
+    user = (json['user'] != null ? User.fromJson(json['user']) : null)!;
 
     if (json['viewd_by'] != null) {
       viewdBy = [];
@@ -97,7 +98,7 @@ class Vehicles {
   List<VehicleTypes>? vehicleTypes;
   List<String>? equipmentTypes2=[];
   List<String>? vehicleSizes2=[];
-
+  User? user;
   String? weight;
   dynamic instructions;
   List<ViewdBy>? viewdBy;
@@ -141,7 +142,10 @@ class Vehicles {
     }
     map['weight'] = weight;
     map['instructions'] = instructions;
-
+    if (user != null) {
+      map['user'] = user!.toJson();
+    }
+    map['user'] = user;
     if (viewdBy != null) {
       map['viewd_by'] = viewdBy!.map((v) => v.toJson()).toList();
     }

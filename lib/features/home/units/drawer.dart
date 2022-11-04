@@ -36,11 +36,6 @@ class OnDrawer extends StatelessWidget {
               navigatename: const Home(),
             ),
             CustomRowDrawer(
-              text: 'Dashboard',
-              icon: Icons.dashboard,
-              navigatename: const DashboardView(),
-            ),
-            CustomRowDrawer(
               text: 'Advertisement',
               icon: Icons.railway_alert_outlined,
               navigatename: const AdvertisementView(),
