@@ -5,12 +5,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/features/search_product/cubit/getProduct_cubit.dart';
 import 'package:hoga_load/features/search_product/model.dart';
+import 'package:hoga_load/features/search_product/units/details.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import 'package:hoga_load/widgets/widgets/custom_button.dart';
 import 'package:hoga_load/widgets/widgets/custom_row.dart';
 import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 
+import '../../core/router/router.dart';
 import 'cubit/getProduct__states.dart';
 
 part 'units/body.dart';

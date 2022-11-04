@@ -3,8 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/data/api/api.dart';
 import '../../../core/data/local/cacheHelper.dart';
+import '../../../core/data/models/vehicle/user.dart';
+import '../../../core/data/repository/vehicle_repo.dart';
 import '../../../core/dialoges/toast.dart';
 import '../../../core/keys/keys.dart';
+import '../../../core/master_cubit/getDataForm_state.dart';
 import 'UpdateProfile_state.dart';
 
 class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
@@ -12,6 +15,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
 
   static UpdateProfileCubit get(context) => BlocProvider.of(context);
   Connectivity connectivity = Connectivity();
+  List<User>? profileList = [];
 
   updateProfile(updateProfileModel,) async {
     var token = await CacheHelper.getString(SharedKeys.token);
@@ -33,5 +37,23 @@ class UpdateProfileCubit extends Cubit<UpdateProfileStates> {
               emit(UpdateProfileFailed()),
               print(error),
             });
+  }
+
+  getVehicleTypesCubit() {
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        emit(FailedNetwork("Check your internet connection and try again"));
+      } else {
+        VehicleRepo.getProfile('profile')
+            .then((value) => {
+          print('..................................'),
+          print(value),
+          profileList = value,
+          emit(GetProfileSuccess(value))
+        })
+            .onError((error, stackTrace) =>
+        {emit(GetProfileFailed(error.toString())), print(error)});
+      }
+    });
   }
 }

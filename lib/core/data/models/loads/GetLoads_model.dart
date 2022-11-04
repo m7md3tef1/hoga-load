@@ -8,35 +8,49 @@ import '../vehicle/Attributes.dart';
 import '../vehicle/VehicleSizes.dart';
 import '../vehicle/VehicleTypes.dart';
 import '../vehicle/ViewdBy.dart';
+import '../vehicle/user.dart';
 
 class GetLoadsModel {
   GetLoadsModel({
-      this.id, 
-      this.availabilityDate, 
-      this.originCountry, 
-      this.originState, 
-      this.originCity, 
-      this.destinationCountry, 
-      this.destinationState, 
-      this.destinationCity, 
-      this.equipmentTypes, 
-      this.attributes, 
-      this.vehicleSizes, 
-      this.vehicleTypes, 
-      this.weight, 
-      this.instructions,
-      this.user,
-      this.viewdBy,});
+    this.id,
+    this.availabilityDate,
+    this.originCountry,
+    this.originState,
+    this.originCity,
+    this.destinationCountry,
+    this.destinationState,
+    this.destinationCity,
+    this.equipmentTypes,
+    this.attributes,
+    this.vehicleSizes,
+    this.vehicleTypes,
+    this.equipmentTypes2,
+    this.vehicleSizes2,
+    this.weight,
+    this.instructions,
+    this.user,
+    this.viewdBy,
+  });
 
   GetLoadsModel.fromJson(dynamic json) {
     id = json['id'];
     availabilityDate = json['availability_date'];
-    originCountry = json['origin_country'] != null ? OriginCountry.fromJson(json['origin_country']) : null;
-    originState = json['origin_state'] != null ? OriginState.fromJson(json['origin_state']) : null;
+    originCountry = json['origin_country'] != null
+        ? OriginCountry.fromJson(json['origin_country'])
+        : null;
+    originState = json['origin_state'] != null
+        ? OriginState.fromJson(json['origin_state'])
+        : null;
     originCity = json['origin_city'];
-    destinationCountry = json['destination_country'] != null ? DestinationCountry.fromJson(json['destination_country']) : null;
-    destinationState = json['destination_state'] != null ? DestinationState.fromJson(json['destination_state']) : null;
-    destinationCity = json['destination_city'] != null ? DestinationCity.fromJson(json['destination_city']) : null;
+    destinationCountry = json['destination_country'] != null
+        ? DestinationCountry.fromJson(json['destination_country'])
+        : null;
+    destinationState = json['destination_state'] != null
+        ? DestinationState.fromJson(json['destination_state'])
+        : null;
+    destinationCity = json['destination_city'] != null
+        ? DestinationCity.fromJson(json['destination_city'])
+        : null;
     if (json['equipment_types'] != null) {
       equipmentTypes = [];
       json['equipment_types'].forEach((v) {
@@ -63,7 +77,7 @@ class GetLoadsModel {
     }
     weight = json['weight'];
     instructions = json['instructions'];
-
+    user = (json['user'] != null ? User.fromJson(json['user']) : null)!;
     if (json['viewd_by'] != null) {
       viewdBy = [];
       json['viewd_by'].forEach((v) {
@@ -83,9 +97,11 @@ class GetLoadsModel {
   List<Attributes>? attributes;
   List<VehicleSizes>? vehicleSizes;
   List<VehicleTypes>? vehicleTypes;
+  List<String>? equipmentTypes2 = [];
+  List<String>? vehicleSizes2 = [];
   String? weight;
   dynamic instructions;
-  List<dynamic>? user;
+  User? user;
   List<ViewdBy>? viewdBy;
 
   Map<String, dynamic> toJson() {
@@ -123,12 +139,12 @@ class GetLoadsModel {
     map['weight'] = weight;
     map['instructions'] = instructions;
     if (user != null) {
-      map['user'] = user!.map((v) => v.toJson()).toList();
+      map['user'] = user!.toJson();
     }
+    map['user'] = user;
     if (viewdBy != null) {
       map['viewd_by'] = viewdBy!.map((v) => v.toJson()).toList();
     }
     return map;
   }
-
 }

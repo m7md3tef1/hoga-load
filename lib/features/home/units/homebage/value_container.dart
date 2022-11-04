@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/color_manager/color_manager.dart';
-import '../../../widgets/widgets/custom_text.dart';
+import '../../../../core/color_manager/color_manager.dart';
+import '../../../../widgets/widgets/custom_text.dart';
 class ValueContainer extends StatelessWidget {
   String? image;
   String? title;
@@ -42,7 +42,7 @@ class ValueContainer extends StatelessWidget {
                             text: title,
                             fontSize: 16.sp,
                             color: const Color(0xFF012970),
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w700,
                           ),
                         )),
                   ],
@@ -55,7 +55,7 @@ class ValueContainer extends StatelessWidget {
                     color: const Color(0xFF6C6C6C),
                     text:desc!,
                     fontSize: 14.sp,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ],
