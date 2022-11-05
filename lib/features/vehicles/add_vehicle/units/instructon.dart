@@ -12,21 +12,19 @@ class Instructions extends StatelessWidget {
         CustomTextField(
           height: 64.h,
           hintText: 'Weight ( in Kilogram )',
-          suffixIcon: Icon(
-            Icons.expand_more,
-            size: 30.sp,
-            color: ColorManager.blackColor,
-          ),
+          keyboardType: TextInputType.number,
+          controller: VehiclesCubit.get(context).weightController,
         ),
         CustomTextField(
           height: 147.h,
           lines: 4,
           hintText: 'Instructions',
+          controller:  VehiclesCubit.get(context).instructionsController,
         ),
         SizedBox(
           height: 23.h,
         ),
-        CustomButton(text: 'Add new vehicle', color: ColorManager.orange),      ],
+      ],
     );
   }
 }

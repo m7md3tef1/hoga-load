@@ -7,12 +7,13 @@ import '../models/response.dart';
 class Api{
    String baseUrl='https://hegaload.com/api/';
 
-   Future<dynamic> getHttp({required url,  data,authToken})async{
+   Future<dynamic> getHttp({required url,  data,authToken,self})async{
      try{
 
        var response=await Dio().get(baseUrl+'$url',options:
            Options(headers:{
-             "auth":authToken
+             "auth":authToken,
+             "self":self
            } ),
          queryParameters: data
 
@@ -20,16 +21,15 @@ class Api{
 
        if(response.statusCode==200){return  response.data;}
     }on DioError catch(e){
-       ResponseModel responseModel=ResponseModel.fromJson(e.response);
-     print('------------------------');
+       ResponseModel responseModel=ResponseModel.fromJson(e.response!.data);
+       print('------------------------');
        print(responseModel.status);
        print(responseModel.message);
-     print(e.response);
+       print('------------------------');
 
+       showToast(msg: responseModel.message.toString(), state: ToastedStates.ERROR);
+       throw Exception();
 
-
-       print(e.response!.data['message']);
-     showToast(msg: e.response!.data['message'].toString(), state: ToastedStates.ERROR);
 
      }
   }
@@ -52,17 +52,14 @@ class Api{
 
     }on DioError  catch(e){
 
-//      ResponseModel responseModel=ResponseModel.fromJson(e.response!.data());
-//      print('------------------------');
-//      print(responseModel.status);
-//      print(responseModel.message);
-//      print('------------------------');
-      print(e.response);
-      print(e.response!.data['message']);
-      showToast(msg: e.response!.data['message'].toString(), state: ToastedStates.ERROR);
+      ResponseModel responseModel=ResponseModel.fromJson(e.response!.data);
+      print('------------------------');
+      print(responseModel.status);
+      print(responseModel.message);
+      print('------------------------');
+
+      showToast(msg: responseModel.message.toString(), state: ToastedStates.ERROR);
       throw Exception();
-
-
     }
    }
 

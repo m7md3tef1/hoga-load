@@ -1,14 +1,13 @@
 import 'package:hoga_load/core/data/local/cacheHelper.dart';
 import 'package:hoga_load/core/keys/keys.dart';
 import 'package:hoga_load/core/master_cubit/getDataForm_cubit.dart';
-
+import '../../../features/vehicles/get_vehicles/cubit/vehicle_cubit.dart';
 import '../api/api.dart';
 import '../models/Packages.dart';
 import '../models/jobs/GetJop_model.dart';
 import '../models/loads/GetLoads_model.dart';
 import '../models/product/GetProduct_model.dart';
 import '../models/vehicle/Addvehicle_model.dart';
-import '../models/vehicle/GetVehicle_model.dart';
 import '../models/vehicle/vehicles.dart';
 
 class VehicleRepo{
@@ -31,8 +30,11 @@ class VehicleRepo{
   }
 
 
-  static Future< List <Vehicles>>  getVehicles()async {
-    var response= await Api().getHttp(url: 'vehicles');
+  static Future< List <Vehicles>>  getVehicles(self)async {
+    String token=await CacheHelper.getString(SharedKeys.token);
+    print(token);
+    print(self);
+    var response= await Api().getHttp(url: 'vehicles',authToken: token,self: self);
 
     List<Vehicles>blogsList=[];
     for(int i =0;i<response['records'].length;i++){
@@ -49,6 +51,17 @@ class VehicleRepo{
         blogModel.vehicleSizes2!.add(element.title!);
         print('oooooo${element.title}');
         print( blogModel.vehicleSizes2);
+
+      }
+      for(var element in blogModel.vehicleTypes!){
+        blogModel.vehicleTypes2!.add(element.title!);
+
+
+      }
+      for(var element in blogModel.attributes!){
+        blogModel.attributes2!.add(element.title!);
+        print('oooooo${element.title}');
+        print( blogModel.equipmentTypes2);
 
       }
       blogsList.add(blogModel);
@@ -127,7 +140,8 @@ class VehicleRepo{
 
   }
 
-  static Future< List <Vehicles>>  searchVehicles({search,equipmentSize,attributes,vehicleSize,vehicleType,context})async {
+  static Future< List <Vehicles>>  searchVehicles({
+    search,equipmentSize,attributes,vehicleSize,vehicleType,context})async {
     String token=await CacheHelper.getString(SharedKeys.token);
     print("repooo");
     print("equipment_types"+equipmentSize);
@@ -193,6 +207,64 @@ class VehicleRepo{
 
     return searchList;
 
+
+  }
+
+
+  static deleteVehicle(vehicleId)async{
+    String token=await CacheHelper.getString(SharedKeys.token);
+    return await Api().getHttp(url: "vehicles/delete",authToken:token,data: {"id":vehicleId} );
+
+  }
+  static editVehicle({context,vehicleId})async{
+    print("repooo");
+    print("equipment_types"+DataFormCubit.get(context).dateTime.toString());
+    print("vehicle_attributes"+VehiclesCubit.get(context).attributes.toString());
+    print("vehicleSize"+VehiclesCubit.get(context).vehcleSize.toString());
+    print("vehicleType"+VehiclesCubit.get(context).vehcleType.toString());
+    print("origin_country_id"+DataFormCubit.get(context).countryOriginID.toString());
+    print("origin_country_id"+DataFormCubit.get(context).stateOriginID.toString());
+    print("origin_country_id"+DataFormCubit.get(context).cityOriginID.toString());
+    print("origin_country_id"+DataFormCubit.get(context).countryDestinationID.toString());
+    print("origin_country_id"+DataFormCubit.get(context).stateDestinationID.toString());
+    String token=await CacheHelper.getString(SharedKeys.token);
+//    return await Api().getHttp(url: "vehicles/update",authToken:token,data:{
+//      "id":vehicleId,
+//    "availability_date":DataFormCubit.get(context).dateTime.toString(),
+//    "equipment_types":VehiclesCubit.get(context).equipmentType.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+//    "vehicle_attributes":VehiclesCubit.get(context).attributes.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+//    "vehicle_sizes": VehiclesCubit.get(context).vehcleSize.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+//    "vehicle_types": VehiclesCubit.get(context).vehcleType.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+//    "origin_country":DataFormCubit.get(context).countryOriginID,
+//    "origin_state":DataFormCubit.get(context).stateOriginID,
+//    "origin_city":DataFormCubit.get(context).cityOriginID,
+//    "destination_country":DataFormCubit.get(context).countryDestinationID,
+//    "destination_state":DataFormCubit.get(context).stateDestinationID,
+//    "destination_city":DataFormCubit.get(context).cityDestinationID,
+//    "weight":VehiclesCubit.get(context).weightController,
+//    "instructions":VehiclesCubit.get(context).instructionsController,
+//    }
+   // );
+
+  }
+  static addVehicle({context})async{
+    String token=await CacheHelper.getString(SharedKeys.token);
+    return await Api().postHttp(url: "vehicles/add",authToken:token,
+        data: {
+   "availability_date":DataFormCubit.get(context).dateTime.toString(),
+    "equipment_types":VehiclesCubit.get(context).equipmentType.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+    "vehicle_attributes":VehiclesCubit.get(context).attributes.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+    "vehicle_sizes": VehiclesCubit.get(context).vehcleSize.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+    "vehicle_types": VehiclesCubit.get(context).vehcleType.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+    "origin_country":DataFormCubit.get(context).countryOriginID,
+    "origin_state":DataFormCubit.get(context).stateOriginID,
+    "origin_city":DataFormCubit.get(context).cityOriginID,
+    "destination_country":DataFormCubit.get(context).countryDestinationID,
+    "destination_state":DataFormCubit.get(context).stateDestinationID,
+    "destination_city":DataFormCubit.get(context).cityDestinationID,
+     "weight":VehiclesCubit.get(context).weightController,
+      "instructions":VehiclesCubit.get(context).instructionsController,
+        } );
 
   }
 

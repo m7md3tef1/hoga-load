@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../core/color_manager/color_manager.dart';
-import '../../widgets/widgets/custom_appbar.dart';
-import '../../widgets/widgets/custom_button.dart';
-import '../../widgets/widgets/custom_scaffold.dart';
-import '../add_vehicle/cubit/getVehicle_cubit.dart';
-import '../add_vehicle/cubit/getVehicle_states.dart';
+import '../../../core/color_manager/color_manager.dart';
+import '../../../widgets/widgets/custom_appbar.dart';
+import '../../../widgets/widgets/custom_button.dart';
+import '../../../widgets/widgets/custom_scaffold.dart';
 import '../add_vehicle/view.dart';
+import 'cubit/vehicle_cubit.dart';
+import 'cubit/vehicle_states.dart';
 class FilterVehicle extends StatelessWidget {
   bool isFilter= true;
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
       body: SafeArea(
-        child: BlocConsumer<VehiclesCubit,AddVehicleStates>(
+        child: BlocConsumer<VehiclesCubit,VehicleStates>(
           listener: (BuildContext context, state) {
             if(state is GetSearchSuccess||state is GetSearchFailed){
               Navigator.pop(context);
@@ -34,7 +34,7 @@ class FilterVehicle extends StatelessWidget {
                       child: Column(
                         children: [
                            Padding(
-                            padding: EdgeInsets.only(top:22),
+                            padding: const EdgeInsets.only(top:22),
                             child: FormInfo(isFilter:isFilter),
                           ),
                           Padding(

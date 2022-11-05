@@ -4,8 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hoga_load/core/data/repository/master_repo.dart';
-import 'package:hoga_load/core/data/repository/vehicle_repo.dart';
-
 import '../data/models/vehicle/Addvehicle_model.dart';
 import 'getDataForm_state.dart';
 
@@ -25,6 +23,7 @@ class DataFormCubit extends Cubit<AddDataFormStates> {
   String countryDestinationID='' ;
   String stateDestinationID='' ;
   String cityDestinationID='' ;
+  String dateTime ='';
 
 
   getCountry() {

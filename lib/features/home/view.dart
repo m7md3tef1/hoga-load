@@ -13,9 +13,9 @@ import 'package:hoga_load/features/packages/view.dart';
 import 'package:hoga_load/features/subscribtion_details/view.dart';
 import 'package:hoga_load/features/upload_jop/view.dart';
 import 'package:hoga_load/features/upload_product/view.dart';
-import 'package:hoga_load/features/upload_vehicles/view.dart';
 import 'package:hoga_load/widgets/widgets/custom_rowdrawer.dart';
 import '../../widgets/widgets/custom_scaffold.dart';
+import '../vehicles/upload_vehicles/view.dart';
 import 'controller.dart';
 
 part 'units/drawer.dart';

@@ -2,6 +2,9 @@ part of '../view.dart';
 
 class Equipment extends StatelessWidget {
   var value=false;
+  Vehicles? vehiclesModel;
+  bool? isEdit;
+  Equipment({super.key,this.vehiclesModel,this.isEdit=false});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +25,13 @@ class Equipment extends StatelessWidget {
             itemCount: VehiclesCubit.get(context).equipmentList.length,
             itemBuilder: (BuildContext context, int index) {
               return CustomCheckBox(
+
                   index: index,
                   boxKey: MasterKeys.equipmentTypes.name,
-                  value: value,
+                  value:isEdit!?
+                  vehiclesModel!.equipmentTypes2!
+                      .contains(VehiclesCubit.get(context).equipmentList[index].title)
+                      ?true:value: value,
                   text: VehiclesCubit.get(context).equipmentList[index].title);
             },
           ),

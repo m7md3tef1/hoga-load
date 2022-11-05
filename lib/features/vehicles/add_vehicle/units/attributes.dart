@@ -2,6 +2,9 @@ part of '../view.dart';
 
 class Attributes extends StatelessWidget {
   bool value2 = false;
+  Vehicles? vehiclesModel;
+  bool? isEdit;
+  Attributes({super.key,this.vehiclesModel,this.isEdit=false});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -30,12 +33,15 @@ class Attributes extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, childAspectRatio: 5),
-            itemCount: VehiclesCubit.get(context).attributesList.length,
+            itemCount:VehiclesCubit.get(context).attributesList.length,
             itemBuilder: (BuildContext context, int index) {
               return CustomCheckBox(
                   index: index,
                   boxKey: MasterKeys.attributes.name,
-                  value: value2,
+                 value: isEdit!?
+                 vehiclesModel!.attributes2!
+                     .contains(VehiclesCubit.get(context).attributesList[index].title)
+                     ?true:value2: value2,
                   text: VehiclesCubit.get(context).attributesList[index].title);
             },
           ),

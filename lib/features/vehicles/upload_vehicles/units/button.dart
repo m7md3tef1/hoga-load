@@ -11,7 +11,7 @@ class Button extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         child: CustomButton(text: 'Add',icon: Icons.add, color: ColorManager.orange,
            function: (){
-          MagicRouter.navigateTo(const AddVehiclesView());
+          MagicRouter.navigateTo( AddVehiclesView());
            },
         ),
       ),

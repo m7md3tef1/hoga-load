@@ -7,7 +7,7 @@ import 'package:hoga_load/features/jobs/cubit/getJop_cubit.dart';
 import 'package:hoga_load/features/loads/cubit/getLoad_cubit.dart';
 import 'package:hoga_load/features/search_product/cubit/getProduct_cubit.dart';
 
-import '../../features/add_vehicle/cubit/getVehicle_cubit.dart';
+import '../../features/vehicles/get_vehicles/cubit/vehicle_cubit.dart';
 
 class CustomSearchRow extends StatelessWidget {
   int index;

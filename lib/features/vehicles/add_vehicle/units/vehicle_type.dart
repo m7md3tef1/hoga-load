@@ -2,6 +2,9 @@ part of '../view.dart';
 
 class VehicleType extends StatelessWidget {
   bool value3 = false;
+  Vehicles? vehiclesModel;
+  bool? isEdit;
+  VehicleType({super.key,this.vehiclesModel,this.isEdit=false});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,7 +32,11 @@ class VehicleType extends StatelessWidget {
               return CustomCheckBox(
                   index: index,
                   boxKey: MasterKeys.vehicleTypes.name,
-                  value: value3,
+                 value:  isEdit!?
+                 vehiclesModel!.vehicleTypes2!
+                     .contains(VehiclesCubit.get(context).vehiclesTypeList[index].title)
+                     ?true:value3: value3,
+                 // value: VehiclesCubit.get(context).vehcleTypeBoxValue![index],
                   text:
                       VehiclesCubit.get(context).vehiclesTypeList[index].title);
             },

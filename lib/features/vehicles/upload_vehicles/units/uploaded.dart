@@ -12,8 +12,9 @@ class Uploaded extends StatelessWidget {
           children: [
             SizedBox(height: 18.h,),
             CustomCardTitle(text: 'UPLOADED Vehicles',),
-            CustomNoContainer(text: 'vehicles'),
-            const Spacer(),
+            //CustomNoContainer(text: 'vehicles'),
+            MyTable(),
+            //const Spacer(),
             const Button()
 
 

@@ -1,25 +1,72 @@
 part of '../view.dart';
 
 class FormInfo extends StatefulWidget {
-   FormInfo({Key? key,this.isFilter=false}) : super(key: key);
+   FormInfo({Key? key,this.isFilter=false,this.vehiclesModel,this.isEdit=false,this.index}) : super(key: key);
 bool isFilter;
+   Vehicles? vehiclesModel;
+   bool isEdit;
+   int? index;
   @override
   State<FormInfo> createState() => _FormInfoState();
 }
 
 class _FormInfoState extends State<FormInfo> {
-  var countryOrigin = '';
-  var stateOrigin = '';
-  var cityOrigin = '';
-  var countryDestination = '';
-  var stateDestination = '';
-  var cityDestination = '';
-  var day = '';
-  var month = '';
-  var year = '';
+  String countryOrigin = '';
+  String stateOrigin = '';
+  String cityOrigin = '';
+  String countryDestination = '';
+  String stateDestination = '';
+  String cityDestination = '';
+  String day = '';
+  String month = '';
+  String year = '';
   String date = '';
 
-  DateTime dateTime = DateTime.now();
+  @override
+  void initState() {
+    super.initState();
+   if(widget.isEdit){
+     date=widget.vehiclesModel!.availabilityDate!;
+     cityDestination=widget.vehiclesModel!.destinationCity!.title!;
+     cityOrigin=widget.vehiclesModel!.originCity!.title!;
+     countryDestination=widget.vehiclesModel!.destinationCountry!.title!;
+     countryOrigin=widget.vehiclesModel!.originCountry!.title!;
+     stateDestination=widget.vehiclesModel!.destinationState!.title!;
+     stateOrigin=widget.vehiclesModel!.originState!.title!;
+
+     DataFormCubit.get(context).cityDestinationID=widget.vehiclesModel!.destinationCity!.id!.toString();
+     DataFormCubit.get(context).cityOriginID=widget.vehiclesModel!.originCity!.id!.toString();
+     DataFormCubit.get(context).cityDestinationID=widget.vehiclesModel!.destinationCountry!.id!.toString();
+     DataFormCubit.get(context).countryOriginID=widget.vehiclesModel!.originCountry!.id!.toString();
+     DataFormCubit.get(context).stateDestinationID=widget.vehiclesModel!.destinationState!.id!.toString();
+     DataFormCubit.get(context).stateOriginID=widget.vehiclesModel!.originState!.id!.toString();
+     DataFormCubit.get(context).dateTime=widget.vehiclesModel!.availabilityDate!;
+
+     VehiclesCubit.get(context).weightController.text=widget.vehiclesModel!.weight!;
+     VehiclesCubit.get(context).instructionsController.text=widget.vehiclesModel!.instructions==null?"":
+     VehiclesCubit.get(context).instructionsController.text=widget.vehiclesModel!.instructions.toString();
+
+
+//     VehiclesCubit.get(context).equipmentBoxValue![widget.index!]==null?true:null;
+//     VehiclesCubit.get(context).attributesBoxValue![widget.index!]==null?true:null;
+//     //VehiclesCubit.get(context).vehcleSizeBoxValue![widget.index!]==null?true:null;
+//     print(VehiclesCubit.get(context).vehcleSizeBoxValue!.length);
+//     print(widget.index!);
+//     print('nda');
+
+     // VehiclesCubit.get(context).vehcleTypeBoxValue![widget.index!]=true;
+
+
+
+
+   }else{
+     //VehiclesCubit.get(context).equipmentBoxValue=List.filled(VehiclesCubit.get(context).equipmentList.length,false);
+   //  VehiclesCubit.get(context).attributesBoxValue=List.filled(VehiclesCubit.get(context).attributesList.length,false);
+   //  VehiclesCubit.get(context).vehcleTypeBoxValue=List.filled(VehiclesCubit.get(context).vehiclesTypeList.length,false);
+   //  VehiclesCubit.get(context).vehcleSizeBoxValue=List.filled(VehiclesCubit.get(context).vehicleSizeList.length,false);
+
+   }
+  }
   @override
   Widget build(BuildContext context) {
     return CustomCard(
@@ -65,9 +112,9 @@ class _FormInfoState extends State<FormInfo> {
                     onTap: () async {
                       DateTime? newDate = await showDatePicker(
                           context: context,
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2100),
-                          initialDate: dateTime);
+                          firstDate: DateTime(1000),
+                          lastDate: DateTime(3000),
+                          initialDate: DateTime.now());
                       if (newDate == null) return;
                       day = newDate.day.toString();
                       month = newDate.month.toString();
@@ -75,7 +122,7 @@ class _FormInfoState extends State<FormInfo> {
 
                       date = '$day/$month/$year';
                       setState(() {
-                        dateTime = newDate;
+                        DataFormCubit.get(context).dateTime = date;
                       });
                     },
                     child: const Icon(Icons.date_range_outlined)),
@@ -109,6 +156,11 @@ class _FormInfoState extends State<FormInfo> {
                                             DataFormCubit.get(context).countryOriginID=DataFormCubit.get(context)
                                                 .countryList[index]
                                                 .id!.toString();
+                                            cityOrigin='';
+                                            stateOrigin='';
+                                            DataFormCubit.get(context).cityOriginID='';
+                                            DataFormCubit.get(context).stateOriginID='';
+
                                           });
                                           DataFormCubit.get(context).getState(
                                               DataFormCubit.get(context)
@@ -167,6 +219,9 @@ class _FormInfoState extends State<FormInfo> {
                                             DataFormCubit.get(context).stateOriginID=DataFormCubit.get(context)
                                                 .stateList[index]
                                                 .id!.toString();
+                                            cityOrigin='';
+                                            DataFormCubit.get(context).cityOriginID='';
+
                                           });
                                           print('sssssssss');
                                           DataFormCubit.get(context).getCity
@@ -297,6 +352,12 @@ class _FormInfoState extends State<FormInfo> {
                                             DataFormCubit.get(context).countryDestinationID=DataFormCubit.get(context)
                                                 .countryList[index]
                                                 .id!.toString();
+                                            cityDestination='';
+                                            stateDestination='';
+                                            DataFormCubit.get(context).cityDestinationID='';
+                                            DataFormCubit.get(context).cityOriginID='';
+
+
                                           });
                                           DataFormCubit.get(context).getDestintionState( DataFormCubit.get(context)
                                               .countryList[index]
@@ -363,6 +424,10 @@ class _FormInfoState extends State<FormInfo> {
                                             DataFormCubit.get(context).stateDestinationID=DataFormCubit.get(context)
                                                 .stateList[index]
                                                 .id!.toString();
+                                            cityDestination='';
+                                            DataFormCubit.get(context).cityDestinationID='';
+
+
                                           });
                                           DataFormCubit.get(context).getDestintionCity( DataFormCubit.get(context)
                                               .stateList[index]
@@ -476,3 +541,4 @@ class _FormInfoState extends State<FormInfo> {
     );
   }
 }
+

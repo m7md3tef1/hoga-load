@@ -1,22 +1,22 @@
 import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hoga_load/core/data/models/master/EquipmentTypes.dart';
-import 'package:hoga_load/core/data/models/vehicle/VehicleSizes.dart';
-import 'package:hoga_load/core/data/models/vehicle/VehicleTypes.dart';
 import 'package:hoga_load/core/data/repository/vehicle_repo.dart';
 import 'package:hoga_load/core/keys/keys.dart';
-import '../../../core/master_cubit/getDataForm_cubit.dart';
+import '../../../../core/data/models/vehicle/Addvehicle_model.dart';
+import '../../../../core/data/models/vehicle/vehicles.dart';
+import '../../../../core/dialoges/toast.dart';
+import '../../../../core/master_cubit/getDataForm_cubit.dart';
+import 'vehicle_states.dart';
 
-import '../../../core/data/models/vehicle/Addvehicle_model.dart';
-import '../../../core/data/models/vehicle/Attributes.dart';
-import '../../../core/data/models/vehicle/vehicles.dart';
-import 'getVehicle_states.dart';
-
-class VehiclesCubit extends Cubit<AddVehicleStates> {
-  VehiclesCubit() : super(AddVehicleLoading());
+class VehiclesCubit extends Cubit<VehicleStates> {
+  VehiclesCubit() : super(VehicleLoading());
 
   static VehiclesCubit get(context) => BlocProvider.of(context);
+  TextEditingController weightController=TextEditingController();
+  TextEditingController instructionsController=TextEditingController();
+
   Connectivity connectivity = Connectivity();
   List<AddVehicle> attributesList = [];
   List<AddVehicle> equipmentList = [];
@@ -24,6 +24,8 @@ class VehiclesCubit extends Cubit<AddVehicleStates> {
   List<AddVehicle> vehiclesTypeList = [];
   List<Vehicles>searchList=[];
   List<Vehicles>vehicleList=[];
+  List<Vehicles>myvehicleList=[];
+
 
   //checkBoxlist
   List equipmentType=[];
@@ -31,11 +33,15 @@ class VehiclesCubit extends Cubit<AddVehicleStates> {
   List vehcleType=[];
   List vehcleSize=[];
 
-
+//  List<bool>?equipmentBoxValue;
+//  List<bool>?vehcleSizeBoxValue;
+//  List<bool>?vehcleTypeBoxValue;
+//  List<bool>?attributesBoxValue;
 
 
 
   getAttributesCubit() {
+
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
@@ -45,8 +51,10 @@ class VehiclesCubit extends Cubit<AddVehicleStates> {
                   print('..................................'),
                   print(value),
                   attributesList = value,
-                  emit(GetAttributesSuccess(value))
-                })
+                  emit(GetAttributesSuccess(value)),
+        //  attributesBoxValue=List.filled(attributesList.length, false),
+
+        })
             .onError((error, stackTrace) =>
                 {emit(GetAttributesFailed(error.toString())), print(error)});
       }
@@ -62,8 +70,10 @@ class VehiclesCubit extends Cubit<AddVehicleStates> {
                   print('..................................'),
                   print(value),
                 equipmentList = value,
-                  emit(GetEquipmentSuccess(value))
-                })
+                  emit(GetEquipmentSuccess(value)),
+        //equipmentBoxValue=List.filled(equipmentList.length, false),
+
+      })
             .onError((error, stackTrace) =>
                 {emit(GetEquipmentFailed(error.toString())), print(error)});
       }
@@ -79,8 +89,10 @@ class VehiclesCubit extends Cubit<AddVehicleStates> {
                   print('..................................'),
                   print(value),
                   vehicleSizeList = value,
-                  emit(GetVehicleSizeSuccess(value))
-                })
+                  emit(GetVehicleSizeSuccess(value)),
+         // vehcleSizeBoxValue=List.filled(vehicleSizeList.length, false),
+
+        })
             .onError((error, stackTrace) =>
                 {emit(GetVehicleSizeFailed(error.toString())), print(error)});
       }
@@ -96,20 +108,21 @@ class VehiclesCubit extends Cubit<AddVehicleStates> {
                   print('..................................'),
                   print(value),
                   vehiclesTypeList = value,
-                  emit(GetVehiclesTypeSuccess(value))
-                })
+                  emit(GetVehiclesTypeSuccess(value)),
+          //vehcleTypeBoxValue=List.filled(vehiclesTypeList.length, false),
+
+        })
             .onError((error, stackTrace) =>
                 {emit(GetVehiclesTypeFailed(error.toString())), print(error)});
       }
     });
   }
-  getVehicleCubit(){
+  getVehicleCubit({self}){
     connectivity.checkConnectivity().then((value)async{
       if(ConnectivityResult.none == value){
         emit(NetworkFailed("Check your internet connection and try again"));
       }else{
-        VehicleRepo.getVehicles().then((value) => {
-          print('..................................'),
+        VehicleRepo.getVehicles(self).then((value) => {
           print(value),
           vehicleList=value,
           emit(GetVehicleSuccess(value))
@@ -145,101 +158,38 @@ class VehiclesCubit extends Cubit<AddVehicleStates> {
             print(value),
             searchList=value,
             emit(GetSearchSuccess(searchList)),
-            equipmentType.clear(),
-            attributes.clear(),
-            vehcleType.clear(),
-            vehcleSize.clear(),
-            DataFormCubit.get(context).cityOriginID='',
-            DataFormCubit.get(context).countryOriginID='',
-            DataFormCubit.get(context).countryDestinationID='',
-            DataFormCubit.get(context).stateDestinationID='',
-            DataFormCubit.get(context).stateOriginID='',
-            DataFormCubit.get(context).cityDestinationID='',
+            vehicleClearData(context),
+
 
           }else{
             emit(GetSearchFailed('Nothing found try again')),
-            equipmentType.clear(),
-            attributes.clear(),
-            vehcleType.clear(),
-            vehcleSize.clear(),
-            DataFormCubit.get(context).cityOriginID='',
-            DataFormCubit.get(context).countryOriginID='',
-            DataFormCubit.get(context).countryDestinationID='',
-            DataFormCubit.get(context).stateDestinationID='',
-            DataFormCubit.get(context).stateOriginID='',
-            DataFormCubit.get(context).cityDestinationID='',
+            vehicleClearData(context),
+
           }
 
         }).onError((error, stackTrace) => {
           emit(GetSearchFailed(error.toString())),
-          equipmentType.clear(),
-          attributes.clear(),
-          vehcleType.clear(),
-          vehcleSize.clear(),
-          DataFormCubit.get(context).cityOriginID='',
-          DataFormCubit.get(context).countryOriginID='',
-          DataFormCubit.get(context).countryDestinationID='',
-          DataFormCubit.get(context).stateDestinationID='',
-          DataFormCubit.get(context).stateOriginID='',
-          DataFormCubit.get(context).cityDestinationID='',t
+          vehicleClearData(context),
           print(error)
 
         });
       }
 
     });
-//    searchList.clear();
-//    VehiclesCubit.get(context).vehicleList.forEach((i) {
-//      if(i.weight!.toLowerCase().contains(val)||i.weight!.contains(val)){
-//        searchList.add(i);
-//      }
-//      else if(i.availabilityDate!.toLowerCase().contains(val)||i.availabilityDate!.contains(val)){
-//        searchList.add(i);
-//
-//      }else if(i.vehicleSizes2.toString().toLowerCase().contains(val)||i.vehicleSizes2.toString().contains(val)){
-//        searchList.add(i);
-//
-//      }else if(i.id!.toString().contains(val)){
-//        searchList.add(i);
-//
-//      }else if(i.originState!.title!.toString().toLowerCase().contains(val)||i.originState!.title!.toString().contains(val)){
-//        searchList.add(i);
-//
-//      }else if(i.originCountry!.title!.contains(val)||i.originCountry!.title!.toString().contains(val)){
-//        searchList.add(i);
-//
-//      }else if(i.originCity!.title!.contains(val)||i.originCity!.title!.toString().toLowerCase().contains(val)){
-//        searchList.add(i);
-//
-//      }else if(i.equipmentTypes2.toString().contains(val)||i.equipmentTypes2.toString().toLowerCase().contains(val)){
-//        searchList.add(i);
-//
-//      }else if(i.destinationCountry!.title!.contains(val)||i.destinationCountry!.title!.toString().contains(val)){
-//        searchList.add(i);
-//
-//      }else if(i.destinationState!.title!.contains(val)||i.destinationState!.title!.toLowerCase().contains(val)){
-//        searchList.add(i);
-//
-//      }else if(i.destinationCity!.title!.contains(val)||i.destinationCity!.title!.toLowerCase().contains(val)){
-//        searchList.add(i);
-//
-//      }else{
-//        null;
-//
-//      }
-//
-//
-//      if(searchList!=null||searchList.length!=0){
-//        emit(GetSearchSuccess(searchList));
-//
-//      }else{
-//        emit(GetSearchFailed('list is empty'));
-//
-//      }
-//    });
   }
 
-
+   vehicleClearData(context){
+     equipmentType.clear();
+     attributes.clear();
+     vehcleType.clear();
+     vehcleSize.clear();
+     DataFormCubit.get(context).cityOriginID='';
+     DataFormCubit.get(context).countryOriginID='';
+     DataFormCubit.get(context).countryDestinationID='';
+     DataFormCubit.get(context).stateDestinationID='';
+     DataFormCubit.get(context).stateOriginID='';
+     DataFormCubit.get(context).cityDestinationID='';
+   }
   changeCheckBox(boxKey,index,val){
 
     if(boxKey==MasterKeys.vehicleSize.name){
@@ -263,4 +213,79 @@ class VehiclesCubit extends Cubit<AddVehicleStates> {
 
     print('+++++++++++++++++++++++++++++++++++');
   }
+
+  deleteVehicleCubit(vehicleId){
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        emit(NetworkFailed("Check your internet connection and try again"));
+      } else {
+        VehicleRepo.deleteVehicle(vehicleId)
+            .then((value) => {
+          print('Delete Vehicle Success'),
+          print(value),
+
+          emit(DeleteSuccess()),
+          showToast(msg: 'Delete Success', state: ToastedStates.SUCCESS),
+
+        })
+            .onError((error, stackTrace) =>
+        {emit(DeleteFailed()),
+          print(error),
+          showToast(msg: error.toString(), state: ToastedStates.ERROR),
+          print('Delete Vehicle Failed'),
+        });
+      }
+    });
+  }
+  editVehicleCubit({context,vehicleId}){
+
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        emit(NetworkFailed("Check your internet connection and try again"));
+      } else {
+        VehicleRepo.editVehicle(context: context,vehicleId:vehicleId)
+            .then((value) => {
+          print('Edit Vehicle Success'),
+          print(value),
+
+          emit(EditSuccess()),
+          showToast(msg: 'Edit Success', state: ToastedStates.SUCCESS),
+
+        })
+            .catchError((error, stackTrace) =>
+        {emit(EditFailed()),
+          print(error),
+          showToast(msg: error.toString(), state: ToastedStates.ERROR),
+          print('Edit Vehicle Failed'),
+        });
+      }
+    });
+  }
+
+  addVehicleCubit({context}){
+
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        emit(NetworkFailed("Check your internet connection and try again"));
+      } else {
+        VehicleRepo.addVehicle(context: context)
+            .then((value) => {
+          print('Add Vehicle Success'),
+          print(value),
+          emit(AddSuccess()),
+          vehicleClearData(context),
+
+          showToast(msg: 'Add Success', state: ToastedStates.SUCCESS),
+
+        }).catchError((error) => {
+          emit(AddFailed()),
+          vehicleClearData(context),
+
+          print('Add Vehicle Failed'),
+          print(error),
+        });
+      }
+    });
+  }
+
 }
