@@ -32,7 +32,7 @@ class Form extends StatelessWidget {
               color: const Color(0xFF757575),
             ),
             CustomButton(
-              text: 'Update Profile', color: ColorManager.orange,
+              text: 'Send Message', color: ColorManager.orange,
 
             ),
 

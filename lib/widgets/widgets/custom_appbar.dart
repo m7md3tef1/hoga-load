@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hoga_load/core/app_images/app_images.dart';
+import 'package:hoga_load/features/dashboard/view.dart';
 import 'package:hoga_load/features/home/view.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 
@@ -44,7 +45,11 @@ class CustomAppbar extends StatelessWidget {
                     ),
                   ),
 
-                   icon==null?const Icon(Icons.account_circle_outlined):icon,
+                   icon ?? InkWell(
+                       onTap: (){
+                         MagicRouter.navigateTo( const DashboardView());
+                       },
+                       child: const Icon(Icons.account_circle_outlined)),
                 ],
               ),
             ),

@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/router/router.dart';
 import 'cubit/vehicle_cubit.dart';
 import 'cubit/vehicle_states.dart';
+import 'details.dart';
 import 'filter_page.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import 'package:hoga_load/widgets/widgets/custom_row.dart';
@@ -32,6 +33,7 @@ class VehiclesView extends StatelessWidget {
           SizedBox(height: 21.h,),
            Body()
         ],
+
       ),
     );
   }

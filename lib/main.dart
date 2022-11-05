@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
               ..getEquipmentsCubit()
               ..getVehicleSizesCubit()
               ..getVehicleTypesCubit()
-             // ..getVehicleCubit()
+          //   ..getVehicleCubit()
 
         ),
         BlocProvider(
@@ -59,14 +59,14 @@ class MyApp extends StatelessWidget {
               ..getCountry()
               ..getProduct()),
         BlocProvider(
-            create: (_) => LoadsCubit()),
+            create: (_) => LoadsCubit()..getLoad()),
         BlocProvider(
-            create: (_) => ProductsCubit()),
+            create: (_) => ProductsCubit()..getProduct()),
         BlocProvider(
-            create: (_) => JopCubit()),
+            create: (_) => JopCubit()..getJop()),
         BlocProvider(create: (_) => PackageCubit()..getPackageCubit()),
         BlocProvider(create: (_)=>ChangePassCubit()),
-        BlocProvider(create: (_)=>UpdateProfileCubit()),
+        BlocProvider(create: (_)=>UpdateProfileCubit()..updateProfile..getVehicleTypesCubit()),
         BlocProvider(
             create: (_) => BlogsCubit()
               ..getBlogsCubit(CacheHelper.getString(SharedKeys.token))..blogList),
