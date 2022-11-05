@@ -112,7 +112,7 @@ class SignUp extends StatelessWidget {
                                 }
 
                               },
-                              text: 'Sign Up', color: ColorManager.orange,
+                              text: 'Sign Up', color: ColorManager.yellow,
                             ),
                             const SizedBox(height: 12,),
 

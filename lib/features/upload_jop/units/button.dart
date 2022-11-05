@@ -9,7 +9,7 @@ class Button extends StatelessWidget {
       padding:  EdgeInsets.only(bottom: 27.h),
       child: Align(
         alignment: Alignment.bottomCenter,
-        child: CustomButton(text: 'Add',icon: Icons.add, color: ColorManager.orange,
+        child: CustomButton(text: '+ Add',icon: Icons.add, color: ColorManager.yellow,
     function: (){
     },
         ),

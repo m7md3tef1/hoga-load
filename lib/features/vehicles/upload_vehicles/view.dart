@@ -3,8 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/core/router/router.dart';
+import 'package:hoga_load/features/plans/view.dart';
+import 'package:hoga_load/widgets/widgets/upgrade_member_ship.dart';
 import '../../../core/widgets/custom_card.dart';
 import '../../../core/widgets/custom_card_title.dart';
+import '../../../core/widgets/custom_no_container.dart';
 import '../add_vehicle/view.dart';
 import '../get_vehicles/cubit/vehicle_cubit.dart';
 import '../get_vehicles/cubit/vehicle_states.dart';
@@ -37,7 +40,7 @@ class _UploadVehiclesViewState extends State<UploadVehiclesView> {
       body:
       Column(
         children: [
-          CustomAppbar(title: 'Uploaded VEHICLES'),
+          CustomAppbar(title: 'Uploaded VEHICLES'.toUpperCase()),
           const Expanded(child: Uploaded()),
            //MyTable(),
 

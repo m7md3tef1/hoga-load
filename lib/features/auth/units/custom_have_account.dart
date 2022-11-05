@@ -15,7 +15,7 @@ class HaveAccount extends StatelessWidget {
         children: [
           CustomText(text: 'Do you have account?',fontWeight: FontWeight.bold,fontSize: 14.sp,color: ColorManager.greyColor, ),
           InkWell(onTap: (){MagicRouter.navigateTo(Login());},
-              child: CustomText(text: '  Login',fontWeight: FontWeight.bold,fontSize: 14.sp,color: ColorManager.orange, )),
+              child: CustomText(text: '  Login',fontWeight: FontWeight.bold,fontSize: 14.sp,color: ColorManager.yellow, )),
 
         ],
       ),

@@ -7,6 +7,7 @@ class PlanBody extends StatelessWidget {
       Padding(
         padding:  EdgeInsets.symmetric(horizontal: 15.sp),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
               padding: EdgeInsets.only(left: 15.w, right: 15.w),
@@ -31,11 +32,29 @@ class PlanBody extends StatelessWidget {
                 color: const Color(0xFF000000),
               ),
             ),
-            BuyContainer('Free Trial 30 Days','30 Load Postings \n30 Truck Posts \n5 Buy-Sell Posts \n2 Career Posts','0','assets/images/30day.png'),
-            BuyContainer('Bronze Plan','100 Load Postings \n100 Truck Posts \n10 Buy-Sell Posts \n5 Career Posts','35','assets/images/bronze.png'),
-            BuyContainer('Silver Plan','300 Load Postings \n300 Truck Posts \n30 Buy-Sell Posts \n20 Career Posts','35','assets/images/silver.png'),
-            BuyContainer('Gold Plan','600 Load Postings \n600 Truck Posts \n100 Buy-Sell Posts \n60 Career Posts','75','assets/images/gold.png'),        ],
-        ),
-      );
+            BlocConsumer<PlansCubit, PlansStates>(
+             listener: (context, state) {},
+            builder: (context, state) {
+                return ListView.builder(
+                  itemCount: PlansCubit.get(context).plansList.length,
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (context,index){
+                  return
+                  BuyContainer(text:PlansCubit.get(context).plansList[index].title,
+                  loadsNo:PlansCubit.get(context).plansList[index].totalNumberOfLoads,
+                 vehiclesNo: PlansCubit.get(context).plansList[index].totalNumberOfVehicles,
+              jobsNo: PlansCubit.get(context).plansList[index].totalNumberOfJobs,
+              productNo: PlansCubit.get(context).plansList[index].totalNumberOfProducts,
+              price: PlansCubit.get(context).plansList[index].price,
+                image:'assets/images/30day.png');
+
+
+    });
+              }
+            ),
+
+]
+      ));
   }
 }

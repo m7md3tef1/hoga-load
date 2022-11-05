@@ -1,7 +1,9 @@
 part of '../view.dart';
 
 class Button extends StatelessWidget {
-  const Button({super.key});
+
+  Button({super.key,this.isUpgradeMember=false});
+  bool isUpgradeMember;
 
   @override
   Widget build(BuildContext context) {
@@ -9,9 +11,12 @@ class Button extends StatelessWidget {
       padding:  EdgeInsets.only(bottom: 27.h),
       child: Align(
         alignment: Alignment.bottomCenter,
-        child: CustomButton(text: 'Add',icon: Icons.add, color: ColorManager.orange,
+        child: CustomButton(text: isUpgradeMember?"Upgrade MemberShip":
+        '+ Add',icon: Icons.add, color: ColorManager.yellow,
            function: (){
-          MagicRouter.navigateTo( AddVehiclesView());
+             isUpgradeMember? MagicRouter.navigateTo( PlanView()):
+             MagicRouter.navigateTo(AddVehiclesView());
+
            },
         ),
       ),

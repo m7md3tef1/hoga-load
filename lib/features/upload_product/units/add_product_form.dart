@@ -345,7 +345,7 @@ class _FormState extends State<Form> {
           Padding(
             padding: EdgeInsets.only(top: 50.sp, bottom: 15.sp),
             child: CustomButton(
-                text: 'Add new product', color: ColorManager.orange),
+                text: 'Add new product', color: ColorManager.yellow),
           ),
         ],
       ),

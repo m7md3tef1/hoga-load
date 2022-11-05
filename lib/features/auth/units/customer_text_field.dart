@@ -24,7 +24,7 @@ class CustomTextFormField extends StatelessWidget {
         keyboardType: keyBoardType,
         decoration: InputDecoration(
           focusedBorder:OutlineInputBorder(
-            borderSide: const BorderSide(color: ColorManager.orange,width: 1),
+            borderSide: const BorderSide(color: ColorManager.yellow,width: 1),
             borderRadius: BorderRadius.circular(12),
 
 

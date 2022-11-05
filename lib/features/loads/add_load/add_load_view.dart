@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/core/widgets/custom_card.dart';
+import 'package:hoga_load/features/loads/cubit/getLoad_cubit.dart';
+import 'package:hoga_load/features/vehicles/add_vehicle/view.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import 'package:hoga_load/widgets/widgets/custom_button.dart';
 import 'package:hoga_load/widgets/widgets/custom_checkbox.dart';
@@ -9,15 +11,16 @@ import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 import 'package:hoga_load/widgets/widgets/custom_text_field.dart';
 
-import '../../core/master_cubit/getDataForm_cubit.dart';
-import '../vehicles/get_vehicles/cubit/vehicle_cubit.dart';
+import '../../../core/master_cubit/getDataForm_cubit.dart';
+import '../../vehicles/get_vehicles/cubit/vehicle_cubit.dart';
 
-part 'units/attributes.dart';
-part 'units/equipment.dart';
-part 'units/form.dart';
-part 'units/instructon.dart';
-part 'units/vehicle_type.dart';
-part 'units/vehicles_size.dart';
+
+part '../add_load/units/attributes.dart';
+part '../add_load/units/equipment.dart';
+part '../add_load/units/form.dart';
+part '../add_load/units/instructon.dart';
+part '../add_load/units/vehicle_type.dart';
+part '../add_load/units/vehicles_size.dart';
 
 class AddLoadsView extends StatelessWidget {
   const AddLoadsView({Key? key}) : super(key: key);
@@ -41,7 +44,7 @@ class AddLoadsView extends StatelessWidget {
                           physics: const BouncingScrollPhysics(),
                           child: Padding(
                             padding: const EdgeInsets.only(top: 22),
-                            child: Form(),
+                            child: FormInfo()
                           )),
                       SingleChildScrollView(
                           physics: const BouncingScrollPhysics(),
