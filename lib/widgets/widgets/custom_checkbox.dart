@@ -26,7 +26,6 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
           children: [
 
             Checkbox(
-
                 value: widget.value,
                 onChanged: (val) {
                   setState(() {

@@ -3,7 +3,7 @@ part of '../view.dart';
 class VehiclesSize extends StatefulWidget {
   Vehicles? vehiclesModel;
   bool? isEdit;
-  VehiclesSize({super.key,this.vehiclesModel,this.isEdit=false});
+  VehiclesSize({super.key, this.vehiclesModel, this.isEdit = false});
 
   @override
   State<VehiclesSize> createState() => _VehiclesSizeState();
@@ -43,19 +43,32 @@ class _VehiclesSizeState extends State<VehiclesSize> {
                   crossAxisCount: 2, childAspectRatio: 5),
               itemCount: VehiclesCubit.get(context).vehicleSizeList.length,
               itemBuilder: (BuildContext context, int index) {
-                widget.isEdit!&&widget.vehiclesModel!.vehicleSizes2!
-                    .contains(VehiclesCubit.get(context).vehicleSizeList[index].title)?
-                    VehiclesCubit.get(context).vehcleSize.add(VehiclesCubit.get(context).vehicleSizeList[index].id!.toString()):null;
+                widget.isEdit! &&
+                        widget.vehiclesModel!.vehicleSizes2!.contains(
+                            VehiclesCubit.get(context)
+                                .vehicleSizeList[index]
+                                .title)
+                    ? VehiclesCubit.get(context).vehcleSize.add(
+                        VehiclesCubit.get(context)
+                            .vehicleSizeList[index]
+                            .id!
+                            .toString())
+                    : null;
                 return CustomCheckBox(
-                  index: index,
+                    index: index,
                     boxKey: MasterKeys.vehicleSize.name,
-                   // value: VehiclesCubit.get(context).vehcleSizeBoxValue![index],
-                    value:  widget.isEdit!?
-                    widget.vehiclesModel!.vehicleSizes2!
-                        .contains(VehiclesCubit.get(context).vehicleSizeList[index].title)
-                        ?true:value4: value4,
-
-                    text: VehiclesCubit.get(context).vehicleSizeList[index].title);
+                    // value: VehiclesCubit.get(context).vehcleSizeBoxValue![index],
+                    value: widget.isEdit!
+                        ? widget.vehiclesModel!.vehicleSizes2!.contains(
+                                VehiclesCubit.get(context)
+                                    .vehicleSizeList[index]
+                                    .title)
+                            ? true
+                            : value4
+                        : value4,
+                    text: VehiclesCubit.get(context)
+                        .vehicleSizeList[index]
+                        .title);
               },
             ),
           ),

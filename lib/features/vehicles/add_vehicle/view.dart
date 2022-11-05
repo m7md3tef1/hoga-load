@@ -53,8 +53,9 @@ class AddVehiclesView extends StatelessWidget {
                       child: Column(
                         children: [
                            Padding(
-                            padding: EdgeInsets.only(top:22),
-                            child: FormInfo(vehiclesModel: vehiclesModel,isEdit: isEdit,index: index,),
+                            padding: const EdgeInsets.only(top:22),
+                            child:
+                            FormInfo(vehiclesModel: vehiclesModel,isEdit: isEdit,index: index,),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top:22),

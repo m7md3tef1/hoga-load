@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
                   const Values(),
                   const Contact(),
                   const Bottom(),
-                  PlanBody()
+
 
                 ],
               ),
