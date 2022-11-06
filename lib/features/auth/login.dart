@@ -83,7 +83,7 @@ class Login extends StatelessWidget {
                             }
                           },
                           text: 'Login',
-                          color: ColorManager.orange,
+                          color: ColorManager.yellow,
                         ),
                       ),
                     NoAccount(),

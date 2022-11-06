@@ -13,13 +13,23 @@ class ChangeBox extends VehicleStates{}
 
 class AddSuccess extends VehicleStates{
 }
-class AddFailed extends VehicleStates{}
+class AddFailed extends VehicleStates{
+  String? error;
+  AddFailed(this.error);
+}
+class AddTestFailed extends VehicleStates{
+  String? error;
+  AddTestFailed(this.error);
+}
 class EditSuccess extends VehicleStates{
 }
 class EditFailed extends VehicleStates{}
 class DeleteSuccess extends VehicleStates{
 }
 class DeleteFailed extends VehicleStates{
+
+}
+class Loading extends VehicleStates{
 
 }
 
@@ -79,6 +89,9 @@ class GetVehicleSuccess extends VehicleStates{
 
   List<Vehicles>vehicleList=[];
   GetVehicleSuccess(this.vehicleList);
+}
+class VehicleListEmpty extends VehicleStates{
+
 }
 
 class GetVehicleFailed extends VehicleStates{

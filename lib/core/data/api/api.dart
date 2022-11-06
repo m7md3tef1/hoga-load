@@ -34,7 +34,7 @@ class Api{
      }
   }
 
-   Future<dynamic> postHttp({required url, required data,authToken,queryParams })async{
+   Future<dynamic> postHttp({required url,  data,authToken,queryParams })async{
 
     try{
       var response=await Dio().post(baseUrl+'$url',data: data,queryParameters:queryParams,options:
@@ -58,8 +58,8 @@ class Api{
       print(responseModel.message);
       print('------------------------');
 
-      showToast(msg: responseModel.message.toString(), state: ToastedStates.ERROR);
-      throw Exception();
+//      showToast(msg: responseModel.message.toString(), state: ToastedStates.ERROR);
+      throw Exception(responseModel.message);
     }
    }
 

@@ -9,28 +9,28 @@ class MyTable extends StatelessWidget {
           listener: (BuildContext context, Object? state) {  },
           builder: (context,state) {
           return ListView.builder(
-              itemCount: VehiclesCubit.get(context).vehicleList.length,
+              itemCount: VehiclesCubit.get(context).myVehicleList.length,
 
               itemBuilder: (context, index) {
               return Container(
                 color: index.isEven ? Colors.grey[300] : Colors.white,
                 child: UploadedTableDataRow(
-                  origin:"${VehiclesCubit.get(context).vehicleList[index].originCity!.title??"other"}"
-                      " (${VehiclesCubit.get(context).vehicleList[index].originState!.title??"other"} , "
-                      "${VehiclesCubit.get(context).vehicleList[index].originCountry!.title??"other"}) "
-                      " → ""${VehiclesCubit.get(context).vehicleList[index].destinationCity!.title??"other"}"
-                      " (${VehiclesCubit.get(context).vehicleList[index].destinationState!.title??"other"} , "
-                      "${VehiclesCubit.get(context).vehicleList[index].destinationCountry!.title??"other"}) ",
+                  origin:"${VehiclesCubit.get(context).myVehicleList[index].originCity!.title??"other"}"
+                      " (${VehiclesCubit.get(context).myVehicleList[index].originState!.title??"other"} , "
+                      "${VehiclesCubit.get(context).myVehicleList[index].originCountry!.title??"other"}) "
+                      " → ""${VehiclesCubit.get(context).myVehicleList[index].destinationCity!.title??"other"}"
+                      " (${VehiclesCubit.get(context).myVehicleList[index].destinationState!.title??"other"} , "
+                      "${VehiclesCubit.get(context).myVehicleList[index].destinationCountry!.title??"other"}) ",
                   editFunc:(){
                     MagicRouter.navigateTo( AddVehiclesView(isEdit: true,vehiclesModel:
-                    VehiclesCubit.get(context).vehicleList[index],index:index));
+                    VehiclesCubit.get(context).myVehicleList[index],index:index));
                     //VehiclesCubit.get(context).editVehicleCubit(context:context,vehicleId:VehiclesCubit.get(context).vehicleList[index].id);
 
                   } ,
                   deleteFunc:(){
-                    VehiclesCubit.get(context).deleteVehicleCubit(VehiclesCubit.get(context).vehicleList[index].id);
+                    VehiclesCubit.get(context).deleteVehicleCubit(VehiclesCubit.get(context).myVehicleList[index].id);
                   } ,
-                  tableWeight:"${VehiclesCubit.get(context).vehicleList[index].weight}" ,
+                  tableWeight:"${VehiclesCubit.get(context).myVehicleList[index].weight}" ,
                   tableNumber: "${index+1}",
                 ),
               );

@@ -82,7 +82,7 @@ class FilterVehicle extends StatelessWidget {
                                       .replaceAll(",","-").replaceAll("[","").replaceAll("]","").
                                   replaceAll(" ",""));
                                 },
-                                child: CustomButton(text: 'Search', color: ColorManager.orange)) ,
+                                child: CustomButton(text: 'Search', color: ColorManager.yellow)) ,
                           ),
                         ],
                       ),

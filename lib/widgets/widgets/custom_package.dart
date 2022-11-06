@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
+import 'package:hoga_load/core/router/router.dart';
+import 'package:hoga_load/features/add_update_card/view.dart';
 import 'package:hoga_load/widgets/widgets/custom_button.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 
@@ -233,6 +235,7 @@ class _CustomPackageState extends State<CustomPackage> {
         Padding(
           padding:  EdgeInsets.only(left: 41.w,right: 13.w),
           child: CustomButton(
+            function: ()=>MagicRouter.navigateTo(const AddUpdateCardView()),
             text: 'BUY NOW',
             colortext: const Color(0xFFFDC52F),
             colorborder: const Color(0xFFFDC52F), color: Colors.white,

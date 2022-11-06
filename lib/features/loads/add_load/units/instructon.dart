@@ -12,6 +12,8 @@ class Instructions extends StatelessWidget {
         CustomTextField(
           height: 64.h,
           hintText: 'Weight ( in Kilogram )',
+          controller: LoadsCubit.get(context).weightController,
+
           suffixIcon: Icon(
             Icons.expand_more,
             size: 30.sp,
@@ -22,11 +24,12 @@ class Instructions extends StatelessWidget {
           height: 147.h,
           lines: 4,
           hintText: 'Instructions',
+          controller: LoadsCubit.get(context).instructionsController,
         ),
         SizedBox(
           height: 23.h,
         ),
-        CustomButton(text: 'Add new load', color: ColorManager.orange),      ],
+        CustomButton(text: 'Add new load', color: ColorManager.yellow),      ],
     );
   }
 }

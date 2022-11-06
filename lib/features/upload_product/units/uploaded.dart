@@ -14,7 +14,7 @@ class Uploaded extends StatelessWidget {
             CustomCardTitle(text: 'UPLOADED PRODUCTS',),
             CustomNoContainer(text: 'products'),
             const Spacer(),
-            const Button()
+             Button()
 
 
           ],

@@ -7,7 +7,7 @@ class OnDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             SizedBox(height: 15.h,),
@@ -36,9 +36,9 @@ class OnDrawer extends StatelessWidget {
               navigatename: const Home(),
             ),
             CustomRowDrawer(
-              text: 'Advertisement',
+              text: 'UploadLoads',
               icon: Icons.railway_alert_outlined,
-              navigatename: const AdvertisementView(),
+              navigatename: const UploadedLoadsView(),
             ),
             CustomRowDrawer(
               text: 'Packages',

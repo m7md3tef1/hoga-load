@@ -15,7 +15,7 @@ class NoAccount extends StatelessWidget {
         children: [
           CustomText(text: 'You don\'t have account?',fontWeight: FontWeight.bold,fontSize: 14,color: ColorManager.greyColor, ),
           InkWell(onTap: (){MagicRouter.navigateTo(SignUp());},
-              child: CustomText(text: '  Sign Up',fontWeight: FontWeight.bold,fontSize: 14,color: ColorManager.orange, )),
+              child: CustomText(text: '  Sign Up',fontWeight: FontWeight.bold,fontSize: 14,color: ColorManager.yellow, )),
 
         ],
       ),

@@ -1,7 +1,9 @@
+
 import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hoga_load/core/data/models/response.dart';
 import 'package:hoga_load/core/data/repository/vehicle_repo.dart';
 import 'package:hoga_load/core/keys/keys.dart';
 import '../../../../core/data/models/vehicle/Addvehicle_model.dart';
@@ -24,7 +26,7 @@ class VehiclesCubit extends Cubit<VehicleStates> {
   List<AddVehicle> vehiclesTypeList = [];
   List<Vehicles>searchList=[];
   List<Vehicles>vehicleList=[];
-  List<Vehicles>myvehicleList=[];
+  List<Vehicles>myVehicleList=[];
 
 
   //checkBoxlist
@@ -33,10 +35,11 @@ class VehiclesCubit extends Cubit<VehicleStates> {
   List vehcleType=[];
   List vehcleSize=[];
 
-//  List<bool>?equipmentBoxValue;
-//  List<bool>?vehcleSizeBoxValue;
-//  List<bool>?vehcleTypeBoxValue;
-//  List<bool>?attributesBoxValue;
+
+
+bool isAccessToken=true;
+  bool  testLoading=true;
+  bool  myVehiclesLoading=true;
 
 
 
@@ -118,16 +121,37 @@ class VehiclesCubit extends Cubit<VehicleStates> {
     });
   }
   getVehicleCubit({self}){
+    myVehiclesLoading=true;
+    emit(VehicleLoading());
     connectivity.checkConnectivity().then((value)async{
       if(ConnectivityResult.none == value){
         emit(NetworkFailed("Check your internet connection and try again"));
       }else{
         VehicleRepo.getVehicles(self).then((value) => {
-          print(value),
-          vehicleList=value,
-          emit(GetVehicleSuccess(value))
+        myVehiclesLoading=false,
+
+            print(value),
+          if(self==1){
+            myVehicleList=value,
+            print('Get Vehice Response'),
+            print(myVehicleList.length),
+            if(myVehicleList.isEmpty){
+              emit(VehicleListEmpty())
+
+            }else{
+              emit(GetVehicleSuccess(value))
+
+            }
+
+          }else{
+            vehicleList=value,
+            emit(GetVehicleSuccess(value))
+
+          },
         }).onError((error, stackTrace) => {
-          emit(GetVehicleFailed(error.toString())),
+        myVehiclesLoading=true,
+
+            emit(GetVehicleFailed(error.toString())),
           print(error)
 
         });
@@ -213,7 +237,6 @@ class VehiclesCubit extends Cubit<VehicleStates> {
 
     print('+++++++++++++++++++++++++++++++++++');
   }
-
   deleteVehicleCubit(vehicleId){
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
@@ -261,12 +284,49 @@ class VehiclesCubit extends Cubit<VehicleStates> {
       }
     });
   }
+  addVehicleCubitTest({context}){
+    testLoading=true;
+    emit(Loading());
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        emit(NetworkFailed("Check your internet connection and try again"));
+        showToast(msg: 'Check your internet connection and try again', state: ToastedStates.ERROR);
+      } else {
+        VehicleRepo.addVehicleTest(context: context)
+            .then((value) => {
+        testLoading=false,
 
+        }).catchError((error)  {
+
+          if(error.toString().contains('Unauthorized Access') ||
+                error.toString().contains('no credit left')){
+            testLoading=false;
+            isAccessToken=false;
+            emit(AddTestFailed(error.toString()));
+            print('oooooooooooooooooo');
+
+          }
+          testLoading=false;
+          emit(AddTestFailed(error.toString()));
+
+          print('Add Vehicle Test Failed');
+
+          print(error);
+
+          //showToast(msg: error.toString(), state: ToastedStates.ERROR);
+
+
+        });
+      }
+    });
+  }
   addVehicleCubit({context}){
 
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
+        showToast(msg: "Check your internet connection and try again", state: ToastedStates.ERROR);
+
       } else {
         VehicleRepo.addVehicle(context: context)
             .then((value) => {
@@ -278,14 +338,17 @@ class VehiclesCubit extends Cubit<VehicleStates> {
           showToast(msg: 'Add Success', state: ToastedStates.SUCCESS),
 
         }).catchError((error) => {
-          emit(AddFailed()),
+          emit(AddFailed(error.toString())),
           vehicleClearData(context),
 
           print('Add Vehicle Failed'),
           print(error),
+        showToast(msg: error.toString(), state: ToastedStates.ERROR),
+
         });
       }
     });
   }
+
 
 }

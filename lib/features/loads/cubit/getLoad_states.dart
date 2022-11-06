@@ -33,3 +33,18 @@ class NetworkFailed extends AddLoadStates {
   final String msg;
   NetworkFailed(this.msg);
 }
+class AddTestFailed extends AddLoadStates{
+  String? error;
+  AddTestFailed(this.error);
+}
+class EditSuccess extends AddLoadStates{
+}
+class EditFailed extends AddLoadStates{}
+class DeleteSuccess extends AddLoadStates{
+}
+class DeleteFailed extends AddLoadStates{
+
+}
+class Loading extends AddLoadStates{
+
+}

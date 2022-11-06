@@ -18,17 +18,15 @@ class CustomContainerLoad extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
-      paddingInEnd: 0,
-      paddingInStart: 0,
-      bottomPadding: 0,
+
       widget: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
             padding: EdgeInsets.only(
               top: 15.h,
-              left: 8.r,
-              right: 8.r,
+              left: 15.sp,
+              right: 15.sp,
             ),
             child: Container(
               height: 100.h,

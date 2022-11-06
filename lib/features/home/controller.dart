@@ -4,7 +4,7 @@ import 'package:hoga_load/features/home/states.dart';
 import 'package:hoga_load/features/home/units/homescreen.dart';
 import 'package:hoga_load/features/jobs/view.dart';
 import 'package:hoga_load/features/loads/cubit/getLoad_cubit.dart';
-import 'package:hoga_load/features/loads/view.dart';
+import '../loads/get_loads/view.dart';
 import 'package:hoga_load/features/search_product/cubit/getProduct_cubit.dart';
 import 'package:hoga_load/features/search_product/view.dart';
 import '../vehicles/get_vehicles/cubit/vehicle_cubit.dart';

@@ -80,29 +80,6 @@ class VehicleRepo {
     return blogsList;
   }
 
-  static Future<List<GetLoadsModel>> getLoads(url) async {
-    String token= await CacheHelper.getString(SharedKeys.token);
-    var response = await Api().getHttp(url: url,authToken: token);
-
-    List<GetLoadsModel> loadsList = [];
-    for (int i = 0; i < response['records'].length; i++) {
-      GetLoadsModel blogModel = GetLoadsModel.fromJson(response['records'][i]);
-
-      for (var element in blogModel.equipmentTypes!) {
-        blogModel.equipmentTypes2!.add(element.title!);
-        print('oooooo${element.title}');
-        print(blogModel.equipmentTypes2);
-      }
-      for (var element in blogModel.vehicleSizes!) {
-        blogModel.vehicleSizes2!.add(element.title!);
-        print('oooooo${element.title}');
-        print(blogModel.vehicleSizes2);
-      }
-      loadsList.add(blogModel);
-    }
-
-    return loadsList;
-  }
 
   static Future<List<GetProductModel>> getProducts(url) async {
     String token= await CacheHelper.getString(SharedKeys.token);
@@ -265,6 +242,12 @@ class VehicleRepo {
         } );
 
   }
+  static addVehicleTest({context})async{
+    String token=await CacheHelper.getString(SharedKeys.token);
+    return await Api().postHttp(url: "vehicles/add",authToken:token);
+
+  }
+
 
 }
 

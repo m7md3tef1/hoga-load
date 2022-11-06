@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/features/about/view.dart';
 import 'package:hoga_load/features/add_update_card/view.dart';
-import 'package:hoga_load/features/advertisements/view.dart';
 import 'package:hoga_load/features/blogs/view.dart';
 import 'package:hoga_load/features/change_password/view.dart';
 import 'package:hoga_load/features/contactus/view.dart';
@@ -15,6 +14,7 @@ import 'package:hoga_load/features/upload_jop/view.dart';
 import 'package:hoga_load/features/upload_product/view.dart';
 import 'package:hoga_load/widgets/widgets/custom_rowdrawer.dart';
 import '../../widgets/widgets/custom_scaffold.dart';
+import '../loads/uploaded_loads/view.dart';
 import '../vehicles/upload_vehicles/view.dart';
 import 'controller.dart';
 

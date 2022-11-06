@@ -14,7 +14,7 @@ class NotLogged extends StatelessWidget {
           onTap: (){
             MagicRouter.navigateTo(RecoverPage());
           },
-          child: CustomText(text: 'Can\'t log in ?',color: ColorManager.orange,
+          child: CustomText(text: 'Can\'t log in ?',color: ColorManager.yellow,
           textDecoration: TextDecoration.underline,fontWeight: FontWeight.normal,),
         ),
       );

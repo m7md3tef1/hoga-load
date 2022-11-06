@@ -86,7 +86,7 @@ class AddVehiclesView extends StatelessWidget {
 
                               },
                               child: CustomButton(text:
-                              isEdit?"Edit Vehicle": 'Add new vehicle', color: ColorManager.orange)),
+                              isEdit?"Edit Vehicle": 'Add new vehicle', color: ColorManager.yellow)),
 
                         ],
                       ),
