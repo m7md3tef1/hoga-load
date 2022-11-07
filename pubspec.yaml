@@ -51,7 +51,7 @@ dependencies:
   url_launcher: ^6.1.6
   date_time_picker: "^2.1.0"
   data_table_2: ^2.3.8
-
+  cached_network_image: ^3.2.2
 
 dev_dependencies:
   flutter_test:
