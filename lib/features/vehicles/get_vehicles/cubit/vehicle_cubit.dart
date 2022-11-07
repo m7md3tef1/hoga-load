@@ -120,6 +120,42 @@ bool isAccessToken=true;
       }
     });
   }
+  vehicleClearData(context){
+    equipmentType.clear();
+    attributes.clear();
+    vehcleType.clear();
+    vehcleSize.clear();
+    DataFormCubit.get(context).cityOriginID='';
+    DataFormCubit.get(context).countryOriginID='';
+    DataFormCubit.get(context).countryDestinationID='';
+    DataFormCubit.get(context).stateDestinationID='';
+    DataFormCubit.get(context).stateOriginID='';
+    DataFormCubit.get(context).cityDestinationID='';
+  }
+  changeCheckBox(boxKey,index,val){
+
+    if(boxKey==MasterKeys.vehicleSize.name){
+      val?vehcleSize.add(vehicleSizeList[index].id):vehcleSize.remove(vehicleSizeList[index].id);
+    }
+    if(boxKey==MasterKeys.vehicleTypes.name){
+      val?vehcleType.add(vehiclesTypeList[index].id):vehcleType.remove(vehiclesTypeList[index].id);
+    }
+    if(boxKey==MasterKeys.attributes.name){
+      val?attributes.add(attributesList[index].id):attributes.remove(attributesList[index].id);
+    }
+    if(boxKey==MasterKeys.equipmentTypes.name){
+      val?equipmentType.add(equipmentList[index].id):equipmentType.remove(equipmentList[index].id);
+    }
+    // emit(ChangeBox());
+
+    print(vehcleSize);
+    print(attributes);
+    print(equipmentType);
+    print(vehcleType);
+
+    print('+++++++++++++++++++++++++++++++++++');
+  }
+
   getVehicleCubit({self}){
     myVehiclesLoading=true;
     emit(VehicleLoading());
@@ -202,41 +238,8 @@ bool isAccessToken=true;
     });
   }
 
-   vehicleClearData(context){
-     equipmentType.clear();
-     attributes.clear();
-     vehcleType.clear();
-     vehcleSize.clear();
-     DataFormCubit.get(context).cityOriginID='';
-     DataFormCubit.get(context).countryOriginID='';
-     DataFormCubit.get(context).countryDestinationID='';
-     DataFormCubit.get(context).stateDestinationID='';
-     DataFormCubit.get(context).stateOriginID='';
-     DataFormCubit.get(context).cityDestinationID='';
-   }
-  changeCheckBox(boxKey,index,val){
 
-    if(boxKey==MasterKeys.vehicleSize.name){
-      val?vehcleSize.add(vehicleSizeList[index].id):vehcleSize.remove(vehicleSizeList[index].id);
-    }
-    if(boxKey==MasterKeys.vehicleTypes.name){
-      val?vehcleType.add(vehiclesTypeList[index].id):vehcleType.remove(vehiclesTypeList[index].id);
-    }
-    if(boxKey==MasterKeys.attributes.name){
-      val?attributes.add(attributesList[index].id):attributes.remove(attributesList[index].id);
-    }
-    if(boxKey==MasterKeys.equipmentTypes.name){
-      val?equipmentType.add(equipmentList[index].id):equipmentType.remove(equipmentList[index].id);
-    }
-   // emit(ChangeBox());
 
-    print(vehcleSize);
-    print(attributes);
-    print(equipmentType);
-    print(vehcleType);
-
-    print('+++++++++++++++++++++++++++++++++++');
-  }
   deleteVehicleCubit(vehicleId){
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
@@ -284,6 +287,7 @@ bool isAccessToken=true;
       }
     });
   }
+
   addVehicleCubitTest({context}){
     testLoading=true;
     emit(Loading());

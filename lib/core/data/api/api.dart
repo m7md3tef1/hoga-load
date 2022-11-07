@@ -39,7 +39,7 @@ class Api{
     try{
       var response=await Dio().post(baseUrl+'$url',data: data,queryParameters:queryParams,options:
       Options(headers:{
-        "auth":authToken
+        "auth":authToken,
       }, )
       );
 

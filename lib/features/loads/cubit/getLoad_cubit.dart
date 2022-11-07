@@ -21,6 +21,11 @@ class LoadsCubit extends Cubit<AddLoadStates> {
   List<GetLoadsModel> loadList=[];
   List<GetLoadsModel>myVehicleList=[];
 
+  List equipmentType=[];
+  List attributes=[];
+  List vehcleType=[];
+  List vehcleSize=[];
+
   bool isAccessToken=true;
   bool  testLoading=true;
   bool  myVehiclesLoading=true;

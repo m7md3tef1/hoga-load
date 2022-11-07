@@ -80,9 +80,10 @@ class Bottom extends StatelessWidget {
           height: 25.h,
         ),
         Row(
-
           children: [
-            Expanded(child: ButtonContainer(ColorManager.primaryColor, 'LOADS & VEHICLES')),
+            Expanded(
+                child: ButtonContainer(
+                    ColorManager.primaryColor, 'LOADS & VEHICLES')),
             SizedBox(
               width: 4.w,
             ),
@@ -374,8 +375,7 @@ class Bottom extends StatelessWidget {
           height: 8.h,
         ),
 
-       // const CustomSearchRow2(),
-       blog()
+        const blog()
       ]),
     );
   }

@@ -1,13 +1,17 @@
 part of '../add_load_view.dart';
 
-class Form extends StatefulWidget {
-  const Form({Key? key}) : super(key: key);
+class FormInfo extends StatefulWidget {
+  FormInfo({Key? key,this.isFilter=false,this.loadsModel,this.isEdit=false,this.index}) : super(key: key);
+  bool isFilter;
+  GetLoadsModel? loadsModel;
+  bool isEdit;
+  int? index;
 
   @override
-  State<Form> createState() => _FormState();
+  State<FormInfo> createState() => _FormInfoState();
 }
 
-class _FormState extends State<Form> {
+class _FormInfoState extends State<FormInfo> {
   var countryOrigin = '';
 
   var stateOrigin = '';
