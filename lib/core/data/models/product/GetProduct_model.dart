@@ -3,16 +3,19 @@ import '../ProductType.dart';
 class GetProductModel {
   GetProductModel({
       this.id, 
-      this.buyOrSell, 
-      this.productName, 
-      this.productType, 
-      this.country, 
-      this.state, 
-      this.city, 
-      this.user, 
-      this.description, 
-      this.price, 
-      this.productImage, 
+    required  this.buyOrSell,
+    required  this.productName,
+      this.productType,
+    required  this.country,
+    required  this.state,
+    required  this.city,
+      this.user,
+    required  this.description,
+      this.price,
+      this.priceInt,
+
+    required this.productTypeId,
+    required  this.productImage,
       this.status,});
 
   GetProductModel.fromJson(dynamic json) {
@@ -41,23 +44,20 @@ class GetProductModel {
   String? price;
   String? productImage;
   int? status;
+  int? productTypeId;
+  int? priceInt;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['id'] = id;
     map['buy_or_sell'] = buyOrSell;
     map['product_name'] = productName;
-    if (productType != null) {
-      map['product_type'] = productType!.toJson();
-    }
+    map['product_type'] = productTypeId;
     map['country'] = country;
     map['state'] = state;
     map['city'] = city;
-    map['user'] = user;
     map['description'] = description;
-    map['price'] = price;
+    map['price'] = priceInt;
     map['product_image'] = productImage;
-    map['status'] = status;
     return map;
   }
 

@@ -81,18 +81,6 @@ class VehicleRepo {
   }
 
 
-  static Future<List<GetProductModel>> getProducts(url) async {
-    String token= await CacheHelper.getString(SharedKeys.token);
-    var response = await Api().getHttp(url: url,authToken: token);
-
-    List<GetProductModel> productsList = [];
-    for (int i = 0; i < response['records'].length; i++) {
-      GetProductModel blogModel =
-          GetProductModel.fromJson(response['records'][i]);
-      productsList.add(blogModel);
-    }
-    return productsList;
-  }
 
   static Future<List<GetJopModel>> getJop(url) async {
     String token= await CacheHelper.getString(SharedKeys.token);
