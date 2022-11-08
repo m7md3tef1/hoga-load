@@ -35,6 +35,7 @@ class _UploadVehiclesViewState extends State<UploadVehiclesView> {
     super.initState();
     VehiclesCubit.get(context).getVehicleCubit(self: 1);
   }
+  @override
   Widget build(BuildContext context) {
     return CustomScaffold(
       body:

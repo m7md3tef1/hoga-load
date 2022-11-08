@@ -36,7 +36,7 @@ class PlanBody extends StatelessWidget {
              listener: (context, state) {},
             builder: (context, state) {
                 return ListView.builder(
-                  itemCount: PlansCubit.get(context).plansList.length,
+                  itemCount: PlansCubit.get(context).plansList.length>3?3:PlansCubit.get(context).plansList.length,
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context,index){

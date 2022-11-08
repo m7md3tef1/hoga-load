@@ -16,8 +16,12 @@ class GetJopModel {
       this.title, 
       this.description, 
       this.category, 
-      this.jobType, 
-      this.country, 
+      this.jobType,
+     this.country2,
+     this.state2,
+     this.city2,
+      this.country,this.jopCategortId,
+    this.jopTypeId,
       this.state, 
       this.city, 
       this.user, 
@@ -40,12 +44,20 @@ class GetJopModel {
     noOfPosts = json['no_of_posts'];
     shiftTime = json['shift_time'];
     status = json['status'];
+    country2 = json['country'];
+    state2 = json['state'];
+    city2 = json['city'];
   }
   int? id;
   String? title;
   String? description;
   Category? category;
   JobType? jobType;
+  dynamic country2;
+  dynamic state2;
+  dynamic city2;
+  int? jopTypeId;
+  int? jopCategortId;
   Country? country;
   State? state;
   City? city;
@@ -60,12 +72,15 @@ class GetJopModel {
     map['id'] = id;
     map['title'] = title;
     map['description'] = description;
+
     if (category != null) {
       map['category'] = category!.toJson();
     }
     if (jobType != null) {
       map['job_type'] = jobType!.toJson();
     }
+    map['job_type'] = jopTypeId;
+    map['category'] = jopCategortId;
     if (country != null) {
       map['country'] = country!.toJson();
     }
@@ -77,6 +92,9 @@ class GetJopModel {
     }
     if (user != null) {
       map['user'] = user!.toJson();
+      map['country'] = country2;
+      map['state'] = state2;
+      map['city'] = city2;
     }
     map['salary'] = salary;
     map['no_of_posts'] = noOfPosts;

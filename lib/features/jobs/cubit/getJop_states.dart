@@ -4,10 +4,19 @@ abstract class AddJopStates {}
 
 class AddJopLoading extends AddJopStates {}
 
-class AddSuccess extends AddJopStates {}
+class AddSuccessJop extends AddJopStates {}
 
-class AddFailed extends AddJopStates {}
+class AddFailed extends AddJopStates {
+  String? error;
+  AddFailed(this.error);
+}
+class Loading extends AddJopStates{
 
+}
+class AddTestFailed extends AddJopStates{
+  String? error;
+  AddTestFailed(this.error);
+}
 
 class GetJopSuccess extends AddJopStates {
   List<GetJopModel> jopList = [];

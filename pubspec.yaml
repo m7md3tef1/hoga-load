@@ -53,6 +53,7 @@ dependencies:
   data_table_2: ^2.3.8
   expandable: ^5.0.1
   flutter_swiper_view: ^1.1.8
+  cached_network_image: ^3.2.2
 
 dev_dependencies:
   flutter_test:
