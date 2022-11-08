@@ -193,18 +193,17 @@ class Body extends StatelessWidget {
                                             fontSize: 8.sp,
                                             align: TextAlign.start,
                                             fontWeight: FontWeight.w500),
-                                        Image(
-                                          height: 50,
-                                            width: 0.2.sw,
-                                            image: NetworkImage(
 
-                                                state
-                                                        .productList[index]
-                                                        .productImage ==
-                                                    null
-                                                ? 'https://hegaload.com/uploads/product-images/1657431690.jpg'
-                                                : state.productList[index]
-                                                    .productImage!))
+                                            CachedNetworkImage(
+                                              height: 50,
+                                              width: 0.2.sw,
+                                              imageUrl:  state
+                                                  .productList[index]
+                                                  .productImage!,
+                                              placeholder: (context, url) => CircularProgressIndicator(),
+                                              errorWidget: (context, url, error) => Icon(Icons.error),
+                                            ),
+
                                       ],
                                     ),
                                   ),

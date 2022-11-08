@@ -12,6 +12,8 @@ class GetCountrySuccess extends AddDataFormStates{
 class GetCountryFailed extends AddDataFormStates{
 }
 class GetCityLoading extends AddDataFormStates{}
+class GetJopCategoryLoading extends AddDataFormStates{}
+class GetJopTypeLoading extends AddDataFormStates{}
 
 
 class GetStateLoading extends AddDataFormStates{}
@@ -66,6 +68,29 @@ class GetCityFailed extends AddDataFormStates{
 
   final String msg;
   GetCityFailed(this.msg);
+}
+
+class GetJopCategorySuccess extends AddDataFormStates{
+
+  List<AddVehicle>equipmentList=[];
+  GetJopCategorySuccess(this.equipmentList);
+}
+
+class GetJopCategoryFailed extends AddDataFormStates{
+
+  final String msg;
+  GetJopCategoryFailed(this.msg);
+}
+class GetJopTypeSuccess extends AddDataFormStates{
+
+  List<AddVehicle>equipmentList=[];
+  GetJopTypeSuccess(this.equipmentList);
+}
+
+class GetJopTypeFailed extends AddDataFormStates{
+
+  final String msg;
+  GetJopTypeFailed(this.msg);
 }
 
 class NetworkFailed extends AddDataFormStates {

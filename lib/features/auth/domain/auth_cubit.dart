@@ -20,6 +20,8 @@ class AuthCubit extends Cubit<AuthStates> {
 
   signIn(loginModel) {
     var response = Api().postHttp(url: 'login', data: loginModel.toJson());
+    print(response);
+    print('login response');
     emit(SignInLoading());
     response.then((value) =>
     {

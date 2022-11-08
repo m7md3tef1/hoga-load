@@ -25,8 +25,8 @@ class CustomContainerLoad extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(
               top: 15.h,
-              left: 15.sp,
-              right: 15.sp,
+              left: 8.sp,
+              right: 8.sp,
             ),
             child: Container(
               height: 100.h,
@@ -40,7 +40,7 @@ class CustomContainerLoad extends StatelessWidget {
                         text: load.originCity == null
                             ? 'other'
                             : load.originCity!.title.toString(),
-                        fontSize: 18.sp,
+                        fontSize: 17.sp,
                         fontWeight: FontWeight.w600,
                         color: ColorManager.primaryColor,
                       ),
@@ -48,7 +48,7 @@ class CustomContainerLoad extends StatelessWidget {
                         text: load.originState == null
                             ? 'other'
                             : ' (${'${load.originState!.title!.toString()},${load.originCountry!.title!.toString()}'})',
-                        fontSize: 16.sp,
+                        fontSize: 15.sp,
                         fontWeight: FontWeight.w600,
                         color: ColorManager.primaryColor,
                       ),
@@ -64,17 +64,20 @@ class CustomContainerLoad extends StatelessWidget {
                         text: load.destinationCity == null
                             ? 'other'
                             : '${load.destinationCity!.title!.toString()} City ',
-                        fontSize: 18.sp,
+                        fontSize: 17.sp,
                         fontWeight: FontWeight.w600,
                         color: ColorManager.primaryColor,
                       ),
-                      CustomText(
-                        text: load.destinationState == null
-                            ? 'other'
-                            : '(${'${load.destinationState!.title!.toString()},${load.destinationCountry!.title!.toString()}'})',
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                        color: ColorManager.primaryColor,
+                      Expanded(
+                        child: CustomText(
+                         // height: 38.h,
+                          text: load.destinationState == null
+                              ? 'other'
+                              : '(${'${load.destinationState!.title!.toString()},${load.destinationCountry!.title!.toString()}'})',
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w600,
+                          color: ColorManager.primaryColor,
+                        ),
                       ),
                     ],
                   )
@@ -179,9 +182,10 @@ class CustomContainerLoad extends StatelessWidget {
                 Row(
                   //  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
+
                     Padding(
                       padding: EdgeInsets.only(
-                          left: 20.w, bottom: 15.h, right: 20.w, top: 15.h),
+                          left: 5.w, bottom: 15.h, right: 5.w, top: 15.h),
                       child: Row(
                         children: [
                           const Icon(
@@ -205,27 +209,30 @@ class CustomContainerLoad extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.email_outlined,
-                          color: ColorManager.primaryColor,
-                        ),
-                        const SizedBox(
-                          width: 6,
-                        ),
-                        CustomText(
-                          text: load.user == null
-                              ? 'other'
-                              : load.user!.email.toString(),
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey,
-                        ),
-                        const SizedBox(
-                          width: 6,
-                        ),
-                      ],
+                    
+                    Expanded(
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.email_outlined,
+                            color: ColorManager.primaryColor,
+                          ),
+                          const SizedBox(
+                            width: 6,
+                          ),
+                          CustomText(
+                            text: load.user == null
+                                ? 'other'
+                                : load.user!.email.toString(),
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.grey,
+                          ),
+                          const SizedBox(
+                            width: 6,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 )

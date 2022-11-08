@@ -81,18 +81,6 @@ class VehicleRepo {
   }
 
 
-  static Future<List<GetProductModel>> getProducts(url) async {
-    String token= await CacheHelper.getString(SharedKeys.token);
-    var response = await Api().getHttp(url: url,authToken: token);
-
-    List<GetProductModel> productsList = [];
-    for (int i = 0; i < response['records'].length; i++) {
-      GetProductModel blogModel =
-          GetProductModel.fromJson(response['records'][i]);
-      productsList.add(blogModel);
-    }
-    return productsList;
-  }
 
   static Future<List<GetJopModel>> getJop(url) async {
     String token= await CacheHelper.getString(SharedKeys.token);
@@ -247,6 +235,34 @@ class VehicleRepo {
     return await Api().postHttp(url: "vehicles/add",authToken:token);
 
   }
+
+  static addJop({context})async{
+    String token=await CacheHelper.getString(SharedKeys.token);
+    return await Api().postHttp(url: "jobs/add",authToken:token,
+        data: {
+          "availability_date":DataFormCubit.get(context).dateTime.toString(),
+          "equipment_types":VehiclesCubit.get(context).equipmentType.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+          "vehicle_attributes":VehiclesCubit.get(context).attributes.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+          "vehicle_sizes": VehiclesCubit.get(context).vehcleSize.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+          "vehicle_types": VehiclesCubit.get(context).vehcleType.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+          "origin_country":DataFormCubit.get(context).countryOriginID,
+          "origin_state":DataFormCubit.get(context).stateOriginID,
+          "origin_city":DataFormCubit.get(context).cityOriginID,
+          "destination_country":DataFormCubit.get(context).countryDestinationID,
+          "destination_state":DataFormCubit.get(context).stateDestinationID,
+          "destination_city":DataFormCubit.get(context).cityDestinationID,
+          "weight":VehiclesCubit.get(context).weightController,
+          "instructions":VehiclesCubit.get(context).instructionsController,
+        } );
+
+  }
+
+  static addJopTest({context})async{
+    String token=await CacheHelper.getString(SharedKeys.token);
+    return await Api().postHttp(url: "jobs/add",authToken:token);
+
+  }
+
 
 
 }

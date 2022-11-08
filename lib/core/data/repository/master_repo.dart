@@ -69,5 +69,16 @@ class MasterRepo{
 
 
   }
+  static Future< List <AddVehicle>>  getJop(url)async{
+    var response= await Api().getHttp(url: url);
+
+    List<AddVehicle>attributesList=[];
+    for(int i =0;i<response['records'].length;i++){
+      AddVehicle blogModel=AddVehicle.fromJson(response['records'][i]);
+      attributesList.add(blogModel);
+    }
+    return attributesList;
+  }
+
 
 }

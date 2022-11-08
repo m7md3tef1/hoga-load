@@ -1,24 +1,26 @@
 part of '../add_view.dart';
 
-class Form extends StatefulWidget {
-  const Form({Key? key}) : super(key: key);
+class FormInfo extends StatefulWidget {
+  const FormInfo({Key? key}) : super(key: key);
 
   @override
-  State<Form> createState() => _FormState();
+  State<FormInfo> createState() => _FormInfoState();
 }
 
-class _FormState extends State<Form> {
+class _FormInfoState extends State<FormInfo> {
   String country = '';
   String state = '';
   String city = '';
-  String product = '';
-  String? buyOrSell;
+  String? jopCategory = '';
+  String? jopTitle='';
+  String? jopType='';
 
+  int? jopCategoryId;
   int? countryId;
+  int? jopTypeId;
   int? stateId;
   int? cityId;
-  int? productId;
-  List productType = ['Buy', 'Sell'];
+  int? jopId;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class _FormState extends State<Form> {
                       ),
                       Expanded(
                         child: CustomText(
-                          text: 'ADD PRODUCT',
+                          text: 'ADD JOP',
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w700,
                         ),
@@ -54,69 +56,17 @@ class _FormState extends State<Form> {
                 ),
                 CustomTextField(
                     height: 64.h,
-                    readOnly: true,
+                    readOnly: false,
                     lines: 1,
-                    name: 'Product for',
-                    hintText: buyOrSell ?? 'Buy',
-                    suffixIcon: InkWell(
-                      onTap: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (context) {
-                            return ListView.builder(
-                                itemCount: productType.length,
-                                itemBuilder: (context, index) => Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              buyOrSell = productType[index];
-                                              Navigator.of(context).pop();
-                                            });
-                                          },
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: productType[index] == null
-                                                ? const Center(
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      color: Colors.green,
-                                                    ),
-                                                  )
-                                                : Text(
-                                                    productType[index],
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 20.sp),
-                                                  ),
-                                          ),
-                                        ),
-                                      ],
-                                    ));
-                          },
-                        );
-                      },
-                      child: Icon(
-                        Icons.expand_more,
-                        size: 30.sp,
-                        color: ColorManager.blackColor,
-                      ),
-                    )),
-                CustomTextField(
-                  // name: '',
-                  height: 64.h,
-                  lines: 1,
-                  hintText: 'Name of the Product',
-                  controller: ProductsCubit.get(context).nameController,
-                  color: Colors.grey,
+                    name: 'Jop Title',
+                    hintText: jopTitle == '' ? 'Enter jop title' : jopTitle,
+                  controller: JopCubit.get(context).titleController,
                 ),
                 CustomTextField(
                     height: 64.h,
                     readOnly: true,
                     name: 'Country',
-                    hintText: country == '' ? 'Select a Country' : country,
+                    hintText: country == '' ? '--SELECT A COUNTRY--' : country,
                     suffixIcon: InkWell(
                       onTap: () {
                         showModalBottomSheet(
@@ -191,7 +141,7 @@ class _FormState extends State<Form> {
                         height: 64.h,
                         readOnly: true,
                         name: 'state',
-                        hintText: state == '' ? 'Select a state' : state,
+                        hintText: state == '' ? '--SELECT A STATE--' : state,
                         suffixIcon: InkWell(
                           onTap: () {
                             showModalBottomSheet(
@@ -265,79 +215,81 @@ class _FormState extends State<Form> {
                     ? CustomText(
                         text: 'Loading....',
                       )
-                    : CustomTextField(
-                        height: 64.h,
-                        readOnly: true,
-                        name: 'City',
-                        hintText: city == '' ? 'Select a city' : city,
-                        suffixIcon: InkWell(
-                          onTap: () {
-                            showModalBottomSheet(
-                              context: context,
-                              builder: (context) {
-                                return ListView.builder(
-                                    itemCount: DataFormCubit.get(context)
-                                        .cityList
-                                        .length,
-                                    itemBuilder: (context, index) => Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  cityId =
-                                                      DataFormCubit.get(context)
-                                                          .cityList[index]
-                                                          .id!;
-                                                  city =
-                                                      DataFormCubit.get(context)
-                                                          .cityList[index]
-                                                          .title!;
-                                                  Navigator.of(context).pop();
-                                                });
-                                              },
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: DataFormCubit.get(
-                                                                context)
-                                                            .cityList[index]
-                                                            .title ==
-                                                        null
-                                                    ? const Center(
-                                                        child:
-                                                            CircularProgressIndicator(
-                                                          color: Colors.green,
-                                                        ),
-                                                      )
-                                                    : Text(
-                                                        DataFormCubit.get(
-                                                                context)
-                                                            .cityList[index]
-                                                            .title!,
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 20.sp),
-                                                      ),
-                                              ),
-                                            ),
-                                          ],
-                                        ));
-                              },
-                            );
-                          },
-                          child: Icon(
-                            Icons.expand_more,
-                            size: 30.sp,
-                            color: ColorManager.blackColor,
-                          ),
-                        )),
+                    :
                 CustomTextField(
                     height: 64.h,
                     readOnly: true,
-                    name: 'Product Type',
-                    hintText: product == '' ? 'Select a product type' : product,
+                    name: 'City',
+                    hintText: city == '' ? '--SELECT A CITY--' : city,
+                    suffixIcon: InkWell(
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return ListView.builder(
+                                itemCount: DataFormCubit.get(context).cityList.length,
+                                itemBuilder: (context, index) => Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          cityId= DataFormCubit.get(context)
+                                              .cityList[index]
+                                              .id!;
+                                          city = DataFormCubit.get(context)
+                                              .cityList[index]
+                                              .title!;
+                                          Navigator.of(context).pop();
+                                        });
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: DataFormCubit.get(context)
+                                            .cityList[index]
+                                            .title ==
+                                            null
+                                            ? const Center(
+                                          child: CircularProgressIndicator(
+                                            color: Colors.green,
+                                          ),
+                                        )
+                                            : Text(
+                                          DataFormCubit.get(context)
+                                              .cityList[index]
+                                              .title!,
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20.sp),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ));
+                          },
+                        );
+                      },
+                      child: Icon(
+                        Icons.expand_more,
+                        size: 30.sp,
+                        color: ColorManager.blackColor,
+                      ),
+                    )),
+
+                SizedBox(
+                  width: 322.w,
+                  child: const Divider(
+                    thickness: 1,
+                  ),
+                ),
+
+                CustomTextField(
+                    height: 64.h,
+                    readOnly: true,
+                    name: 'Jop Category',
+                    hintText: jopCategory == ''
+                        ? '--SELECT A JOP CATEGORY--'
+                        : jopCategory,
                     suffixIcon: InkWell(
                       onTap: () {
                         showModalBottomSheet(
@@ -345,7 +297,7 @@ class _FormState extends State<Form> {
                           builder: (context) {
                             return ListView.builder(
                                 itemCount: DataFormCubit.get(context)
-                                    .productList
+                                    .jopCategoryList
                                     .length,
                                 itemBuilder: (context, index) => Column(
                                       mainAxisAlignment:
@@ -354,13 +306,13 @@ class _FormState extends State<Form> {
                                         InkWell(
                                           onTap: () {
                                             setState(() {
-                                              productId =
+                                              jopCategoryId =
                                                   DataFormCubit.get(context)
-                                                      .productList[index]
+                                                      .jopCategoryList[index]
                                                       .id!;
-                                              product =
+                                              jopCategory =
                                                   DataFormCubit.get(context)
-                                                      .productList[index]
+                                                      .jopCategoryList[index]
                                                       .title!;
                                               Navigator.of(context).pop();
                                             });
@@ -368,7 +320,7 @@ class _FormState extends State<Form> {
                                           child: Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: DataFormCubit.get(context)
-                                                        .productList[index]
+                                                        .jopCategoryList[index]
                                                         .title ==
                                                     null
                                                 ? const Center(
@@ -379,7 +331,7 @@ class _FormState extends State<Form> {
                                                   )
                                                 : Text(
                                                     DataFormCubit.get(context)
-                                                        .productList[index]
+                                                        .jopCategoryList[index]
                                                         .title!,
                                                     style: TextStyle(
                                                         color: Colors.black,
@@ -399,56 +351,93 @@ class _FormState extends State<Form> {
                       ),
                     )),
                 CustomTextField(
-                  height: 64.h,
-                  hintText: 'Price (CAD)',
-                  keyboardType: TextInputType.number,
-                  controller: ProductsCubit.get(context).priceController,
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 5.h, horizontal: 14.w),
-                  child: Container(
                     height: 64.h,
-                    width: 1.sw,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: ColorManager.greyColor),
-                        color: ColorManager.whiteColor,
-                        borderRadius: BorderRadius.circular(12.r)),
-                    child: InkWell(
+                    readOnly: true,
+                    name: 'Jop Type',
+                    hintText: jopType == ''
+                        ? '--SELECT A JOP Type--'
+                        : jopType,
+                    suffixIcon: InkWell(
                       onTap: () {
-                        ProductsCubit.get(context).pickFromGallery(context);
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return ListView.builder(
+                                itemCount: DataFormCubit.get(context)
+                                    .jopTypeList
+                                    .length,
+                                itemBuilder: (context, index) => Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              jopTypeId =
+                                                  DataFormCubit.get(context)
+                                                      .jopTypeList[index]
+                                                      .id!;
+                                              jopType =
+                                                  DataFormCubit.get(context)
+                                                      .jopTypeList[index]
+                                                      .title!;
+                                              Navigator.of(context).pop();
+                                            });
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: DataFormCubit.get(context)
+                                                        .jopTypeList[index]
+                                                        .title ==
+                                                    null
+                                                ? const Center(
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      color: Colors.green,
+                                                    ),
+                                                  )
+                                                : Text(
+                                                    DataFormCubit.get(context)
+                                                        .jopTypeList[index]
+                                                        .title!,
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 20.sp),
+                                                  ),
+                                          ),
+                                        ),
+                                      ],
+                                    ));
+                          },
+                        );
                       },
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 64.h,
-                            width: 106.w,
-                            decoration: BoxDecoration(
-                                color: Colors.grey[100],
-                                borderRadius: BorderRadius.circular(12.r)),
-                            child: Center(
-                              child: Text(
-                                'Choose File',
-                                style: TextStyle(
-                                    color: const Color(0xFF757575),
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14.sp),
-                              ),
-                            ),
-                          ),
-                          Center(
-                            child: Text(
-                              '    No File chosen',
-                              style: TextStyle(
-                                  color: const Color(0xFF757575),
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14.sp),
-                            ),
-                          )
-                        ],
+                      child: Icon(
+                        Icons.expand_more,
+                        size: 30.sp,
+                        color: ColorManager.blackColor,
                       ),
-                    ),
-                  ),
+                    )),
+
+                CustomTextField(
+                  height: 64.h,
+                  hintText: 'Enter Financial Package to Offer',
+                  name: 'Salary',
+               //   keyboardType: TextInputType.number,
+                     controller: JopCubit.get(context).salaryController,
+                ),
+                CustomTextField(
+                  height: 64.h,
+                  hintText: 'Enter Number of candidate you are hiring',
+                  name: 'Number of Available Posts',
+                  keyboardType: TextInputType.number,
+                  controller: JopCubit.get(context).noOfPostController,
+                ),
+                CustomTextField(
+                  height: 64.h,
+                  hintText: 'Enter details about shifts and timings',
+                  name: 'Shift Time',
+                  //  keyboardType: TextInputType.number,
+                  controller: JopCubit.get(context).shiftController,
                 ),
                 SizedBox(
                   width: 322.w,
@@ -459,40 +448,41 @@ class _FormState extends State<Form> {
                 CustomTextField(
                   height: 147.h,
                   lines: 6,
-                  controller: ProductsCubit.get(context).descController,
+                  controller: JopCubit.get(context).descController,
                   hintText: 'Description',
                 ),
-                BlocListener<ProductsCubit, AddProductStates>(
+                if(s is AddJopLoading)
+                   Padding(
+                    padding: EdgeInsets.only(top: 50.sp, bottom: 15.sp),
+                    child:const Center(child:  CircularProgressIndicator()),
+                  ),
+
+                BlocListener<JopCubit, AddJopStates>(
                   listener: (BuildContext context, state) {
-                    if (state is AddSuccess) {
+                    if (state is AddSuccessJop) {
                       Navigator.pop(context);
                     }
                   },
                   child: Padding(
                     padding: EdgeInsets.only(top: 50.sp, bottom: 15.sp),
                     child: CustomButton(
-                      text: 'Add new product',
+                      text: 'Add new Jop',
                       color: ColorManager.yellow,
                       function: () {
-                        ProductsCubit.get(context).addProductCubit(
+                        JopCubit.get(context).addJopCubit(
                             context: context,
-                            productModel: GetProductModel(
-                                buyOrSell: buyOrSell,
-                                productName: ProductsCubit.get(context)
-                                    .nameController
-                                    .text,
-                                priceInt: int.parse(ProductsCubit.get(context)
-                                    .priceController
-                                    .text),
-                                productTypeId: productId,
-                                country: countryId,
-                                state: stateId,
-                                city: cityId,
-                                description: ProductsCubit.get(context)
-                                    .descController
-                                    .text,
-                                productImage:
-                                    ProductsCubit.get(context).img64));
+                            productModel: GetJopModel(
+                                jopCategortId:jopCategoryId ,
+                                jopTypeId:jopTypeId ,
+                                title: JopCubit.get(context).titleController.text,
+                                salary: JopCubit.get(context).salaryController.text,
+                                noOfPosts: int.parse(JopCubit.get(context).noOfPostController.text),
+                                shiftTime: JopCubit.get(context).shiftController.text,
+                                id: jopId,
+                                country2: countryId,
+                                state2: stateId,
+                                city2: cityId,
+                                description: JopCubit.get(context).descController.text,));
                       },
                     ),
                   ),
