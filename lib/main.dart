@@ -59,14 +59,14 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
             create: (_) => DataFormCubit()
-              ..getCountry()
-              ..getProduct()),
+              ..getCountry()..cityList..countryList..stateList
+              ..getProduct()..getJopCategory()..getJopType()),
         BlocProvider(
             create: (_) => LoadsCubit()),
         BlocProvider(
             create: (_) => ProductsCubit()),
         BlocProvider(
-            create: (_) => JopCubit()..getJop()),
+            create: (_) => JopCubit()..getJop()..addJopCubit),
         BlocProvider(create: (_) => PackageCubit()..getPackageCubit()),
         BlocProvider(create: (_)=>ChangePassCubit()),
         BlocProvider(create: (_)=>UpdateProfileCubit()..updateProfile..getVehicleTypesCubit()),

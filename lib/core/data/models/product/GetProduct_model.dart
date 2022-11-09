@@ -8,7 +8,7 @@ import '../ProductType.dart';
 
 class GetProductModel {
   GetProductModel({
-      this.id, 
+      this.id,
       this.buyOrSell,
       this.productName,
       this.productType,
@@ -27,6 +27,7 @@ class GetProductModel {
       this.productImage,
       this.status,});
 
+
   GetProductModel.fromJson(dynamic json) {
     id = json['id'];
     buyOrSell = json['buy_or_sell'];
@@ -36,6 +37,7 @@ class GetProductModel {
     state = json['state']!= null ? AddVehicle.fromJson(json['state']) : null;
     city = json['city']!= null ? AddVehicle.fromJson(json['city']) : null;
     user = json['user']!= null ? User.fromJson(json['user']) : null;
+
     description = json['description'];
     price = json['price'];
     productImage = json['product_image'];
@@ -75,5 +77,4 @@ class GetProductModel {
 
     return map;
   }
-
 }

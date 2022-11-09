@@ -1,3 +1,5 @@
+import 'package:hoga_load/core/data/models/jobs/GetJop_model.dart';
+
 import '../../keys/keys.dart';
 import '../api/api.dart';
 import '../local/cacheHelper.dart';
@@ -36,14 +38,12 @@ class ProductRepo{
         data:productModel!.toJson() );
 
   }
-
   static delete(productId)async{
     String token=await CacheHelper.getString(SharedKeys.token);
     return await Api().postHttp(url: "products/delete",authToken:token,
        data: {"id":productId} );
 
   }
-
   static addProductTest({context})async{
     String token=await CacheHelper.getString(SharedKeys.token);
     return await Api().postHttp(url: "products/add",authToken:token);
@@ -58,4 +58,11 @@ class ProductRepo{
   }
 
 
+
+  static addJop({context,GetJopModel? jopModel})async{
+    String token=await CacheHelper.getString(SharedKeys.token);
+    return await Api().postHttp(url: "jobs/add",authToken:token,
+        data:jopModel!.toJson() );
+
+  }
 }

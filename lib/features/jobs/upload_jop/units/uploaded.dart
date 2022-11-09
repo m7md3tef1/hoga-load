@@ -14,7 +14,7 @@ class Uploaded extends StatelessWidget {
             CustomCardTitle(text: 'UPLOADED JOBS',),
             CustomNoContainer(text: 'jobs'),
             const Spacer(),
-            const Button()
+             const Button()
 
 
           ],

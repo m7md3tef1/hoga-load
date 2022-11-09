@@ -455,6 +455,74 @@ class _FormState extends State<Form> {
                                                         DataFormCubit
                                                             .get(context)
                                                             .productList[index]
+//=======
+//                                              ),
+//                                            ),
+//                                          ],
+//                                        ));
+//                              },
+//                            );
+//                          },
+//                          child: Icon(
+//                            Icons.expand_more,
+//                            size: 30.sp,
+//                            color: ColorManager.blackColor,
+//                          ),
+//                        )),
+//                s is GetCityLoading
+//                    ? CustomText(
+//                        text: 'Loading....',
+//                      )
+//                    : CustomTextField(
+//                        height: 64.h,
+//                        readOnly: true,
+//                        name: 'City',
+//                        hintText: city == '' ? 'Select a city' : city,
+//                        suffixIcon: InkWell(
+//                          onTap: () {
+//                            showModalBottomSheet(
+//                              context: context,
+//                              builder: (context) {
+//                                return ListView.builder(
+//                                    itemCount: DataFormCubit.get(context)
+//                                        .cityList
+//                                        .length,
+//                                    itemBuilder: (context, index) => Column(
+//                                          mainAxisAlignment:
+//                                              MainAxisAlignment.center,
+//                                          children: [
+//                                            InkWell(
+//                                              onTap: () {
+//                                                setState(() {
+//                                                  cityId =
+//                                                      DataFormCubit.get(context)
+//                                                          .cityList[index]
+//                                                          .id!;
+//                                                  city =
+//                                                      DataFormCubit.get(context)
+//                                                          .cityList[index]
+//                                                          .title!;
+//                                                  Navigator.of(context).pop();
+//                                                });
+//                                              },
+//                                              child: Padding(
+//                                                padding:
+//                                                    const EdgeInsets.all(8.0),
+//                                                child: DataFormCubit.get(
+//                                                                context)
+//                                                            .cityList[index]
+//                                                            .title ==
+//                                                        null
+//                                                    ? const Center(
+//                                                        child:
+//                                                            CircularProgressIndicator(
+//                                                          color: Colors.green,
+//                                                        ),
+//                                                      )
+//                                                    : Text(
+//                                                        DataFormCubit.get(
+//                                                                context)
+//                                                            .cityList[index]
                                                             .title!,
                                                         style: TextStyle(
                                                             color: Colors.black,
