@@ -44,3 +44,6 @@ class ImageGallery extends AddProductStates {
 class DeleteSuccess extends AddProductStates {
 }class DeleteFailed extends AddProductStates {
 }
+class EditSuccess extends AddProductStates {
+}class EditFailed extends AddProductStates {
+}

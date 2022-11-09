@@ -16,8 +16,9 @@ class _FormInfoState extends State<FormInfo> {
   String? jopType='';
 
   int? jopCategoryId;
+
+  int? jopTypeId1;
   int? countryId;
-  int? jopTypeId;
   int? stateId;
   int? cityId;
   int? jopId;
@@ -60,8 +61,9 @@ class _FormInfoState extends State<FormInfo> {
                     lines: 1,
                     name: 'Jop Title',
                     hintText: jopTitle == '' ? 'Enter jop title' : jopTitle,
-                  controller: JopCubit.get(context).titleController,
+                    controller: JopCubit.get(context).titleController,
                 ),
+
                 CustomTextField(
                     height: 64.h,
                     readOnly: true,
@@ -215,8 +217,7 @@ class _FormInfoState extends State<FormInfo> {
                     ? CustomText(
                         text: 'Loading....',
                       )
-                    :
-                CustomTextField(
+                    : CustomTextField(
                     height: 64.h,
                     readOnly: true,
                     name: 'City',
@@ -373,7 +374,7 @@ class _FormInfoState extends State<FormInfo> {
                                         InkWell(
                                           onTap: () {
                                             setState(() {
-                                              jopTypeId =
+                                              jopTypeId1 =
                                                   DataFormCubit.get(context)
                                                       .jopTypeList[index]
                                                       .id!;
@@ -473,12 +474,11 @@ class _FormInfoState extends State<FormInfo> {
                             context: context,
                             productModel: GetJopModel(
                                 jopCategortId:jopCategoryId ,
-                                jopTypeId:jopTypeId ,
+                                jopTypeId:jopTypeId1 ,
                                 title: JopCubit.get(context).titleController.text,
-                                salary: JopCubit.get(context).salaryController.text,
+                                salaryInt: int.parse(JopCubit.get(context).salaryController.text),
                                 noOfPosts: int.parse(JopCubit.get(context).noOfPostController.text),
                                 shiftTime: JopCubit.get(context).shiftController.text,
-                                id: jopId,
                                 country2: countryId,
                                 state2: stateId,
                                 city2: cityId,

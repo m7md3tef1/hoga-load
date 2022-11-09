@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hoga_load/features/jobs/upload_jop/units/table_jop_title.dart';
 import 'package:hoga_load/features/search_product/cubit/getProduct_cubit.dart';
 import 'package:hoga_load/features/upload_product/add_view.dart';
-import 'package:hoga_load/features/upload_product/units/table_product_title.dart';
-import '../../../core/color_manager/color_manager.dart';
-import '../../../core/dialoges/delete_dialoge.dart';
-import '../../../core/router/router.dart';
-import '../../../widgets/widgets/custom_text.dart';
-class MyProductTable extends StatelessWidget {
-  const MyProductTable({super.key});
+import '../../../../core/color_manager/color_manager.dart';
+import '../../../../core/dialoges/delete_dialoge.dart';
+import '../../../../core/router/router.dart';
+import '../../../../widgets/widgets/custom_text.dart';
+import '../../cubit/getJop_cubit.dart';
+import '../add_view.dart';
+
+class MyJopTable extends StatelessWidget {
+  const MyJopTable({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return UploadedTableProduct(
+    return uploadedTableJop(
       child:  ListView.builder(
-                itemCount: ProductsCubit.get(context).myProductList.length,
+                itemCount: JopCubit.get(context).myJopList.length,
 
                 itemBuilder: (context, index) {
                   return Container(
@@ -36,7 +39,7 @@ class MyProductTable extends StatelessWidget {
                           Expanded(
                             flex: 2,
                             child: CustomText(
-                              text: ProductsCubit.get(context).myProductList[index].productName,
+                              text: JopCubit.get(context).myJopList[index].category!.title,
                               align: TextAlign.start,
                               fontSize: 8.sp,
                               fontWeight: FontWeight.w500,
@@ -45,7 +48,16 @@ class MyProductTable extends StatelessWidget {
                           Expanded(
                             flex:2,
                             child: CustomText(
-                              text: ProductsCubit.get(context).myProductList[index].productType!.title,
+                              text:( '${JopCubit.get(context).myJopList[index].state!.title}→ ${JopCubit.get(context).myJopList[index].city!.title}'),
+                              align: TextAlign.start,
+                              fontSize: 8.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Expanded(
+                            flex:2,
+                            child: CustomText(
+                              text:( '${JopCubit.get(context).myJopList[index].category!.title}${JopCubit.get(context).myJopList[index].jobType!.title}'),
                               align: TextAlign.start,
                               fontSize: 8.sp,
                               fontWeight: FontWeight.w500,
@@ -59,8 +71,8 @@ class MyProductTable extends StatelessWidget {
                                   onTap:(){
                                     showDialog(context: context, builder:(context)=> DeleteEditDialog(function: (){
                                       Navigator.pop(context);
-                                      MagicRouter.navigateTo( AddProductsView(isEdit: true,productModel:
-                                      ProductsCubit.get(context).myProductList[index],index:index));
+                                      MagicRouter.navigateTo( AddJopView(isEdit: true,productModel:
+                                      JopCubit.get(context).myJopList[index],index:index));
                                     },btnText: 'Edit',));
 
                                   },
@@ -77,7 +89,7 @@ class MyProductTable extends StatelessWidget {
                                   onTap:(){
                                     showDialog(context: context, builder:(context)=> DeleteEditDialog(function: (){
 
-                                      ProductsCubit.get(context).deleteProductCubit(ProductsCubit.get(context).myProductList[index].id);
+                                      JopCubit.get(context).deleteJopCubit(JopCubit.get(context).myJopList[index].id);
 
                                     },btnText: 'Delete',));
                                   },

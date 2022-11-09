@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (_) => LoadsCubit()),
         BlocProvider(
-            create: (_) => ProductsCubit()..getProduct()),
+            create: (_) => ProductsCubit()),
         BlocProvider(
             create: (_) => JopCubit()..getJop()..addJopCubit),
         BlocProvider(create: (_) => PackageCubit()..getPackageCubit()),

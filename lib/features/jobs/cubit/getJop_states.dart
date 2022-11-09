@@ -37,6 +37,12 @@ class GetSearchFailed extends AddJopStates {
   final String msg;
   GetSearchFailed(this.msg);
 }
+class DeleteSuccess extends AddJopStates {
+}class DeleteFailed extends AddJopStates {
+}
+class EditSuccess extends AddJopStates {
+}class EditFailed extends AddJopStates {
+}
 
 class NetworkFailed extends AddJopStates {
   final String msg;

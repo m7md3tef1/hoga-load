@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../widgets/widgets/custom_text.dart';
-class UploadedTableProduct extends StatelessWidget {
-  UploadedTableProduct({super.key, required this.child});
+
+import '../../../../widgets/widgets/custom_text.dart';
+class uploadedTableJop extends StatelessWidget {
+  uploadedTableJop({super.key, required this.child});
   Widget child;
 
   @override
@@ -41,7 +42,7 @@ class UploadedTableProduct extends StatelessWidget {
                             Expanded(
                               flex:2,
                               child: CustomText(
-                                text: "Product",
+                                text: "Job Title",
                                 fontSize: 9.sp,
                                 align: TextAlign.start,
                                 fontWeight: FontWeight.w700,
@@ -50,7 +51,7 @@ class UploadedTableProduct extends StatelessWidget {
                             Expanded(
                               flex:2,
                               child: CustomText(
-                                text: "ProductType",
+                                text: "Other Details",
                                 fontSize: 9.sp,
                                 align: TextAlign.start,
                                 fontWeight: FontWeight.w700,

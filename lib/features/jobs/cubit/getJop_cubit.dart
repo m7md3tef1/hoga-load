@@ -24,9 +24,47 @@ class JopCubit extends Cubit<AddJopStates> {
   TextEditingController shiftController=TextEditingController();
   TextEditingController descController=TextEditingController();
 
+  List<GetJopModel> myJopList=[];
   bool isAccessToken=true;
-  bool  testLoading=true;
-  bool  myVehiclesLoading=true;
+  bool  testLoading=false;
+  bool  myVehiclesLoading=false;
+  getJops({self}){
+    myVehiclesLoading=true;
+
+    connectivity.checkConnectivity().then((value)async{
+      if(ConnectivityResult.none == value){
+        emit(NetworkFailed("Check your internet connection and try again"));
+      }else{
+        ProductRepo.getJop('jops',self).then((value) => {
+          myVehiclesLoading=false,
+
+          print('..................................'),
+          print(value),
+
+          if(self==1){
+            myVehiclesLoading=false,
+
+            myJopList=value,
+            print('Get My Product Response'),
+            print(myJopList.length),
+
+          }else
+            {
+
+              jopList = value,
+              emit(GetJopSuccess(value))
+            }
+        }).onError((error, stackTrace) => {
+          myVehiclesLoading=true,
+
+          emit(GetJopFailed(error.toString())),
+          print(error)
+
+        });
+      }
+
+    });
+  }
 
   getJop() {
     connectivity.checkConnectivity().then((value) async {
@@ -131,7 +169,7 @@ class JopCubit extends Cubit<AddJopStates> {
 
 
   addJopCubit({context,GetJopModel? productModel}){
-    emit(AddJopLoading());
+
 
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
@@ -139,6 +177,7 @@ class JopCubit extends Cubit<AddJopStates> {
         showToast(msg: "Check your internet connection and try again", state: ToastedStates.ERROR);
 
       } else {
+        emit(AddJopLoading());
         ProductRepo.addJop(context: context,jopModel: productModel)
             .then((value) => {
           print('Add Jop Success'),
@@ -162,6 +201,57 @@ class JopCubit extends Cubit<AddJopStates> {
           print(error);
           showToast(msg: error.toString(), state: ToastedStates.ERROR);
 
+        });
+      }
+    });
+  }
+
+  editJopCubit(GetJopModel? jopModel){
+
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        emit(NetworkFailed("Check your internet connection and try again"));
+      } else {
+        ProductRepo.editJop(jopModel)
+            .then((value) => {
+          print('Edit Jop Success'),
+          print(value),
+
+          emit(EditSuccess()),
+          showToast(msg: 'Edit Success', state: ToastedStates.SUCCESS),
+          descController.text='',
+          noOfPostController.text='',
+          salaryController.text='',
+          titleController.text='',
+          shiftController.text='',
+        })
+            .catchError((error, stackTrace) =>
+        {emit(EditFailed()),
+          print(error),
+          showToast(msg: error.toString(), state: ToastedStates.ERROR),
+          print('Edit Jop Failed'),
+        });
+      }
+    });
+  }
+  deleteJopCubit(jopId){
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        emit(NetworkFailed("Check your internet connection and try again"));
+      } else {
+        ProductRepo.deleteJop(jopId)
+            .then((value) => {
+          print('Delete Jop Success'),
+          print(value),
+
+          emit(DeleteSuccess()),
+          showToast(msg: 'Delete Success', state: ToastedStates.SUCCESS),
+
+        }).catchError((error, stackTrace) =>
+        {emit(DeleteFailed()),
+          print(error),
+          showToast(msg: error.toString(), state: ToastedStates.ERROR),
+          print('Delete Jop Failed'),
         });
       }
     });
