@@ -2,7 +2,7 @@ part of '../view.dart';
 
 class FormInfo extends StatefulWidget {
    FormInfo({Key? key,this.isFilter=false,this.vehiclesModel,this.isEdit=false,this.index}) : super(key: key);
-bool isFilter;
+   bool isFilter;
    Vehicles? vehiclesModel;
    bool isEdit;
    int? index;

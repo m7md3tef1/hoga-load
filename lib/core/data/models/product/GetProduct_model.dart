@@ -1,21 +1,30 @@
+import 'package:hoga_load/core/data/models/master/OriginCity.dart';
+import 'package:hoga_load/core/data/models/master/OriginCountry.dart';
+import 'package:hoga_load/core/data/models/master/OriginState.dart';
+import 'package:hoga_load/core/data/models/vehicle/Addvehicle_model.dart';
+import 'package:hoga_load/core/data/models/vehicle/user.dart';
+
 import '../ProductType.dart';
 
 class GetProductModel {
   GetProductModel({
       this.id, 
-    required  this.buyOrSell,
-    required  this.productName,
+      this.buyOrSell,
+      this.productName,
       this.productType,
-    required  this.country,
-    required  this.state,
-    required  this.city,
+      this.country,
+      this.state,
+      this.city,
+      this.countryPost,
+      this.statePost,
+      this.cityPost,
       this.user,
-    required  this.description,
+      this.description,
       this.price,
       this.priceInt,
-
-    required this.productTypeId,
-    required  this.productImage,
+      this.search,
+     this.productTypeId,
+      this.productImage,
       this.status,});
 
   GetProductModel.fromJson(dynamic json) {
@@ -23,10 +32,10 @@ class GetProductModel {
     buyOrSell = json['buy_or_sell'];
     productName = json['product_name'];
     productType = json['product_type'] != null ? ProductType.fromJson(json['product_type']) : null;
-    country = json['country'];
-    state = json['state'];
-    city = json['city'];
-    user = json['user'];
+    country = json['country']!= null ? ProductType.fromJson(json['country']) : null;
+    state = json['state']!= null ? AddVehicle.fromJson(json['state']) : null;
+    city = json['city']!= null ? AddVehicle.fromJson(json['city']) : null;
+    user = json['user']!= null ? User.fromJson(json['user']) : null;
     description = json['description'];
     price = json['price'];
     productImage = json['product_image'];
@@ -36,28 +45,34 @@ class GetProductModel {
   String? buyOrSell;
   String? productName;
   ProductType? productType;
-  dynamic country;
-  dynamic state;
-  dynamic city;
-  dynamic user;
+  ProductType? country;
+  AddVehicle? state;
+  AddVehicle? city;
+  int? countryPost;
+  int? statePost;
+  int? cityPost;
+  User? user;
   String? description;
   String? price;
   String? productImage;
   int? status;
   int? productTypeId;
   int? priceInt;
+  String? search;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['buy_or_sell'] = buyOrSell;
     map['product_name'] = productName;
     map['product_type'] = productTypeId;
-    map['country'] = country;
-    map['state'] = state;
-    map['city'] = city;
+    map['country'] = countryPost;
+    map['state'] = statePost;
+    map['city'] = cityPost;
     map['description'] = description;
     map['price'] = priceInt;
     map['product_image'] = productImage;
+    map['search'] = search;
+
     return map;
   }
 

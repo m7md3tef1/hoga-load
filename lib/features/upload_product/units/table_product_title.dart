@@ -39,7 +39,7 @@ class UploadedTableProduct extends StatelessWidget {
                               ),
                             ),
                             Expanded(
-                              flex:5,
+                              flex:2,
                               child: CustomText(
                                 text: "Product",
                                 fontSize: 9.sp,
@@ -57,7 +57,7 @@ class UploadedTableProduct extends StatelessWidget {
                               ),
                             ),
                             Expanded(
-                              flex:3,
+                              flex:2,
                               child: CustomText(
                                 text: "View(s)",
                                 fontSize: 9.sp,

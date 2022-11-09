@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hoga_load/features/search_product/cubit/getProduct__states.dart';
 import 'package:hoga_load/features/search_product/cubit/getProduct_cubit.dart';
+import 'package:hoga_load/features/upload_product/add_view.dart';
 import 'package:hoga_load/features/upload_product/units/table_product_title.dart';
-
 import '../../../core/color_manager/color_manager.dart';
 import '../../../core/dialoges/delete_dialoge.dart';
+import '../../../core/router/router.dart';
 import '../../../widgets/widgets/custom_text.dart';
-import '../../vehicles/get_vehicles/cubit/vehicle_cubit.dart';
 class MyProductTable extends StatelessWidget {
   const MyProductTable({super.key});
 
   @override
   Widget build(BuildContext context) {
     return UploadedTableProduct(
-      child: BlocConsumer<ProductsCubit,AddProductStates>(
-          listener: (BuildContext context, Object? state) {  },
-          builder: (context,state) {
-            return ListView.builder(
+      child:  ListView.builder(
                 itemCount: ProductsCubit.get(context).myProductList.length,
 
                 itemBuilder: (context, index) {
@@ -48,7 +43,7 @@ class MyProductTable extends StatelessWidget {
                             ),
                           ),
                           Expanded(
-                            flex: 5,
+                            flex:2,
                             child: CustomText(
                               text: ProductsCubit.get(context).myProductList[index].productType!.title,
                               align: TextAlign.start,
@@ -57,14 +52,15 @@ class MyProductTable extends StatelessWidget {
                             ),
                           ),
                           Expanded(
-                            flex: 3,
+                            flex:2,
                             child: Row(
                               children: [
                                 InkWell(
                                   onTap:(){
                                     showDialog(context: context, builder:(context)=> DeleteEditDialog(function: (){
-                                      ProductsCubit.get(context).deleteProductCubit(ProductsCubit.get(context).myProductList[index].id);
-
+                                      Navigator.pop(context);
+                                      MagicRouter.navigateTo( AddProductsView(isEdit: true,productModel:
+                                      ProductsCubit.get(context).myProductList[index],index:index));
                                     },btnText: 'Edit',));
 
                                   },
@@ -103,9 +99,8 @@ class MyProductTable extends StatelessWidget {
                     ),
                   );
                 }
-            );
-          }
-      ),
+            )
+
     );
   }
 }

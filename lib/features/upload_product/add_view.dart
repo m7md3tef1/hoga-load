@@ -17,9 +17,13 @@ import '../../core/master_cubit/getDataForm_cubit.dart';
 
 part 'units/add_product_form.dart';
 
-class AddProductsView extends StatelessWidget {
-  const AddProductsView({Key? key}) : super(key: key);
+  class AddProductsView extends StatelessWidget {
+    AddProductsView({Key? key,this.productModel,this.isEdit=false,this.index,this.isFilter=false}) : super(key: key);
+  GetProductModel? productModel;
+  bool isEdit;
+    bool isFilter;
 
+    int? index;
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -27,14 +31,14 @@ class AddProductsView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomAppbar(title: 'Add Products'),
+            CustomAppbar(title: isEdit?'Edit Products':isFilter?'Search Product':'Add Product'),
 
 
-            const Expanded(child: SingleChildScrollView(
+             Expanded(child: SingleChildScrollView(
                 physics:BouncingScrollPhysics(),
                 child: Padding(
                   padding: EdgeInsets.only(top: 22.0),
-                  child: Form(),
+                  child: Form(productModel: productModel,isEdit: isEdit,index: index,isFilter: isFilter,),
                 ))),
           ],
         ),

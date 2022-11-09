@@ -11,9 +11,9 @@ class Button extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         child: CustomButton(text: '+ Add',icon: Icons.add, color: ColorManager.yellow,
     function: (){
-          MagicRouter.navigateTo(const AddProductsView(
+         // MagicRouter.navigateTo(const AddProductsView(
 
-          ));
+        //  ));
     },
         ),
       ),

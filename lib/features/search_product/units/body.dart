@@ -5,7 +5,7 @@ class Body extends StatelessWidget {
   List titlesList = ['Buy / Sell', 'Product', 'Type', 'Price', ' '];
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 0.7.sh,
       child: Scrollbar(
         thickness: 15,
@@ -135,7 +135,6 @@ class Body extends StatelessWidget {
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: state.productList.length,
                             itemBuilder: (context, index) {
-                              print('llllllll');
 
                               return Container(
                                 color: index.isEven

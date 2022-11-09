@@ -6,7 +6,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hoga_load/core/data/repository/product_repo.dart';
-import 'package:hoga_load/core/data/repository/vehicle_repo.dart';
 import 'package:hoga_load/features/search_product/cubit/getProduct__states.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -32,20 +31,38 @@ class ProductsCubit extends Cubit<AddProductStates> {
   String? img64;
 
   bool isAccessToken=true;
-  bool  testLoading=true;
-  bool  myVehiclesLoading=true;
+  bool  testLoading=false;
+  bool  myVehiclesLoading=false;
   getProduct({self}){
+    myVehiclesLoading=true;
+
     connectivity.checkConnectivity().then((value)async{
       if(ConnectivityResult.none == value){
         emit(NetworkFailed("Check your internet connection and try again"));
       }else{
         ProductRepo.getProducts('products',self).then((value) => {
-          print('..................................'),
+        myVehiclesLoading=false,
+
+            print('..................................'),
           print(value),
-          productList=value,
-          emit(GetProductsSuccess(value))
+
+        if(self==1){
+          myVehiclesLoading=false,
+
+          myProductList=value,
+        print('Get My Product Response'),
+        print(myProductList.length),
+
+        }else
+          {
+
+            productList = value,
+            emit(GetProductsSuccess(value))
+          }
         }).onError((error, stackTrace) => {
-          emit(GetProductsFailed(error.toString())),
+        myVehiclesLoading=true,
+
+            emit(GetProductsFailed(error.toString())),
           print(error)
 
         });
@@ -54,51 +71,45 @@ class ProductsCubit extends Cubit<AddProductStates> {
     });
   }
 
-  searchProducts(context,{val}) {
+  searchProducts(GetProductModel productModel) {
     searchList.clear();
-    print("cubit");
+    print("cubit search product");
+
+    connectivity.checkConnectivity().then((value)async{
+      if(ConnectivityResult.none == value){
+        emit(NetworkFailed("Check your internet connection and try again"));
+      }else{
+        ProductRepo.searchProduct('products',0,productModel: productModel).then((value) => {
+          print('..................................'),
+          print(value),
+          print("value2"),
+
+          if(value.isNotEmpty){
+            print("value"),
+            print('..................................'),
+            print(value),
+            searchList=value,
+            emit(GetSearchSuccess(searchList)),
 
 
+          }else{
+            emit(GetSearchFailed('Nothing found try again')),
 
-   // connectivity.checkConnectivity().then((value)async{
-//      if(ConnectivityResult.none == value){
-//        emit(NetworkFailed("Check your internet connection and try again"));
-//      }else{
-//        ProductRepo.searchVehicles(search: val,equipmentSize: equipmentSize2,vehicleSize: vehicleSize2,
-//            attributes: attributes2,vehicleType: vehicleType2,context: context).then((value) => {
-//          print('..................................'),
-//          print(value),
-//          print("value2"),
-//
-//          if(value.isNotEmpty){
-//            print("value"),
-//            print('..................................'),
-//            print(value),
-//            searchList=value,
-//            emit(GetSearchSuccess(searchList)),
-//            vehicleClearData(context),
-//
-//
-//          }else{
-//            emit(GetSearchFailed('Nothing found try again')),
-//            vehicleClearData(context),
-//
-//          }
-//
-//        }).onError((error, stackTrace) => {
-//          emit(GetSearchFailed(error.toString())),
-//          vehicleClearData(context),
-//          print(error)
-//
-//        });
-//      }
+          }
 
-   // });
+        }).onError((error, stackTrace) => {
+          emit(GetSearchFailed(error.toString())),
+          print(error)
+
+        });
+      }
+
+    });
   }
 
   addProductCubit({context,GetProductModel? productModel}){
      emit(AddProductLoading());
-     testLoading=true;
+
 
      connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
@@ -115,6 +126,7 @@ class ProductsCubit extends Cubit<AddProductStates> {
           descController.text='',
           nameController.text='',
           img64='',
+          image=null,
 
           showToast(msg: 'Add Success', state: ToastedStates.SUCCESS),
 
@@ -122,11 +134,9 @@ class ProductsCubit extends Cubit<AddProductStates> {
           emit(AddFailed());
         if(error.toString().contains('Unauthorized Access') ||
         error.toString().contains('no credit left')){
-            testLoading=false;
-            isAccessToken=false;
+
 
       }
-      testLoading=false;
           print('Add Product Failed');
           print(error);
           showToast(msg: error.toString(), state: ToastedStates.ERROR);
@@ -141,7 +151,7 @@ class ProductsCubit extends Cubit<AddProductStates> {
     image = File(
       img!.path,
     );
-    print(image);
+    print(image.toString().split('/data/user/0/com.example.hoga_load/cache/image_picker'));
     final bytes = image.readAsBytesSync();
      img64 = "data:image/png;base64,"+base64Encode(bytes);
     emit(ImageGallery());
@@ -163,8 +173,7 @@ class ProductsCubit extends Cubit<AddProductStates> {
           emit(DeleteSuccess()),
           showToast(msg: 'Delete Success', state: ToastedStates.SUCCESS),
 
-        })
-            .onError((error, stackTrace) =>
+        }).catchError((error, stackTrace) =>
         {emit(DeleteFailed()),
           print(error),
           showToast(msg: error.toString(), state: ToastedStates.ERROR),
@@ -198,13 +207,41 @@ class ProductsCubit extends Cubit<AddProductStates> {
           testLoading=false;
           emit(AddTestFailed(error.toString()));
 
-          print('Add Vehicle Test Failed');
+          print('Add Product Test Failed');
 
           print(error);
 
           //showToast(msg: error.toString(), state: ToastedStates.ERROR);
 
 
+        });
+      }
+    });
+  }
+  editProductCubit(GetProductModel? productModel){
+
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        emit(NetworkFailed("Check your internet connection and try again"));
+      } else {
+        ProductRepo.editVehicle(productModel)
+            .then((value) => {
+          print('Edit Vehicle Success'),
+          print(value),
+
+          emit(EditSuccess()),
+          showToast(msg: 'Edit Success', state: ToastedStates.SUCCESS),
+          priceController.text='',
+          descController.text='',
+          nameController.text='',
+          img64='',
+          image=null,
+        })
+            .catchError((error, stackTrace) =>
+        {emit(EditFailed()),
+          print(error),
+          showToast(msg: error.toString(), state: ToastedStates.ERROR),
+          print('Edit Vehicle Failed'),
         });
       }
     });

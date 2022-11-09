@@ -135,13 +135,6 @@ bool isAccessToken=true;
             myVehicleList=value,
             print('Get Vehice Response'),
             print(myVehicleList.length),
-            if(myVehicleList.isEmpty){
-              emit(VehicleListEmpty())
-
-            }else{
-              emit(GetVehicleSuccess(value))
-
-            }
 
           }else{
             vehicleList=value,
