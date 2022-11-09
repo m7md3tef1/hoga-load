@@ -1,10 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hoga_load/core/data/repository/vehicle_repo.dart';
 import 'package:hoga_load/features/jobs/cubit/getJop_states.dart';
 
 import '../../../core/data/models/jobs/GetJop_model.dart';
+import '../../../core/data/repository/product_repo.dart';
+import '../../../core/dialoges/toast.dart';
+import '../../../core/master_cubit/getDataForm_cubit.dart';
 
 class JopCubit extends Cubit<AddJopStates> {
   JopCubit() : super(AddJopLoading());
@@ -14,6 +18,53 @@ class JopCubit extends Cubit<AddJopStates> {
 
   List<GetJopModel> searchList = [];
   List<GetJopModel> jopList = [];
+  TextEditingController salaryController=TextEditingController();
+  TextEditingController titleController=TextEditingController();
+  TextEditingController noOfPostController=TextEditingController();
+  TextEditingController shiftController=TextEditingController();
+  TextEditingController descController=TextEditingController();
+
+  List<GetJopModel> myJopList=[];
+  bool isAccessToken=true;
+  bool  testLoading=false;
+  bool  myVehiclesLoading=false;
+  getJops({self}){
+    myVehiclesLoading=true;
+
+    connectivity.checkConnectivity().then((value)async{
+      if(ConnectivityResult.none == value){
+        emit(NetworkFailed("Check your internet connection and try again"));
+      }else{
+        ProductRepo.getJop('jops',self).then((value) => {
+          myVehiclesLoading=false,
+
+          print('..................................'),
+          print(value),
+
+          if(self==1){
+            myVehiclesLoading=false,
+
+            myJopList=value,
+            print('Get My Product Response'),
+            print(myJopList.length),
+
+          }else
+            {
+
+              jopList = value,
+              emit(GetJopSuccess(value))
+            }
+        }).onError((error, stackTrace) => {
+          myVehiclesLoading=true,
+
+          emit(GetJopFailed(error.toString())),
+          print(error)
+
+        });
+      }
+
+    });
+  }
 
   getJop() {
     connectivity.checkConnectivity().then((value) async {
@@ -66,6 +117,142 @@ class JopCubit extends Cubit<AddJopStates> {
         emit(GetSearchSuccess(searchList));
       } else {
         emit(GetSearchFailed('list is empty'));
+      }
+    });
+  }
+  jopClearData(context){
+    DataFormCubit.get(context).cityJop='';
+    DataFormCubit.get(context).countryJop='';
+    DataFormCubit.get(context).countryJop='';
+    DataFormCubit.get(context).jopCategory='';
+    DataFormCubit.get(context).jopType='';
+    DataFormCubit.get(context).salary='';
+    DataFormCubit.get(context).noOfPost='';
+    DataFormCubit.get(context).shiftTIme='';
+    DataFormCubit.get(context).jopTitle='';
+  }
+  addJopCubitTest({context}){
+    testLoading=true;
+    emit(Loading());
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        emit(NetworkFailed("Check your internet connection and try again"));
+        showToast(msg: 'Check your internet connection and try again', state: ToastedStates.ERROR);
+      } else {
+        VehicleRepo.addJopTest(context: context)
+            .then((value) => {
+          testLoading=false,
+
+        }).catchError((error)  {
+
+          if(error.toString().contains('Unauthorized Access') ||
+              error.toString().contains('no credit left')){
+            testLoading=false;
+            isAccessToken=false;
+            emit(AddTestFailed(error.toString()));
+            print('oooooooooooooooooo');
+
+          }
+          testLoading=false;
+          emit(AddTestFailed(error.toString()));
+
+          print('Add Jop Test Failed');
+
+          print(error);
+
+
+
+        });
+      }
+    });
+  }
+
+
+  addJopCubit({context,GetJopModel? productModel}){
+
+
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        emit(NetworkFailed("Check your internet connection and try again"));
+        showToast(msg: "Check your internet connection and try again", state: ToastedStates.ERROR);
+
+      } else {
+        emit(AddJopLoading());
+        ProductRepo.addJop(context: context,jopModel: productModel)
+            .then((value) => {
+          print('Add Jop Success'),
+          print(value),
+          emit(AddSuccessJop()),
+          descController.text='',
+          noOfPostController.text='',
+          salaryController.text='',
+          titleController.text='',
+          shiftController.text='',
+
+          showToast(msg: 'Add Jop Success', state: ToastedStates.SUCCESS),
+
+        }).catchError((error)  {
+          emit(AddFailed(error));
+          if(error.toString().contains('Unauthorized Access') ||
+              error.toString().contains('no credit left')){
+          }
+
+          print('Add Jop Failed');
+          print(error);
+          showToast(msg: error.toString(), state: ToastedStates.ERROR);
+
+        });
+      }
+    });
+  }
+
+  editJopCubit(GetJopModel? jopModel){
+
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        emit(NetworkFailed("Check your internet connection and try again"));
+      } else {
+        ProductRepo.editJop(jopModel)
+            .then((value) => {
+          print('Edit Jop Success'),
+          print(value),
+
+          emit(EditSuccess()),
+          showToast(msg: 'Edit Success', state: ToastedStates.SUCCESS),
+          descController.text='',
+          noOfPostController.text='',
+          salaryController.text='',
+          titleController.text='',
+          shiftController.text='',
+        })
+            .catchError((error, stackTrace) =>
+        {emit(EditFailed()),
+          print(error),
+          showToast(msg: error.toString(), state: ToastedStates.ERROR),
+          print('Edit Jop Failed'),
+        });
+      }
+    });
+  }
+  deleteJopCubit(jopId){
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        emit(NetworkFailed("Check your internet connection and try again"));
+      } else {
+        ProductRepo.deleteJop(jopId)
+            .then((value) => {
+          print('Delete Jop Success'),
+          print(value),
+
+          emit(DeleteSuccess()),
+          showToast(msg: 'Delete Success', state: ToastedStates.SUCCESS),
+
+        }).catchError((error, stackTrace) =>
+        {emit(DeleteFailed()),
+          print(error),
+          showToast(msg: error.toString(), state: ToastedStates.ERROR),
+          print('Delete Jop Failed'),
+        });
       }
     });
   }

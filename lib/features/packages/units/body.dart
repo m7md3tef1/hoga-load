@@ -18,7 +18,7 @@ class Body extends StatelessWidget {
                 height: .69.sh,
                 width: 1.sw,
                 child: ListView.builder(
-
+                    physics: const BouncingScrollPhysics(),
                     itemCount: PackageCubit.get(context).packageList.length,
                     itemBuilder: (context,index){
                       return CustomPackage(

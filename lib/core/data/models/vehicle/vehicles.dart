@@ -25,9 +25,11 @@ class Vehicles {
     this.equipmentTypes,
     this.equipmentTypes2,
     this.attributes,
+    this.attributes2,
     this.vehicleSizes,
     this.vehicleSizes2,
     this.vehicleTypes,
+    this.vehicleTypes2,
     this.weight,
     this.instructions,
     this.viewdBy,
@@ -98,6 +100,13 @@ class Vehicles {
   List<VehicleTypes>? vehicleTypes;
   List<String>? equipmentTypes2=[];
   List<String>? vehicleSizes2=[];
+<<<<<<< HEAD
+=======
+  List<String>? attributes2=[];
+  List<String>? vehicleTypes2=[];
+
+
+>>>>>>> nada
   User? user;
   String? weight;
   dynamic instructions;
@@ -111,22 +120,22 @@ class Vehicles {
     map['id'] = id;
     map['availability_date'] = availabilityDate;
     if (originCountry != null) {
-      map['origin_country'] = originCountry!.toJson();
+      map['origin_country'] = originCountry!.id!;
     }
     if (originState != null) {
-      map['origin_state'] = originState!.toJson();
+      map['origin_state'] = originState!.id;
     }
     if (originCity != null) {
-      map['origin_city'] = originCity!.toJson();
+      map['origin_city'] = originCity!.id;
     }
     if (destinationCountry != null) {
-      map['destination_country'] = destinationCountry!.toJson();
+      map['destination_country'] = destinationCountry!.id;
     }
     if (destinationState != null) {
-      map['destination_state'] = destinationState!.toJson();
+      map['destination_state'] = destinationState!.id;
     }
     if (destinationCity != null) {
-      map['destination_city'] = destinationCity!.toJson();
+      map['destination_city'] = destinationCity!.id;
     }
     if (equipmentTypes != null) {
       map['equipment_types'] = equipmentTypes!.map((v) => v.toJson()).toList();
@@ -142,6 +151,11 @@ class Vehicles {
     }
     map['weight'] = weight;
     map['instructions'] = instructions;
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> nada
     if (user != null) {
       map['user'] = user!.toJson();
     }

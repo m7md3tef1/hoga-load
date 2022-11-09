@@ -15,7 +15,7 @@ class ResponseModel {
         message!.add(v);
       });
     }
-    record = json['record'] != null ? User.fromJson(json['record']) : null;
+    //record = json['record'] != null ? User.fromJson(json['record']) : null;
   }
   String? status;
   List<dynamic>? message;

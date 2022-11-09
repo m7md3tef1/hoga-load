@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +7,10 @@ import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/features/search_product/cubit/getProduct_cubit.dart';
 import 'package:hoga_load/features/search_product/model.dart';
 import 'package:hoga_load/features/search_product/units/details.dart';
+<<<<<<< HEAD
+=======
+import 'package:hoga_load/features/upload_product/add_view.dart';
+>>>>>>> nada
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import 'package:hoga_load/widgets/widgets/custom_button.dart';
 import 'package:hoga_load/widgets/widgets/custom_row.dart';
@@ -28,7 +33,9 @@ class SearchView extends StatelessWidget {
           children: [
             CustomAppbar(title: 'Search Product'),
             SizedBox(height: 22.h,),
-             CustomSearchRow(3),
+             CustomSearchRow(3,function: (){
+               MagicRouter.navigateTo(AddProductsView(isFilter: true,));
+             },),
             SizedBox(height: 21.h,),
              Body()
           ],

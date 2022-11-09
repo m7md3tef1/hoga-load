@@ -78,12 +78,12 @@ class Login extends StatelessWidget {
                           function: () {
                             if (formKey.currentState!.validate()) {
                               AuthCubit.get(context).signIn(LoginModel(
-                                  password: passwordController.text,
-                                  userName: emailController.text));
+                                  password: passwordController.text.trim(),
+                                  userName: emailController.text.trim()));
                             }
                           },
                           text: 'Login',
-                          color: ColorManager.orange,
+                          color: ColorManager.yellow,
                         ),
                       ),
                     NoAccount(),

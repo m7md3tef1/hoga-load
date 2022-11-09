@@ -20,6 +20,7 @@ class PackagesView extends StatelessWidget {
     return CustomScaffold(
       body: SafeArea(
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

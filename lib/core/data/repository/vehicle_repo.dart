@@ -1,14 +1,17 @@
 import 'package:hoga_load/core/data/local/cacheHelper.dart';
 import 'package:hoga_load/core/keys/keys.dart';
 import 'package:hoga_load/core/master_cubit/getDataForm_cubit.dart';
-
+import '../../../features/vehicles/get_vehicles/cubit/vehicle_cubit.dart';
 import '../api/api.dart';
 import '../models/Packages.dart';
 import '../models/jobs/GetJop_model.dart';
 import '../models/loads/GetLoads_model.dart';
 import '../models/product/GetProduct_model.dart';
 import '../models/vehicle/Addvehicle_model.dart';
+<<<<<<< HEAD
 import '../models/vehicle/GetVehicle_model.dart';
+=======
+>>>>>>> nada
 import '../models/vehicle/user.dart';
 import '../models/vehicle/vehicles.dart';
 
@@ -36,14 +39,29 @@ class VehicleRepo {
       print('firstname...............');
       print(blogModel.firstName);
     }
+<<<<<<< HEAD
 
     return getProfileList;
   }
+=======
+>>>>>>> nada
 
   static Future<List<Vehicles>> getVehicles() async {
     String token= await CacheHelper.getString(SharedKeys.token);
     var response = await Api().getHttp(url: 'vehicles',authToken: token);
 
+<<<<<<< HEAD
+=======
+    return getProfileList;
+  }
+
+  static Future< List <Vehicles>>  getVehicles(self)async {
+    String token=await CacheHelper.getString(SharedKeys.token);
+    print(token);
+    print(self);
+    var response= await Api().getHttp(url: 'vehicles',authToken: token,self: self);
+
+>>>>>>> nada
     List<Vehicles> blogsList = [];
     for (int i = 0; i < response['records'].length; i++) {
       Vehicles blogModel = Vehicles.fromJson(response['records'][i]);
@@ -52,12 +70,32 @@ class VehicleRepo {
         blogModel.equipmentTypes2!.add(element.title!);
         print('oooooo${element.title}');
         print(blogModel.equipmentTypes2);
+<<<<<<< HEAD
       }
       for (var element in blogModel.vehicleSizes!) {
         blogModel.vehicleSizes2!.add(element.title!);
         print('oooooo${element.title}');
         print(blogModel.vehicleSizes2);
       }
+=======
+      }
+      for (var element in blogModel.vehicleSizes!) {
+        blogModel.vehicleSizes2!.add(element.title!);
+        print('oooooo${element.title}');
+        print(blogModel.vehicleSizes2);
+      }
+      for(var element in blogModel.vehicleTypes!){
+        blogModel.vehicleTypes2!.add(element.title!);
+
+
+      }
+      for(var element in blogModel.attributes!){
+        blogModel.attributes2!.add(element.title!);
+        print('oooooo${element.title}');
+        print( blogModel.equipmentTypes2);
+
+      }
+>>>>>>> nada
       blogsList.add(blogModel);
     }
 
@@ -67,6 +105,7 @@ class VehicleRepo {
     return blogsList;
   }
 
+<<<<<<< HEAD
   static Future<List<GetLoadsModel>> getLoads(url) async {
     String token= await CacheHelper.getString(SharedKeys.token);
     var response = await Api().getHttp(url: url,authToken: token);
@@ -74,6 +113,81 @@ class VehicleRepo {
     List<GetLoadsModel> loadsList = [];
     for (int i = 0; i < response['records'].length; i++) {
       GetLoadsModel blogModel = GetLoadsModel.fromJson(response['records'][i]);
+=======
+
+
+  static Future<List<GetJopModel>> getJop(url) async {
+    String token= await CacheHelper.getString(SharedKeys.token);
+    var response = await Api().getHttp(url: url,authToken:  token);
+
+    List<GetJopModel> productsList = [];
+    for (int i = 0; i < response['records'].length; i++) {
+      GetJopModel blogModel = GetJopModel.fromJson(response['records'][i]);
+      productsList.add(blogModel);
+    }
+    return productsList;
+  }
+
+  static Future<List<Packages>> getPackage() async {
+    String token= await CacheHelper.getString(SharedKeys.token);
+    var response = await Api().getHttp(url: 'advertisement-packages',authToken:  token);
+
+    List<Packages> packageList = [];
+    for (int i = 0; i < response['records'].length; i++) {
+      Packages blogModel = Packages.fromJson(response['records'][i]);
+      packageList.add(blogModel);
+    }
+    print(response.length);
+    print(packageList.length);
+
+    return packageList;
+  }
+
+
+  static Future<List<Vehicles>> searchVehicles(
+      {search,
+      equipmentSize,
+      attributes,
+      vehicleSize,
+      vehicleType,
+      context}) async {
+    String token = await CacheHelper.getString(SharedKeys.token);
+    print("repooo");
+    print("equipment_types" + equipmentSize);
+    print("vehicle_attributes" + attributes);
+    print("vehicleSize" + vehicleSize);
+    print("vehicleType" + vehicleType);
+    print("origin_country_id" +
+        DataFormCubit.get(context).countryOriginID.toString());
+    print("origin_country_id" +
+        DataFormCubit.get(context).stateOriginID.toString());
+    print("origin_country_id" +
+        DataFormCubit.get(context).cityOriginID.toString());
+    print("origin_country_id" +
+        DataFormCubit.get(context).countryDestinationID.toString());
+    print("origin_country_id" +
+        DataFormCubit.get(context).stateDestinationID.toString());
+
+    var response =
+        await Api().getHttp(url: 'vehicles', authToken: token, data: {
+      "search": search,
+      "equipment_types": equipmentSize,
+      "vehicle_attributes": attributes,
+      "vehicle_sizes": vehicleSize,
+      "vehicle_types": vehicleType,
+      "origin_country_id": DataFormCubit.get(context).countryOriginID,
+      "origin_state_id": DataFormCubit.get(context).stateOriginID,
+      "origin_city_id": DataFormCubit.get(context).cityOriginID,
+      "destination_country_id": DataFormCubit.get(context).countryDestinationID,
+      "destination_state_id": DataFormCubit.get(context).stateDestinationID,
+      "destination_city_id": DataFormCubit.get(context).cityDestinationID,
+    });
+
+    List<Vehicles> searchList = [];
+
+    for (int i = 0; i < response['records'].length; i++) {
+      Vehicles blogModel = Vehicles.fromJson(response['records'][i]);
+>>>>>>> nada
 
       for (var element in blogModel.equipmentTypes!) {
         blogModel.equipmentTypes2!.add(element.title!);
@@ -84,6 +198,7 @@ class VehicleRepo {
         blogModel.vehicleSizes2!.add(element.title!);
         print('oooooo${element.title}');
         print(blogModel.vehicleSizes2);
+<<<<<<< HEAD
       }
       loadsList.add(blogModel);
     }
@@ -184,6 +299,8 @@ class VehicleRepo {
         blogModel.vehicleSizes2!.add(element.title!);
         print('oooooo${element.title}');
         print(blogModel.vehicleSizes2);
+=======
+>>>>>>> nada
       }
       searchList.add(blogModel);
     }
@@ -192,5 +309,104 @@ class VehicleRepo {
     print(searchList.length);
 
     return searchList;
+<<<<<<< HEAD
   }
 }
+=======
+  }
+
+
+  static deleteVehicle(vehicleId)async{
+    String token=await CacheHelper.getString(SharedKeys.token);
+    return await Api().getHttp(url: "vehicles/delete",authToken:token,data: {"id":vehicleId} );
+
+  }
+  static editVehicle({context,vehicleId})async{
+    print("repooo");
+    print("equipment_types"+DataFormCubit.get(context).dateTime.toString());
+    print("vehicle_attributes"+VehiclesCubit.get(context).attributes.toString());
+    print("vehicleSize"+VehiclesCubit.get(context).vehcleSize.toString());
+    print("vehicleType"+VehiclesCubit.get(context).vehcleType.toString());
+    print("origin_country_id"+DataFormCubit.get(context).countryOriginID.toString());
+    print("origin_country_id"+DataFormCubit.get(context).stateOriginID.toString());
+    print("origin_country_id"+DataFormCubit.get(context).cityOriginID.toString());
+    print("origin_country_id"+DataFormCubit.get(context).countryDestinationID.toString());
+    print("origin_country_id"+DataFormCubit.get(context).stateDestinationID.toString());
+    String token=await CacheHelper.getString(SharedKeys.token);
+//    return await Api().getHttp(url: "vehicles/update",authToken:token,data:{
+//      "id":vehicleId,
+//    "availability_date":DataFormCubit.get(context).dateTime.toString(),
+//    "equipment_types":VehiclesCubit.get(context).equipmentType.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+//    "vehicle_attributes":VehiclesCubit.get(context).attributes.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+//    "vehicle_sizes": VehiclesCubit.get(context).vehcleSize.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+//    "vehicle_types": VehiclesCubit.get(context).vehcleType.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+//    "origin_country":DataFormCubit.get(context).countryOriginID,
+//    "origin_state":DataFormCubit.get(context).stateOriginID,
+//    "origin_city":DataFormCubit.get(context).cityOriginID,
+//    "destination_country":DataFormCubit.get(context).countryDestinationID,
+//    "destination_state":DataFormCubit.get(context).stateDestinationID,
+//    "destination_city":DataFormCubit.get(context).cityDestinationID,
+//    "weight":VehiclesCubit.get(context).weightController,
+//    "instructions":VehiclesCubit.get(context).instructionsController,
+//    }
+   // );
+
+  }
+  static addVehicle({context})async{
+    String token=await CacheHelper.getString(SharedKeys.token);
+    return await Api().postHttp(url: "vehicles/add",authToken:token,
+        data: {
+   "availability_date":DataFormCubit.get(context).dateTime.toString(),
+    "equipment_types":VehiclesCubit.get(context).equipmentType.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+    "vehicle_attributes":VehiclesCubit.get(context).attributes.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+    "vehicle_sizes": VehiclesCubit.get(context).vehcleSize.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+    "vehicle_types": VehiclesCubit.get(context).vehcleType.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+    "origin_country":DataFormCubit.get(context).countryOriginID,
+    "origin_state":DataFormCubit.get(context).stateOriginID,
+    "origin_city":DataFormCubit.get(context).cityOriginID,
+    "destination_country":DataFormCubit.get(context).countryDestinationID,
+    "destination_state":DataFormCubit.get(context).stateDestinationID,
+    "destination_city":DataFormCubit.get(context).cityDestinationID,
+     "weight":VehiclesCubit.get(context).weightController,
+      "instructions":VehiclesCubit.get(context).instructionsController,
+        } );
+
+  }
+  static addVehicleTest({context})async{
+    String token=await CacheHelper.getString(SharedKeys.token);
+    return await Api().postHttp(url: "vehicles/add",authToken:token);
+
+  }
+
+  static addJop({context})async{
+    String token=await CacheHelper.getString(SharedKeys.token);
+    return await Api().postHttp(url: "jobs/add",authToken:token,
+        data: {
+          "availability_date":DataFormCubit.get(context).dateTime.toString(),
+          "equipment_types":VehiclesCubit.get(context).equipmentType.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+          "vehicle_attributes":VehiclesCubit.get(context).attributes.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+          "vehicle_sizes": VehiclesCubit.get(context).vehcleSize.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+          "vehicle_types": VehiclesCubit.get(context).vehcleType.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+          "origin_country":DataFormCubit.get(context).countryOriginID,
+          "origin_state":DataFormCubit.get(context).stateOriginID,
+          "origin_city":DataFormCubit.get(context).cityOriginID,
+          "destination_country":DataFormCubit.get(context).countryDestinationID,
+          "destination_state":DataFormCubit.get(context).stateDestinationID,
+          "destination_city":DataFormCubit.get(context).cityDestinationID,
+          "weight":VehiclesCubit.get(context).weightController,
+          "instructions":VehiclesCubit.get(context).instructionsController,
+        } );
+
+  }
+
+  static addJopTest({context})async{
+    String token=await CacheHelper.getString(SharedKeys.token);
+    return await Api().postHttp(url: "jobs/add",authToken:token);
+
+  }
+
+
+
+}
+
+>>>>>>> nada

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/features/home/units/homebage/bottom.dart';
+<<<<<<< HEAD
+=======
+import 'package:hoga_load/features/plans/view.dart';
+>>>>>>> nada
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 
@@ -31,6 +35,10 @@ class HomeScreen extends StatelessWidget {
                   const Contact(),
                   const Bottom(),
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> nada
                 ],
               ),
             ),

@@ -27,7 +27,7 @@ bottomPadding: 0,
         children: [
           Container(
             height: 166.h,
-            width: double.infinity,
+            width: 1.sw,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(12.r),
@@ -51,7 +51,7 @@ fit: BoxFit.cover,
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 8.h, left: 13.w),
+            padding: EdgeInsets.only(top: 8.h, left: 6.w),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -62,14 +62,14 @@ fit: BoxFit.cover,
                       Icons.person_outline,
                       color: Colors.grey,
                     ),
-                    const SizedBox(width: 6,),
+                    const SizedBox(width: 2,),
                     CustomText(
                       text: 'Admin',
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w600,
                       color: Colors.grey,
                     ),
-                    const SizedBox(width: 6,),
+                    const SizedBox(width: 2,),
 
                   ],
                 ),
@@ -83,19 +83,17 @@ fit: BoxFit.cover,
                         Icons.access_time_outlined,
                         color: Colors.grey,
                       ),
-                      Expanded(
-
-                        child: CustomText(
-                          align: TextAlign.start,
-                          text: blogs.createdAt!.substring(0, blogs.createdAt!.indexOf('T')),
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey,
-                        ),
+                      CustomText(
+                        align: TextAlign.start,
+                        text: blogs.createdAt!.substring(0, blogs.createdAt!.indexOf('T')),
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey,
                       )
                     ],
                   ),
                 ),
+
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,

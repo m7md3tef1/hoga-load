@@ -28,8 +28,8 @@ class CustomButton extends StatelessWidget {
     return InkWell(
       onTap: function,
       child: Container(
-          width: 320.w,
-          height: 48.h,
+          width: 1.sw,
+         // height: 48.h,
           decoration: BoxDecoration(
               color: color,
               borderRadius: BorderRadius.circular(10.r),
@@ -37,18 +37,23 @@ class CustomButton extends StatelessWidget {
                   color:
                       colorborder == null ? Colors.transparent : colorborder)),
           child: Center(
-              child: Row(
+              child: Padding(
+                padding:  EdgeInsets.symmetric(vertical: 10.sp),
+                child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon),
-              CustomText(
-                text: text,
-                color: colortext == null ? Colors.black : colortext,
-                fontSize: font == null ? 20.sp : font,
-                fontWeight: FontWeight.w600,
-              ),
+               // Icon(icon),
+                Expanded(
+                  child: CustomText(
+                    text: text,
+                    color: colortext == null ? Colors.black : colortext,
+                    fontSize: font == null ? 20.sp : font,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
             ],
-          ))),
+          ),
+              ))),
     );
   }
 }

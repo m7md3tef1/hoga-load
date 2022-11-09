@@ -1,3 +1,5 @@
+import 'package:hoga_load/core/data/models/master/OriginCity.dart';
+
 import '../master/DestinationCity.dart';
 import '../master/DestinationCountry.dart';
 import '../master/DestinationState.dart';
@@ -22,8 +24,15 @@ class GetLoadsModel {
     this.destinationCity,
     this.equipmentTypes,
     this.attributes,
+<<<<<<< HEAD
     this.vehicleSizes,
     this.vehicleTypes,
+=======
+    this.attributes2,
+    this.vehicleSizes,
+    this.vehicleTypes,
+    this.vehicleTypes2,
+>>>>>>> nada
     this.equipmentTypes2,
     this.vehicleSizes2,
     this.weight,
@@ -41,7 +50,13 @@ class GetLoadsModel {
     originState = json['origin_state'] != null
         ? OriginState.fromJson(json['origin_state'])
         : null;
+<<<<<<< HEAD
     originCity = json['origin_city'];
+=======
+    originCity = json['origin_city'] != null
+        ? OriginCity.fromJson(json['origin_city'])
+        : null;
+>>>>>>> nada
     destinationCountry = json['destination_country'] != null
         ? DestinationCountry.fromJson(json['destination_country'])
         : null;
@@ -89,7 +104,7 @@ class GetLoadsModel {
   String? availabilityDate;
   OriginCountry? originCountry;
   OriginState? originState;
-  dynamic originCity;
+  OriginCity? originCity;
   DestinationCountry? destinationCountry;
   DestinationState? destinationState;
   DestinationCity? destinationCity;
@@ -103,6 +118,9 @@ class GetLoadsModel {
   dynamic instructions;
   User? user;
   List<ViewdBy>? viewdBy;
+  List<String>?vehicleTypes2=[];
+  List<String>?attributes2=[];
+
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

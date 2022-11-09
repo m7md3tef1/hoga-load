@@ -129,6 +129,7 @@ class CustomContainerJop extends StatelessWidget {
             ),
           ),
           Padding(
+<<<<<<< HEAD
             padding: EdgeInsets.only(top: 20.h, left: 12.r),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -139,6 +140,74 @@ class CustomContainerJop extends StatelessWidget {
                   fontSize: 18.sp,
                   color: Colors.black38,
                 ),
+=======
+            padding: EdgeInsets.only(top: 15.h),
+            child: Column(
+              //  mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 33.w, bottom: 15.h, top: 15.h),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      CustomText(text: 'CONTACT DETAILS'),
+                    ],
+                  ),
+                ),
+                Row(
+                  //  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                      child: Row(
+                      children: [
+                        const Icon(
+                          Icons.email_outlined,
+                          color: ColorManager.primaryColor,
+                        ),
+                        const SizedBox(
+                          width: 6,
+                        ),
+                        CustomText(
+                          text: jop.user == null
+                              ? 'other'
+                              : jop.user!.email.toString(),
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey,
+                        ),
+                        const SizedBox(
+                          width: 6,
+                        ),
+                      ],
+                  ),
+                    ),
+                    
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.phone_callback,
+                          color: ColorManager.primaryColor,
+                        ),
+                        const SizedBox(
+                          width: 6,
+                        ),
+                        CustomText(
+                          text: jop.user == null
+                              ? 'other'
+                              : jop.user!.contactNumber.toString(),
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey,
+                        ),
+                        const SizedBox(
+                          width: 6,
+                        ),
+                      ],
+                    ),
+
+                  ],
+                )
+>>>>>>> nada
               ],
             ),
           )

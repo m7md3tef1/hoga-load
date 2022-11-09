@@ -102,17 +102,17 @@ class SignUp extends StatelessWidget {
                               function: () {
                                 if(formKey.currentState!.validate()){
                                   AuthCubit.get(context).signUp(User(
-                                      firstName: firstNameController!.text,
-                                      lastName: lastNameController!.text,
-                                      email: emailController!.text,
-                                      contactNumber: phoneController!.text,
-                                      password: passwordController!.text,
-                                      address:addressController!.text ));
+                                      firstName: firstNameController!.text.trim(),
+                                      lastName: lastNameController!.text.trim(),
+                                      email: emailController!.text.trim(),
+                                      contactNumber: phoneController!.text.trim(),
+                                      password: passwordController!.text.trim(),
+                                      address:addressController!.text.trim() ));
 
                                 }
 
                               },
-                              text: 'Sign Up', color: ColorManager.orange,
+                              text: 'Sign Up', color: ColorManager.yellow,
                             ),
                             const SizedBox(height: 12,),
 

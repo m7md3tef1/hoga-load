@@ -73,7 +73,7 @@ class RecoverPage extends StatelessWidget {
                           }
                         },
                         text: 'Send Link',
-                        color: ColorManager.orange,
+                        color: ColorManager.yellow,
                       ),
                     ),
                   ],

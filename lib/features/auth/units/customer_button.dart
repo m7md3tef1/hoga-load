@@ -5,8 +5,9 @@ import '../../../widgets/widgets/custom_text.dart';
 class CustomButton extends StatelessWidget {
   String? text;
   var function;
+  Color? color;
 
-  CustomButton({required this.text,required this.function, super.key});
+  CustomButton({required this.text,required this.function,this.color, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class CustomButton extends StatelessWidget {
             width: double.infinity,
             height: 48,
             decoration: BoxDecoration(
-              color: ColorManager.orange,
+              color: color??ColorManager.yellow,
               borderRadius: BorderRadius.circular(10),
 
             ),

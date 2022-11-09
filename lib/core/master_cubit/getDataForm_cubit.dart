@@ -3,9 +3,8 @@ import 'dart:ffi';
 import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hoga_load/core/data/models/jobs/GetJop_model.dart';
 import 'package:hoga_load/core/data/repository/master_repo.dart';
-import 'package:hoga_load/core/data/repository/vehicle_repo.dart';
-
 import '../data/models/vehicle/Addvehicle_model.dart';
 import 'getDataForm_state.dart';
 
@@ -18,6 +17,8 @@ class DataFormCubit extends Cubit<AddDataFormStates> {
   List<AddVehicle> stateList = [];
   List<AddVehicle> cityList = [];
   List<AddVehicle> productList = [];
+  List<AddVehicle> jopTypeList=[];
+  List<AddVehicle> jopCategoryList=[];
 
   String countryOriginID='' ;
   String stateOriginID='' ;
@@ -25,6 +26,17 @@ class DataFormCubit extends Cubit<AddDataFormStates> {
   String countryDestinationID='' ;
   String stateDestinationID='' ;
   String cityDestinationID='' ;
+  String dateTime ='';
+
+  String countryJop='' ;
+  String stateJop='' ;
+  String cityJop='' ;
+  String jopCategory ='';
+  String jopType ='';
+  String salary ='';
+  String noOfPost ='';
+  String shiftTIme ='';
+  String jopTitle ='';
 
 
   getCountry() {
@@ -52,7 +64,7 @@ class DataFormCubit extends Cubit<AddDataFormStates> {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
-        MasterRepo.getCity('masters/cities',state)
+        MasterRepo.getCity("masters/cities",state)
             .then((value) => {
           print('..................................'),
           print(value),
@@ -64,6 +76,46 @@ class DataFormCubit extends Cubit<AddDataFormStates> {
       }
     });
   }
+
+  getJopCategory() {
+    emit(GetJopCategoryLoading());
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        emit(NetworkFailed("Check your internet connection and try again"));
+      } else {
+        MasterRepo.getJop('masters/job-categories')
+            .then((value) => {
+          print('................success..................'),
+          print(value),
+          jopCategoryList = value,
+          emit(GetJopCategorySuccess(value))
+        })
+            .onError((error, stackTrace) =>
+        {emit(GetJopCategoryFailed(error.toString())), print(error)});
+      }
+    });
+  }
+
+  getJopType() {
+    emit(GetJopTypeLoading());
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        emit(NetworkFailed("Check your internet connection and try again"));
+      } else {
+        MasterRepo.getJop('masters/job-types',)
+            .then((value) => {
+          print('................success..................'),
+          print(value),
+          jopTypeList = value,
+          emit(GetJopTypeSuccess(value))
+        })
+            .onError((error, stackTrace) =>
+        {emit(GetJopTypeFailed(error.toString())), print(error)});
+      }
+    });
+  }
+
+
   getDestintionCity(state) {
     emit(GetDestintionCityLoading());
     connectivity.checkConnectivity().then((value) async {

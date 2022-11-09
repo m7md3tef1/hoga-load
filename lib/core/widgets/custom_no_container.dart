@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../widgets/widgets/custom_text.dart';
 class CustomNoContainer extends StatelessWidget {
   String? text;
-
-  CustomNoContainer({ required this.text});
+  bool isUpgradeMember;
+  CustomNoContainer({ required this.text,this.isUpgradeMember=false});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,8 @@ class CustomNoContainer extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: CustomText(
             align: TextAlign.center,
-            text: 'There is no $text uploaded by you.',
+            text:isUpgradeMember?"** You do not have a valid subscription plan to post a vehicle detail. Please click below to subscribe.":
+            'There is no $text uploaded by you.',
             fontSize: 16.sp,
             textHeight: 1.5,
             fontWeight: FontWeight.w500,

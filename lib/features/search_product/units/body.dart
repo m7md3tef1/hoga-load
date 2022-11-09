@@ -5,7 +5,11 @@ class Body extends StatelessWidget {
   List titlesList = ['Buy / Sell', 'Product', 'Type', 'Price', ' '];
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return Container(
+=======
+    return SizedBox(
+>>>>>>> nada
       height: 0.7.sh,
       child: Scrollbar(
         thickness: 15,
@@ -135,7 +139,10 @@ class Body extends StatelessWidget {
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: state.productList.length,
                             itemBuilder: (context, index) {
+<<<<<<< HEAD
                               print('llllllll');
+=======
+>>>>>>> nada
 
                               return Container(
                                 color: index.isEven
@@ -193,6 +200,7 @@ class Body extends StatelessWidget {
                                             fontSize: 8.sp,
                                             align: TextAlign.start,
                                             fontWeight: FontWeight.w500),
+<<<<<<< HEAD
                                         Image(
                                           height: 50,
                                             width: 0.2.sw,
@@ -205,6 +213,19 @@ class Body extends StatelessWidget {
                                                 ? 'https://hegaload.com/uploads/product-images/1657431690.jpg'
                                                 : state.productList[index]
                                                     .productImage!))
+=======
+
+                                            CachedNetworkImage(
+                                              height: 50,
+                                              width: 0.2.sw,
+                                              imageUrl:  state
+                                                  .productList[index]
+                                                  .productImage!,
+                                              placeholder: (context, url) => CircularProgressIndicator(),
+                                              errorWidget: (context, url, error) => Icon(Icons.error),
+                                            ),
+
+>>>>>>> nada
                                       ],
                                     ),
                                   ),

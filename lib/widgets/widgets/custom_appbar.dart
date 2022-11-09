@@ -32,7 +32,8 @@ class CustomAppbar extends StatelessWidget {
                 children: [
                  InkWell(
                      onTap: (){
-                       MagicRouter.navigateTo( const OnDrawer());
+                       Scaffold.of(context).openDrawer();
+                       //MagicRouter.navigateTo( const OnDrawer());
                      },
                      child: SvgPicture.asset(AppImages.menu)),
 

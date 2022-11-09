@@ -4,10 +4,19 @@ abstract class AddJopStates {}
 
 class AddJopLoading extends AddJopStates {}
 
-class AddSuccess extends AddJopStates {}
+class AddSuccessJop extends AddJopStates {}
 
-class AddFailed extends AddJopStates {}
+class AddFailed extends AddJopStates {
+  String? error;
+  AddFailed(this.error);
+}
+class Loading extends AddJopStates{
 
+}
+class AddTestFailed extends AddJopStates{
+  String? error;
+  AddTestFailed(this.error);
+}
 
 class GetJopSuccess extends AddJopStates {
   List<GetJopModel> jopList = [];
@@ -27,6 +36,12 @@ class GetSearchSuccess extends AddJopStates {
 class GetSearchFailed extends AddJopStates {
   final String msg;
   GetSearchFailed(this.msg);
+}
+class DeleteSuccess extends AddJopStates {
+}class DeleteFailed extends AddJopStates {
+}
+class EditSuccess extends AddJopStates {
+}class EditFailed extends AddJopStates {
 }
 
 class NetworkFailed extends AddJopStates {

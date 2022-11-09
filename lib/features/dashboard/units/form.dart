@@ -85,7 +85,11 @@ class FormView extends StatelessWidget {
                             }
                           },
                           text: 'Update Profile',
+<<<<<<< HEAD
                           color: ColorManager.orange,
+=======
+                          color: ColorManager.yellow,
+>>>>>>> nada
                         ),
                       )
                   ],
