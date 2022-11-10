@@ -5,16 +5,15 @@ import 'package:hoga_load/core/dialoges/delete_dialoge.dart';
 
 import 'custom_text.dart';
 class UploadedTableDataRow extends StatelessWidget {
-   UploadedTableDataRow({super.key,required this.deleteFunc,
-   required this.editFunc,this.flex,this.flex2, this.tableWeight,required this.origin,required this.tableNumber});
-   String? tableNumber;
-   String? tableWeight;
-   String? origin;
-   var editFunc;
-   var deleteFunc;
-   var flex;
-   var flex2;
-   @override
+  UploadedTableDataRow({super.key,required this.deleteFunc,
+    required this.editFunc, this.tableWeight,required this.origin,required this.tableNumber});
+  String? tableNumber;
+  String? tableWeight;
+  String? origin;
+  var editFunc;
+  var deleteFunc;
+
+  @override
   Widget build(BuildContext context) {
     return   Padding(
       padding:  const EdgeInsets.symmetric(vertical: 5),
@@ -31,7 +30,7 @@ class UploadedTableDataRow extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: flex ?? 8,
+            flex: 8,
             child: CustomText(
               text: origin,
               align: TextAlign.start,
@@ -40,7 +39,7 @@ class UploadedTableDataRow extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex:flex2?? 2,
+            flex: 2,
             child: CustomText(
               text: tableWeight,
               align: TextAlign.start,

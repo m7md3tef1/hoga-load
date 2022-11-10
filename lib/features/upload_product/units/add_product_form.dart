@@ -642,8 +642,7 @@ class _FormState extends State<Form> {
                                 color: ColorManager.yellow,
                                 function: () {
                                   widget.isEdit?
-                                  ProductsCubit.get(context).editProductCubit(
-                                    GetProductModel(
+                                  ProductsCubit.get(context).editProductCubit(GetProductModel(
                                       id: widget.productModel!.id,
                                           buyOrSell: buyOrSell,
                                           productName: ProductsCubit
@@ -664,8 +663,10 @@ class _FormState extends State<Form> {
                                               .text,
                                           productImage: ProductsCubit
                                               .get(context)
-                                              .img64)):
-                                      widget.isFilter? ProductsCubit.get(context).searchProducts(GetProductModel(
+                                              .img64))
+                                      :
+                                      widget.isFilter?
+                                      ProductsCubit.get(context).searchProducts(GetProductModel(
                                           buyOrSell: buyOrSell,
                                         productTypeId: productId,
                                         countryPost: countryId,

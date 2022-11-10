@@ -108,14 +108,10 @@ class ProductsCubit extends Cubit<AddProductStates> {
   }
 
   addProductCubit({context,GetProductModel? productModel}){
-
-
-
      connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
         showToast(msg: "Check your internet connection and try again", state: ToastedStates.ERROR);
-
       } else {
         emit(AddProductLoading());
         ProductRepo.addProduct(context: context,productModel: productModel)

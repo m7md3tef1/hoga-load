@@ -3,17 +3,18 @@ import 'package:hoga_load/core/data/models/jobs/GetJop_model.dart';
 import '../../keys/keys.dart';
 import '../api/api.dart';
 import '../local/cacheHelper.dart';
+import '../models/jobs/get_jop.dart';
 import '../models/product/GetProduct_model.dart';
 
 class ProductRepo{
-  static Future<List<GetJopModel>> getJop(url,self,{GetJopModel? productModel}) async {
+  static Future<List<GetJop>> getJop(url,self,{GetJop? productModel}) async {
     String token= await CacheHelper.getString(SharedKeys.token);
     var response = await Api().getHttp(url: url,authToken: token,self: self );
 
-    List<GetJopModel> productsList = [];
+    List<GetJop> productsList = [];
     for (int i = 0; i < response['records'].length; i++) {
-      GetJopModel blogModel =
-      GetJopModel.fromJson(response['records'][i]);
+      GetJop blogModel =
+      GetJop.fromJson(response['records'][i]);
       productsList.add(blogModel);
     }
     return productsList;

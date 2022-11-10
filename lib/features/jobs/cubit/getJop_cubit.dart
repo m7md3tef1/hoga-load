@@ -6,6 +6,7 @@ import 'package:hoga_load/core/data/repository/vehicle_repo.dart';
 import 'package:hoga_load/features/jobs/cubit/getJop_states.dart';
 
 import '../../../core/data/models/jobs/GetJop_model.dart';
+import '../../../core/data/models/jobs/get_jop.dart';
 import '../../../core/data/repository/product_repo.dart';
 import '../../../core/dialoges/toast.dart';
 import '../../../core/master_cubit/getDataForm_cubit.dart';
@@ -16,33 +17,33 @@ class JopCubit extends Cubit<AddJopStates> {
   static JopCubit get(context) => BlocProvider.of(context);
   Connectivity connectivity = Connectivity();
 
-  List<GetJopModel> searchList = [];
-  List<GetJopModel> jopList = [];
+  List<GetJop> searchList = [];
+  List<GetJop> jopList = [];
   TextEditingController salaryController=TextEditingController();
   TextEditingController titleController=TextEditingController();
   TextEditingController noOfPostController=TextEditingController();
   TextEditingController shiftController=TextEditingController();
   TextEditingController descController=TextEditingController();
 
-  List<GetJopModel> myJopList=[];
+  List<GetJop> myJopList=[];
   bool isAccessToken=true;
   bool  testLoading=false;
-  bool  myVehiclesLoading=false;
+  bool  myJopLoading=false;
   getJops({self}){
-    myVehiclesLoading=true;
+    myJopLoading=true;
 
     connectivity.checkConnectivity().then((value)async{
       if(ConnectivityResult.none == value){
         emit(NetworkFailed("Check your internet connection and try again"));
       }else{
         ProductRepo.getJop('jops',self).then((value) => {
-          myVehiclesLoading=false,
+          myJopLoading=false,
 
           print('..................................'),
           print(value),
 
           if(self==1){
-            myVehiclesLoading=false,
+            myJopLoading=false,
 
             myJopList=value,
             print('Get My Product Response'),
@@ -55,7 +56,7 @@ class JopCubit extends Cubit<AddJopStates> {
               emit(GetJopSuccess(value))
             }
         }).onError((error, stackTrace) => {
-          myVehiclesLoading=true,
+          myJopLoading=true,
 
           emit(GetJopFailed(error.toString())),
           print(error)
@@ -71,6 +72,7 @@ class JopCubit extends Cubit<AddJopStates> {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
+        emit(AddJopLoading());
         VehicleRepo.getJop('jobs')
             .then((value) => {
                   print('..................................'),
@@ -142,7 +144,7 @@ class JopCubit extends Cubit<AddJopStates> {
         VehicleRepo.addJopTest(context: context)
             .then((value) => {
           testLoading=false,
-
+        showToast(msg:'success', state: ToastedStates.SUCCESS),
         }).catchError((error)  {
 
           if(error.toString().contains('Unauthorized Access') ||
@@ -169,13 +171,10 @@ class JopCubit extends Cubit<AddJopStates> {
 
 
   addJopCubit({context,GetJopModel? productModel}){
-
-
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
         showToast(msg: "Check your internet connection and try again", state: ToastedStates.ERROR);
-
       } else {
         emit(AddJopLoading());
         ProductRepo.addJop(context: context,jopModel: productModel)
@@ -188,15 +187,12 @@ class JopCubit extends Cubit<AddJopStates> {
           salaryController.text='',
           titleController.text='',
           shiftController.text='',
-
           showToast(msg: 'Add Jop Success', state: ToastedStates.SUCCESS),
-
         }).catchError((error)  {
           emit(AddFailed(error));
           if(error.toString().contains('Unauthorized Access') ||
               error.toString().contains('no credit left')){
           }
-
           print('Add Jop Failed');
           print(error);
           showToast(msg: error.toString(), state: ToastedStates.ERROR);
