@@ -37,9 +37,9 @@ class VehiclesCubit extends Cubit<VehicleStates> {
 
 
 
-bool isAccessToken=true;
+  bool isAccessToken=true;
   bool  testLoading=true;
-  bool  myVehiclesLoading=true;
+  bool  myVehiclesLoading=false;
 
 
 
@@ -55,7 +55,9 @@ bool isAccessToken=true;
                   print(value),
                   attributesList = value,
                   emit(GetAttributesSuccess(value)),
-        //  attributesBoxValue=List.filled(attributesList.length, false),
+                         attributes=[],
+
+            //  attributesBoxValue=List.filled(attributesList.length, false),
 
         })
             .onError((error, stackTrace) =>
@@ -131,6 +133,9 @@ bool isAccessToken=true;
     DataFormCubit.get(context).stateDestinationID='';
     DataFormCubit.get(context).stateOriginID='';
     DataFormCubit.get(context).cityDestinationID='';
+
+    weightController.clear();
+    instructionsController.clear();
   }
   changeCheckBox(boxKey,index,val){
 
@@ -168,17 +173,21 @@ bool isAccessToken=true;
 
             print(value),
           if(self==1){
+            myVehiclesLoading=false,
             myVehicleList=value,
             print('Get Vehice Response'),
             print(myVehicleList.length),
+            emit(GetVehicleSuccess(value))
 
           }else{
+            myVehiclesLoading=false,
+
             vehicleList=value,
             emit(GetVehicleSuccess(value))
 
           },
         }).onError((error, stackTrace) => {
-        myVehiclesLoading=true,
+        myVehiclesLoading=false,
 
             emit(GetVehicleFailed(error.toString())),
           print(error)
@@ -231,8 +240,6 @@ bool isAccessToken=true;
     });
   }
 
-
-
   deleteVehicleCubit(vehicleId){
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
@@ -269,6 +276,7 @@ bool isAccessToken=true;
 
           emit(EditSuccess()),
           showToast(msg: 'Edit Success', state: ToastedStates.SUCCESS),
+          vehicleClearData(context)
 
         })
             .catchError((error, stackTrace) =>

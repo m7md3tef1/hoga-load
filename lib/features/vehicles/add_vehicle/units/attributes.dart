@@ -35,6 +35,14 @@ class Attributes extends StatelessWidget {
                 crossAxisCount: 2, childAspectRatio: 5),
             itemCount:VehiclesCubit.get(context).attributesList.length,
             itemBuilder: (BuildContext context, int index) {
+//              if( vehiclesModel!.attributes2!
+//                  .contains(VehiclesCubit.get(context).attributesList[index].title)
+//              ){
+//                VehiclesCubit.get(context).attributes.add(VehiclesCubit.get(context).
+//                attributesList[index].id);
+//              }
+
+
               return CustomCheckBox(
                   index: index,
                   boxKey: MasterKeys.attributes.name,
