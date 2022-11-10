@@ -25,11 +25,11 @@ class ProductsCubit extends Cubit<AddProductStates> {
   Connectivity connectivity = Connectivity();
 
   List<GetProductModel> searchList=[];
-  List<GetProductModel> productList=[];
+
   List<GetProductModel> myProductList=[];
 
   String? img64;
-
+  List<GetProductModel> productList=[];
   bool isAccessToken=true;
   bool  testLoading=false;
   bool  myVehiclesLoading=false;
@@ -108,7 +108,7 @@ class ProductsCubit extends Cubit<AddProductStates> {
   }
 
   addProductCubit({context,GetProductModel? productModel}){
-     emit(AddProductLoading());
+
 
 
      connectivity.checkConnectivity().then((value) async {
@@ -117,6 +117,7 @@ class ProductsCubit extends Cubit<AddProductStates> {
         showToast(msg: "Check your internet connection and try again", state: ToastedStates.ERROR);
 
       } else {
+        emit(AddProductLoading());
         ProductRepo.addProduct(context: context,productModel: productModel)
             .then((value) => {
           print('Add Product Success'),
@@ -160,28 +161,7 @@ class ProductsCubit extends Cubit<AddProductStates> {
 
   }
 
-  deleteProductCubit(productId){
-    connectivity.checkConnectivity().then((value) async {
-      if (ConnectivityResult.none == value) {
-        emit(NetworkFailed("Check your internet connection and try again"));
-      } else {
-        ProductRepo.delete(productId)
-            .then((value) => {
-          print('Delete Vehicle Success'),
-          print(value),
 
-          emit(DeleteSuccess()),
-          showToast(msg: 'Delete Success', state: ToastedStates.SUCCESS),
-
-        }).catchError((error, stackTrace) =>
-        {emit(DeleteFailed()),
-          print(error),
-          showToast(msg: error.toString(), state: ToastedStates.ERROR),
-          print('Delete Vehicle Failed'),
-        });
-      }
-    });
-  }
 
   addProductCubitTest({context}){
     testLoading=true;
@@ -246,6 +226,27 @@ class ProductsCubit extends Cubit<AddProductStates> {
       }
     });
   }
+  deleteProductCubit(productId){
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        emit(NetworkFailed("Check your internet connection and try again"));
+      } else {
+        ProductRepo.delete(productId)
+            .then((value) => {
+          print('Delete Vehicle Success'),
+          print(value),
 
+          emit(DeleteSuccess()),
+          showToast(msg: 'Delete Success', state: ToastedStates.SUCCESS),
+
+        }).catchError((error, stackTrace) =>
+        {emit(DeleteFailed()),
+          print(error),
+          showToast(msg: error.toString(), state: ToastedStates.ERROR),
+          print('Delete Vehicle Failed'),
+        });
+      }
+    });
+  }
 
 }

@@ -15,7 +15,7 @@ class Button extends StatelessWidget {
           icon: Icons.add,
           color: ColorManager.yellow,
           function: () {
-            MagicRouter.navigateTo(const AddJopView());
+            MagicRouter.navigateTo( AddJopView());
           },
         ),
       ),

@@ -8,15 +8,25 @@ class Uploaded extends StatelessWidget {
     return CustomCard(
       widget: Padding(
         padding:  EdgeInsets.symmetric(horizontal: 11.sp),
-        child: Column(
+        child:Column(
           children: [
-            SizedBox(height: 18.h,),
-            CustomCardTitle(text: 'UPLOADED JOBS',),
-            CustomNoContainer(text: 'jobs'),
-            const Spacer(),
-             const Button()
+            SizedBox(
+              height: 18.h,
+            ),
+            CustomCardTitle(
+              text: 'UPLOADED JOP',
+            ),
 
-
+            JopCubit.get(context).jopList.isEmpty
+                ? Expanded(
+              child: Column(
+                children: [
+                  CustomNoContainer(text: 'jop'),
+                ],
+              ),
+            )
+                : const MyJopTable(),
+            Button()
           ],
         ),
       ),

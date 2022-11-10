@@ -18,12 +18,21 @@ import '../../../core/master_cubit/getDataForm_state.dart';
 import '../../../core/widgets/custom_card.dart';
 import '../cubit/getJop_cubit.dart';
 
-
 part 'units/add_jop_form.dart';
 
 class AddJopView extends StatelessWidget {
-  const AddJopView({Key? key}) : super(key: key);
+  AddJopView(
+      {Key? key,
+      this.productModel,
+      this.isEdit = false,
+      this.index,
+      this.isFilter = false})
+      : super(key: key);
+  GetJopModel? productModel;
+  bool isEdit;
+  bool isFilter;
 
+  int? index;
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -31,15 +40,19 @@ class AddJopView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomAppbar(title: 'Add Jop'),
-
-
-            const Expanded(child: SingleChildScrollView(
-                physics:BouncingScrollPhysics(),
-                child: Padding(
-                  padding: EdgeInsets.only(top: 22.0),
-                  child: FormInfo(),
-                ))),
+            CustomAppbar(
+                title: isEdit
+                    ? 'Edit Jop'
+                    : isFilter
+                        ? 'Search Jop'
+                        : 'Add Jop'),
+            const Expanded(
+                child: SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 22.0),
+                      child: FormInfo(),
+                    ))),
           ],
         ),
       ),
