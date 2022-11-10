@@ -81,17 +81,21 @@ class Bottom extends StatelessWidget {
         ),
         Row(
           children: [
-            Expanded(
-                child: ButtonContainer(
-                    ColorManager.primaryColor, 'LOADS & VEHICLES')),
+
+            ButtonContainer(
+                ColorManager.primaryColor, 'LOADS & VEHICLES'),
             SizedBox(
-              width: 4.w,
+              width: 4.h,
             ),
             ButtonContainer(const Color(0xFFA9A9A9), 'JOBS'),
+
             SizedBox(
-              width: 4.w,
+              width: 4.h,
             ),
-            ButtonContainer(const Color(0xFFA9A9A9), 'PRODUCTS'),
+            Expanded(child: ButtonContainer(const Color(0xFFA9A9A9), 'PRODUCTS')),
+            SizedBox(
+              width: 10.h,
+            ),
           ],
         ),
         SizedBox(
