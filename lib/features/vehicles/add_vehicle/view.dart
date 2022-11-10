@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/core/data/models/vehicle/vehicles.dart';
+import 'package:hoga_load/features/loads/cubit/getLoad_cubit.dart';
+import 'package:hoga_load/features/search_product/cubit/getProduct_cubit.dart';
 
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import 'package:hoga_load/widgets/widgets/custom_button.dart';
@@ -26,10 +28,11 @@ part 'units/instructon.dart';
 part 'units/vehicle_type.dart';
 part 'units/vehicles_size.dart';
 class AddVehiclesView extends StatelessWidget {
-   AddVehiclesView({Key? key,this.vehiclesModel,this.isEdit=false,this.index}) : super(key: key);
+   AddVehiclesView({Key? key,this.vehiclesModel,this.isEdit=false,this.index,this.isLoad=false}) : super(key: key);
   Vehicles? vehiclesModel;
   bool isEdit;
   int? index;
+  bool isLoad;
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -44,7 +47,7 @@ class AddVehiclesView extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CustomAppbar(title:isEdit?"Edit Vehicle": 'Add a New Vehicle'),
+                CustomAppbar(title:isLoad?"Add a New Load":isEdit?"Edit Vehicle": 'Add a New Vehicle'),
                 Expanded(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
@@ -79,13 +82,15 @@ class AddVehiclesView extends StatelessWidget {
                           ),
                           InkWell(
                               onTap: ()async{
+                                isLoad?  await LoadsCubit.get(context).addLoadsCubit(context:context):
+
                                 isEdit==false?
                                 await VehiclesCubit.get(context).addVehicleCubit(context:context):
                                 await VehiclesCubit.get(context).editVehicleCubit
                                   (context:context,vehicleId:vehiclesModel!.id);
 
                               },
-                              child: CustomButton(text:
+                              child: CustomButton(text:isLoad?"Add Load":
                               isEdit?"Edit Vehicle": 'Add new vehicle', color: ColorManager.yellow)),
 
                         ],

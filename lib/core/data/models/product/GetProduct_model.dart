@@ -74,6 +74,8 @@ class GetProductModel {
     map['price'] = priceInt;
     map['product_image'] = productImage;
     map['search'] = search;
+    map['id'] = id;
+
 
     return map;
   }

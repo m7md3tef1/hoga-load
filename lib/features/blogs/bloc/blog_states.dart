@@ -34,3 +34,9 @@ class NetworkFailed extends BlogsState{
   final String msg;
   NetworkFailed(this.msg);
 }
+class AddSuccess extends BlogsState{
+
+}
+class AddFailed extends BlogsState{
+
+}

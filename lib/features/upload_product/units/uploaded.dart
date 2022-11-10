@@ -16,7 +16,11 @@ class _UploadedState extends State<Uploaded> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProductsCubit,AddProductStates>(
-    listener: (BuildContext context, Object? state) {  },
+    listener: (BuildContext context, Object? state) {
+      if(state is DeleteSuccess||state is EditSuccess){
+        Navigator.pop(context);
+      }
+    },
     builder: (context,state) {
     return
     ProductsCubit.get(context).testLoading?

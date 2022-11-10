@@ -355,7 +355,7 @@ class _FormInfoState extends State<FormInfo> {
                                             cityDestination='';
                                             stateDestination='';
                                             DataFormCubit.get(context).cityDestinationID='';
-                                            DataFormCubit.get(context).cityOriginID='';
+                                            DataFormCubit.get(context).stateDestinationID='';
 
 
                                           });

@@ -109,7 +109,7 @@ fit: BoxFit.cover,
 
                       Expanded(
                         child: CustomText(
-                          text: '0 Comment(s)',
+                          text: '${blogs.enableComment} Comment(s)',
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w600,
                           color: Colors.grey,

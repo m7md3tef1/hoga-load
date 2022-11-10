@@ -144,6 +144,15 @@ class LoadsRepo{
 
   }
   static addLoads({context})async{
+    print("equipment_types"+DataFormCubit.get(context).dateTime.toString());
+    print("vehicle_attributes"+VehiclesCubit.get(context).attributes.toString());
+    print("vehicleSize"+VehiclesCubit.get(context).vehcleSize.toString());
+    print("vehicleType"+VehiclesCubit.get(context).vehcleType.toString());
+    print("origin_country_id"+DataFormCubit.get(context).countryOriginID.toString());
+    print("origin_country_id"+DataFormCubit.get(context).stateOriginID.toString());
+    print("origin_country_id"+DataFormCubit.get(context).cityOriginID.toString());
+    print("origin_country_id"+DataFormCubit.get(context).countryDestinationID.toString());
+    print("origin_country_id"+DataFormCubit.get(context).stateDestinationID.toString());
     String token=await CacheHelper.getString(SharedKeys.token);
     return await Api().postHttp(url: "loads/add",authToken:token,
         data: {
@@ -154,12 +163,12 @@ class LoadsRepo{
           "vehicle_types": VehiclesCubit.get(context).vehcleType.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
           "origin_country":DataFormCubit.get(context).countryOriginID,
           "origin_state":DataFormCubit.get(context).stateOriginID,
-          "origin_city":DataFormCubit.get(context).cityOriginID,
-          "destination_country":DataFormCubit.get(context).countryDestinationID,
-          "destination_state":DataFormCubit.get(context).stateDestinationID,
-          "destination_city":DataFormCubit.get(context).cityDestinationID,
-          "weight":LoadsCubit.get(context).weightController,
-          "instructions":LoadsCubit.get(context).instructionsController,
+       "origin_city":DataFormCubit.get(context).cityOriginID,
+         "destination_country":DataFormCubit.get(context).countryDestinationID,
+        "destination_state":DataFormCubit.get(context).stateDestinationID,
+       "destination_city":DataFormCubit.get(context).cityDestinationID,
+    "weight":VehiclesCubit.get(context).weightController.text,
+       "instructions":VehiclesCubit.get(context).instructionsController.text,
         } );
 
   }

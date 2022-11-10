@@ -38,9 +38,10 @@ class ProductRepo{
         data:productModel!.toJson() );
 
   }
+
   static delete(productId)async{
     String token=await CacheHelper.getString(SharedKeys.token);
-    return await Api().postHttp(url: "products/delete",authToken:token,
+    return await Api().getHttp(url: "products/delete",authToken:token,
        data: {"id":productId} );
 
   }
@@ -53,7 +54,7 @@ class ProductRepo{
   static editVehicle(GetProductModel? productModel)async{
 
     String token=await CacheHelper.getString(SharedKeys.token);
-    return await Api().getHttp(url: "products/update",authToken:token, data:productModel!.toJson());
+    return await Api().postHttp(url: "products/update",authToken:token, data:productModel!.toJson());
 
   }
 

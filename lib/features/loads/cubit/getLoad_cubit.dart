@@ -141,7 +141,7 @@ class LoadsCubit extends Cubit<AddLoadStates> {
       } else {
         LoadsRepo.addLoads(context: context)
             .then((value) => {
-          print('Add Vehicle Success'),
+          print('Add Load Success'),
           print(value),
           emit(AddSuccess()),
           VehiclesCubit.get(context).vehicleClearData(context),
@@ -150,9 +150,9 @@ class LoadsCubit extends Cubit<AddLoadStates> {
 
         }).catchError((error) => {
           emit(AddFailed()),
-          VehiclesCubit.get(context).vehicleClearData(context),
+         // VehiclesCubit.get(context).vehicleClearData(context),
 
-          print('Add Vehicle Failed'),
+          print('Add Load Failed'),
           print(error),
           showToast(msg: error.toString(), state: ToastedStates.ERROR),
 

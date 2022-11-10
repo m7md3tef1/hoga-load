@@ -644,6 +644,7 @@ class _FormState extends State<Form> {
                                   widget.isEdit?
                                   ProductsCubit.get(context).editProductCubit(
                                     GetProductModel(
+                                      id: widget.productModel!.id,
                                           buyOrSell: buyOrSell,
                                           productName: ProductsCubit
                                               .get(context)

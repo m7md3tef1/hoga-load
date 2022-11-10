@@ -1,8 +1,11 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/data/local/cacheHelper.dart';
 import '../../../core/data/models/blogs/blogs.dart';
 import '../../../core/data/repository/blog_repo.dart';
+import '../../../core/dialoges/toast.dart';
+import '../../../core/keys/keys.dart';
 import 'blog_states.dart';
 
 class BlogsCubit  extends Cubit<BlogsState> {
@@ -35,28 +38,61 @@ class BlogsCubit  extends Cubit<BlogsState> {
     });
   }
 
-  getBlogCategory(){
+  addComment(comment,id,{website}){
 
-  }
-  searchBlogs(val,context) {
-    searchList.clear();
-    BlogsCubit.get(context).blogList.forEach((i) {
-      if(i.title!.toLowerCase().contains(val)||i.title!.contains(val)){
-        searchList.add(i);
-      }
-      else{
-        null;
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        emit(NetworkFailed("Check your internet connection and try again"));
+        showToast(msg: "Check your internet connection and try again", state: ToastedStates.ERROR);
 
-      }
+      } else {
+        BlogRepo.addComment(comment:comment ,website:website,id:id )
+            .then((value) => {
+          print('Add  Success'),
+          print(value),
+          emit(AddSuccess()),
 
-      if(searchList!=null||searchList.length!=0){
-        emit(GetSearchSuccess(searchList));
+          showToast(msg: 'Add Success', state: ToastedStates.SUCCESS),
 
-      }else{
-        emit(GetSearchFailed('list is empty'));
+        }).catchError((error) => {
+          emit(AddFailed()),
 
+          print('Add  Failed'),
+          print(error),
+          showToast(msg: error.toString(), state: ToastedStates.ERROR),
+
+        });
       }
     });
+  }
+  searchBlogs(val)async {
+    String token=await CacheHelper.getString(SharedKeys.token);
+    searchList.clear();
+    connectivity.checkConnectivity().then((value)async{
+      if(ConnectivityResult.none == value){
+        emit(NetworkFailed("Check your internet connection and try again"));
+      }else{
+        BlogRepo.searchBlogs(token,val).then((value) => {
+          print('..................................'),
+          searchList=value,
+          print("this value--------SearchBlog"),
+          print(value),
+        if(searchList!=null||searchList.length!=0){
+            emit(GetSearchSuccess(searchList)),
+
+      }else{
+      emit(GetSearchFailed('list is empty'))}
+
+        }).catchError((error, stackTrace) => {
+          emit(GetSearchFailed(error.toString())),
+          print(error)
+
+        });
+      }
+
+    });
+
+
   }
 
 }

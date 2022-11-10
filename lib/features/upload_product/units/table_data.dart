@@ -75,9 +75,12 @@ class MyProductTable extends StatelessWidget {
                                 SizedBox(width: 5.sp,),
                                 InkWell(
                                   onTap:(){
+                                    print('id');
+                                    print(ProductsCubit.get(context).myProductList[index].id);
                                     showDialog(context: context, builder:(context)=> DeleteEditDialog(function: (){
 
-                                      ProductsCubit.get(context).deleteProductCubit(ProductsCubit.get(context).myProductList[index].id);
+                                      ProductsCubit.get(context).deleteProductCubit(
+                                          ProductsCubit.get(context).myProductList[index].id);
 
                                     },btnText: 'Delete',));
                                   },

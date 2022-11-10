@@ -27,7 +27,9 @@ class BlogsView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomAppbar(title: 'Blogs',icon: const Icon(Icons.search),),
+              SizedBox(height: 15.h,),
               const CustomSearchRow2(),
+
               const Expanded(child: Body()),
             ],
           ),
@@ -55,10 +57,9 @@ class CustomSearchRow2 extends StatelessWidget {
                 child: Center(
                   child: TextFormField(
                     onFieldSubmitted: (val){
-                      print('hhhhhhhhhhhhhhhhhhhhhhhhh');
                       print(val);
 
-                      BlogsCubit.get(context).searchBlogs(val, context);
+                      BlogsCubit.get(context).searchBlogs(val);
 
                     },
                     decoration:  InputDecoration(
