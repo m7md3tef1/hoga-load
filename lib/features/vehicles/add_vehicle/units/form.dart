@@ -47,10 +47,7 @@ class _FormInfoState extends State<FormInfo> {
      VehiclesCubit.get(context).instructionsController.text=widget.vehiclesModel!.instructions.toString();
 
 
-     print(VehiclesCubit.get(context).attributes);
-     print('ssssssssssssss');
-
-
+//     VehiclesCubit.get(context).equipmentBoxValue![widget.index!]==null?true:null;
 //     VehiclesCubit.get(context).attributesBoxValue![widget.index!]==null?true:null;
 //     //VehiclesCubit.get(context).vehcleSizeBoxValue![widget.index!]==null?true:null;
 //     print(VehiclesCubit.get(context).vehcleSizeBoxValue!.length);

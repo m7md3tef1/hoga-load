@@ -4,8 +4,8 @@ class Country {
     this.title,});
 
   Country.fromJson(dynamic json) {
-    id = json['id'];
-    title = json['title'];
+    id = json['id']??0;
+    title = json['title']??'';
   }
   int? id;
   String? title;

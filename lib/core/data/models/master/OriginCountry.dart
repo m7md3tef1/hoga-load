@@ -8,8 +8,8 @@ class OriginCountry {
       this.deletedAt,});
 
   OriginCountry.fromJson(dynamic json) {
-    id = json['id'];
-    title = json['title'];
+    id = json['id']??0;
+    title = json['title']??"other";
     slug = json['slug'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];

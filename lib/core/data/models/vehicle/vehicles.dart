@@ -38,7 +38,7 @@ class Vehicles {
     this.updatedAt,
     this.deletedAt,});
 
-  Vehicles.fromJson(dynamic json) {
+  Vehicles.fromJson(Map<dynamic, dynamic>json) {
     id = json['id'];
     availabilityDate = json['availability_date'];
     originCountry = json['origin_country'] != null ? OriginCountry.fromJson(json['origin_country']) : null;

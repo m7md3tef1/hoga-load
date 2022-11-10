@@ -15,13 +15,16 @@ class MyTable extends StatelessWidget {
               return Container(
                 color: index.isEven ? Colors.grey[300] : Colors.white,
                 child: UploadedTableDataRow(
-                  origin:
-                  "${VehiclesCubit.get(context).myVehicleList[index].originCity!.title??"other"}"
-                      " (${VehiclesCubit.get(context).myVehicleList[index].originState!.title??"other"} , "
-                      "${VehiclesCubit.get(context).myVehicleList[index].originCountry!.title??"other"}) "
-                      " → ""${VehiclesCubit.get(context).myVehicleList[index].destinationCity!.title??"other"}"
-                      " (${VehiclesCubit.get(context).myVehicleList[index].destinationState!.title??"other"} , "
-                      "${VehiclesCubit.get(context).myVehicleList[index].destinationCountry!.title??"other"}) ",
+                  origin:"${VehiclesCubit.get(context).myVehicleList[index].originCity==null?"other":VehiclesCubit.get(context).myVehicleList[index].originCity!.title}"
+                      " (${VehiclesCubit.get(context).myVehicleList[index].originState==null?"other":VehiclesCubit.get(context).myVehicleList[index].originState!.title} , "
+                      "${VehiclesCubit.get(context).myVehicleList[index].originCountry==null?'other':
+                  VehiclesCubit.get(context).myVehicleList[index].originCountry!.title}) "
+                      " → ""${VehiclesCubit.get(context).myVehicleList[index].destinationCity==null?'other':
+                    VehiclesCubit.get(context).myVehicleList[index].destinationCity!.title}"
+                      " (${VehiclesCubit.get(context).myVehicleList[index].destinationState==null?'other':
+                  VehiclesCubit.get(context).myVehicleList[index].destinationState!.title} , "
+                      "${VehiclesCubit.get(context).myVehicleList[index].destinationCountry==null?'other':
+                    VehiclesCubit.get(context).myVehicleList[index].destinationCountry!.title}) ",
                   editFunc:(){
                     MagicRouter.navigateTo( AddVehiclesView(isEdit: true,vehiclesModel:
                     VehiclesCubit.get(context).myVehicleList[index],index:index));

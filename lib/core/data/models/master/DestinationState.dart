@@ -9,8 +9,8 @@ class DestinationState {
       this.deletedAt,});
 
   DestinationState.fromJson(dynamic json) {
-    id = json['id'];
-    title = json['title'];
+    id = json['id']??0;
+    title = json['title']??"other";
     slug = json['slug'];
     countryId = json['country_id'];
     createdAt = json['created_at'];

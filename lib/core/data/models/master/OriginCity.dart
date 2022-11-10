@@ -10,8 +10,8 @@ class OriginCity {
       this.deletedAt,});
 
   OriginCity.fromJson(dynamic json) {
-    id = json['id'];
-    title = json['title'];
+    id = json['id']??0;
+    title = json['title']??"other";
     slug = json['slug'];
     stateId = json['state_id'];
     countryId = json['country_id'];

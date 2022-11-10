@@ -27,23 +27,12 @@ part 'units/form.dart';
 part 'units/instructon.dart';
 part 'units/vehicle_type.dart';
 part 'units/vehicles_size.dart';
-class AddVehiclesView extends StatefulWidget {
+class AddVehiclesView extends StatelessWidget {
    AddVehiclesView({Key? key,this.vehiclesModel,this.isEdit=false,this.index,this.isLoad=false}) : super(key: key);
   Vehicles? vehiclesModel;
   bool isEdit;
   int? index;
   bool isLoad;
-
-  @override
-  State<AddVehiclesView> createState() => _AddVehiclesViewState();
-}
-
-class _AddVehiclesViewState extends State<AddVehiclesView> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -52,19 +41,13 @@ class _AddVehiclesViewState extends State<AddVehiclesView> {
           listener: (BuildContext context, state) {
             if(state is AddSuccess){
               Navigator.pop(context);
-              VehiclesCubit.get(context).getVehicleCubit(self: 1);
-            }
-            if(state is EditSuccess){
-              Navigator.pop(context);
-              Navigator.pop(context);
-
             }
           },
           builder: (context,state) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CustomAppbar(title:widget.isLoad?"Add a New Load":widget.isEdit?"Edit Vehicle": 'Add a New Vehicle'),
+                CustomAppbar(title:isLoad?"Add a New Load":isEdit?"Edit Vehicle": 'Add a New Vehicle'),
                 Expanded(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
@@ -75,23 +58,23 @@ class _AddVehiclesViewState extends State<AddVehiclesView> {
                            Padding(
                             padding: const EdgeInsets.only(top:22),
                             child:
-                            FormInfo(vehiclesModel: widget.vehiclesModel,isEdit: widget.isEdit,index: widget.index,),
+                            FormInfo(vehiclesModel: vehiclesModel,isEdit: isEdit,index: index,),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top:22),
-                            child: Equipment(vehiclesModel: widget.vehiclesModel,isEdit:widget.isEdit),
+                            child: Equipment(vehiclesModel: vehiclesModel,isEdit:isEdit),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top:22),
-                            child: Attributes(vehiclesModel: widget.vehiclesModel,isEdit:widget.isEdit),
+                            child: Attributes(vehiclesModel: vehiclesModel,isEdit:isEdit),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top:22),
-                            child: VehicleType(vehiclesModel: widget.vehiclesModel,isEdit:widget.isEdit),
+                            child: VehicleType(vehiclesModel: vehiclesModel,isEdit:isEdit),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top:22),
-                            child: VehiclesSize(vehiclesModel: widget.vehiclesModel,isEdit:widget.isEdit),
+                            child: VehiclesSize(vehiclesModel: vehiclesModel,isEdit:isEdit),
                           ),
                           const Padding(
                             padding: EdgeInsets.only(top:22),
@@ -99,16 +82,16 @@ class _AddVehiclesViewState extends State<AddVehiclesView> {
                           ),
                           InkWell(
                               onTap: ()async{
-                                widget.isLoad?  await LoadsCubit.get(context).addLoadsCubit(context:context):
+                                isLoad?  await LoadsCubit.get(context).addLoadsCubit(context:context):
 
-                                widget.isEdit==false?
+                                isEdit==false?
                                 await VehiclesCubit.get(context).addVehicleCubit(context:context):
                                 await VehiclesCubit.get(context).editVehicleCubit
-                                  (context:context,vehicleId:widget.vehiclesModel!.id);
+                                  (context:context,vehicleId:vehiclesModel!.id);
 
                               },
-                              child: CustomButton(text:widget.isLoad?"Add Load":
-                              widget.isEdit?"Edit Vehicle": 'Add new vehicle', color: ColorManager.yellow)),
+                              child: CustomButton(text:isLoad?"Add Load":
+                              isEdit?"Edit Vehicle": 'Add new vehicle', color: ColorManager.yellow)),
 
                         ],
                       ),

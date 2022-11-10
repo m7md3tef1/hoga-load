@@ -4,8 +4,8 @@ class EquipmentTypes {
       this.title,});
 
   EquipmentTypes.fromJson(dynamic json) {
-    id = json['id'];
-    title = json['title'];
+    id = json['id']??0;
+    title = json['title']??'other';
   }
   int? id;
   String? title;

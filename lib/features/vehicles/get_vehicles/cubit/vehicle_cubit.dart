@@ -37,9 +37,9 @@ class VehiclesCubit extends Cubit<VehicleStates> {
 
 
 
-  bool isAccessToken=true;
+bool isAccessToken=true;
   bool  testLoading=true;
-  bool  myVehiclesLoading=false;
+  bool  myVehiclesLoading=true;
 
 
 
@@ -55,9 +55,7 @@ class VehiclesCubit extends Cubit<VehicleStates> {
                   print(value),
                   attributesList = value,
                   emit(GetAttributesSuccess(value)),
-                         attributes=[],
-
-            //  attributesBoxValue=List.filled(attributesList.length, false),
+        //  attributesBoxValue=List.filled(attributesList.length, false),
 
         })
             .onError((error, stackTrace) =>
@@ -133,9 +131,6 @@ class VehiclesCubit extends Cubit<VehicleStates> {
     DataFormCubit.get(context).stateDestinationID='';
     DataFormCubit.get(context).stateOriginID='';
     DataFormCubit.get(context).cityDestinationID='';
-
-    weightController.clear();
-    instructionsController.clear();
   }
   changeCheckBox(boxKey,index,val){
 
@@ -161,84 +156,90 @@ class VehiclesCubit extends Cubit<VehicleStates> {
     print('+++++++++++++++++++++++++++++++++++');
   }
 
-  getVehicleCubit({self}){
+  getVehicleCubit({self,val,equipmentSize2,attributes2,vehicleSize2,vehicleType2,isFilter,context}){
     myVehiclesLoading=true;
     emit(VehicleLoading());
     connectivity.checkConnectivity().then((value)async{
       if(ConnectivityResult.none == value){
         emit(NetworkFailed("Check your internet connection and try again"));
       }else{
-        VehicleRepo.getVehicles(self).then((value) => {
+        VehicleRepo.getVehicles(self,val: val,
+        context: context,isFilter: isFilter,
+        vehicleSize: vehicleSize2,vehicleType: vehicleType2,attributes: attributes2,equipmentSize: equipmentSize2
+
+        ).then((value) => {
         myVehiclesLoading=false,
 
             print(value),
           if(self==1){
-            myVehiclesLoading=false,
             myVehicleList=value,
             print('Get Vehice Response'),
             print(myVehicleList.length),
-            emit(GetVehicleSuccess(value))
 
           }else{
-            myVehiclesLoading=false,
-
             vehicleList=value,
-            emit(GetVehicleSuccess(value))
+            emit(GetVehicleSuccess(value)),
+            vehicleClearData(context),
+
 
           },
         }).onError((error, stackTrace) => {
-        myVehiclesLoading=false,
+        myVehiclesLoading=true,
 
             emit(GetVehicleFailed(error.toString())),
-          print(error)
-
-        });
-      }
-
-    });
-  }
-  searchVehicles(context,{val,equipmentSize2,attributes2,vehicleSize2,vehicleType2}) {
-      searchList.clear();
-    print("cubit");
-    print(equipmentSize2);
-      print(vehicleSize2);
-
-
-      connectivity.checkConnectivity().then((value)async{
-      if(ConnectivityResult.none == value){
-        emit(NetworkFailed("Check your internet connection and try again"));
-      }else{
-        VehicleRepo.searchVehicles(search: val,equipmentSize: equipmentSize2,vehicleSize: vehicleSize2,
-            attributes: attributes2,vehicleType: vehicleType2,context: context).then((value) => {
-          print('..................................'),
-          print(value),
-          print("value2"),
-
-          if(value.isNotEmpty){
-            print("value"),
-            print('..................................'),
-            print(value),
-            searchList=value,
-            emit(GetSearchSuccess(searchList)),
-            vehicleClearData(context),
-
-
-          }else{
-            emit(GetSearchFailed('Nothing found try again')),
-            vehicleClearData(context),
-
-          }
-
-        }).onError((error, stackTrace) => {
-          emit(GetSearchFailed(error.toString())),
+          print(error),
           vehicleClearData(context),
-          print(error)
+
 
         });
       }
 
     });
   }
+//  searchVehicles(context,{val,equipmentSize2,attributes2,vehicleSize2,vehicleType2}) {
+//      searchList.clear();
+//      print("cubit");
+//      print(equipmentSize2);
+//      print(vehicleSize2);
+//
+//
+//      connectivity.checkConnectivity().then((value)async{
+//      if(ConnectivityResult.none == value){
+//        emit(NetworkFailed("Check your internet connection and try again"));
+//      }else{
+//        VehicleRepo.searchVehicles(search: val,equipmentSize: equipmentSize2,vehicleSize: vehicleSize2,
+//            attributes: attributes2,vehicleType: vehicleType2,context: context).then((value) => {
+//          print('..................................'),
+//          print(value),
+//          print("value2"),
+//
+//          if(value.isNotEmpty){
+//            print("value"),
+//            print('..................................'),
+//            print(value),
+//            searchList=value,
+//            emit(GetSearchSuccess(searchList)),
+//            vehicleClearData(context),
+//
+//
+//          }else{
+//            emit(GetSearchFailed('Nothing found try again')),
+//            vehicleClearData(context),
+//
+//          }
+//
+//        }).onError((error, stackTrace) => {
+//          emit(GetSearchFailed(error.toString())),
+//          vehicleClearData(context),
+//          print(error)
+//
+//        });
+//      }
+//
+//    });
+//  }
+
+
 
   deleteVehicleCubit(vehicleId){
     connectivity.checkConnectivity().then((value) async {
@@ -276,7 +277,6 @@ class VehiclesCubit extends Cubit<VehicleStates> {
 
           emit(EditSuccess()),
           showToast(msg: 'Edit Success', state: ToastedStates.SUCCESS),
-          vehicleClearData(context)
 
         })
             .catchError((error, stackTrace) =>

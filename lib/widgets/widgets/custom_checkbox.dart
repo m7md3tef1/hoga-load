@@ -17,7 +17,7 @@ String? boxKey;
 class _CustomCheckBoxState extends State<CustomCheckBox> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: 30.h,
       width: 150.w,
       child: Padding(
@@ -33,8 +33,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
                   });
                   VehiclesCubit.get(context).changeCheckBox(widget.boxKey, widget.index,val);
                 }),
-            CustomText(text: widget.text, fontSize: 14.sp,fontWeight: FontWeight.w500,color:
-            const Color(0xFFAEAEB2),)
+            CustomText(text: widget.text, fontSize: 14.sp,fontWeight: FontWeight.w500,color: const Color(0xFFAEAEB2),)
           ],
         ),
       ),

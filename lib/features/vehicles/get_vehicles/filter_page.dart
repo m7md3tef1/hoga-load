@@ -58,7 +58,10 @@ class FilterVehicle extends StatelessWidget {
                             padding: const EdgeInsets.only(top:22),
                             child:  InkWell(
                                 onTap: ()async{
-                                 await VehiclesCubit.get(context).searchVehicles(context,
+                                  print('filter Search');
+                                 await VehiclesCubit.get(context).getVehicleCubit(
+                                     context:context,
+                                    isFilter: true,
                                     equipmentSize2:
                                     VehiclesCubit.get(context).equipmentType.toString()
                                         .replaceAll(",","-").replaceAll("[","").replaceAll("]","").
@@ -77,6 +80,8 @@ class FilterVehicle extends StatelessWidget {
                                     replaceAll(" ","")
 
                                   );
+                                 Navigator.pop(context);
+
                                   print(
                                       VehiclesCubit.get(context).equipmentType.toString()
                                       .replaceAll(",","-").replaceAll("[","").replaceAll("]","").
