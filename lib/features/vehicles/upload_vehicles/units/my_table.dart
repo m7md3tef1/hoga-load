@@ -15,7 +15,8 @@ class MyTable extends StatelessWidget {
               return Container(
                 color: index.isEven ? Colors.grey[300] : Colors.white,
                 child: UploadedTableDataRow(
-                  origin:"${VehiclesCubit.get(context).myVehicleList[index].originCity!.title??"other"}"
+                  origin:
+                  "${VehiclesCubit.get(context).myVehicleList[index].originCity!.title??"other"}"
                       " (${VehiclesCubit.get(context).myVehicleList[index].originState!.title??"other"} , "
                       "${VehiclesCubit.get(context).myVehicleList[index].originCountry!.title??"other"}) "
                       " → ""${VehiclesCubit.get(context).myVehicleList[index].destinationCity!.title??"other"}"

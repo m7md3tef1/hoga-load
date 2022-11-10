@@ -191,23 +191,23 @@ class VehicleRepo {
     print("origin_country_id"+DataFormCubit.get(context).countryDestinationID.toString());
     print("origin_country_id"+DataFormCubit.get(context).stateDestinationID.toString());
     String token=await CacheHelper.getString(SharedKeys.token);
-//    return await Api().getHttp(url: "vehicles/update",authToken:token,data:{
-//      "id":vehicleId,
-//    "availability_date":DataFormCubit.get(context).dateTime.toString(),
-//    "equipment_types":VehiclesCubit.get(context).equipmentType.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
-//    "vehicle_attributes":VehiclesCubit.get(context).attributes.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
-//    "vehicle_sizes": VehiclesCubit.get(context).vehcleSize.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
-//    "vehicle_types": VehiclesCubit.get(context).vehcleType.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
-//    "origin_country":DataFormCubit.get(context).countryOriginID,
-//    "origin_state":DataFormCubit.get(context).stateOriginID,
-//    "origin_city":DataFormCubit.get(context).cityOriginID,
-//    "destination_country":DataFormCubit.get(context).countryDestinationID,
-//    "destination_state":DataFormCubit.get(context).stateDestinationID,
-//    "destination_city":DataFormCubit.get(context).cityDestinationID,
-//    "weight":VehiclesCubit.get(context).weightController,
-//    "instructions":VehiclesCubit.get(context).instructionsController,
-//    }
-   // );
+    return await Api().postHttp(url: "vehicles/update",authToken:token,data:{
+      "id":vehicleId,
+    "availability_date":DataFormCubit.get(context).dateTime.toString(),
+    "equipment_types":VehiclesCubit.get(context).equipmentType.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+    "vehicle_attributes":VehiclesCubit.get(context).attributes.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+    "vehicle_sizes": VehiclesCubit.get(context).vehcleSize.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+    "vehicle_types": VehiclesCubit.get(context).vehcleType.toString().replaceAll(",","-").replaceAll("[","").replaceAll("]","").replaceAll(" ",""),
+    "origin_country":DataFormCubit.get(context).countryOriginID,
+    "origin_state":DataFormCubit.get(context).stateOriginID,
+    "origin_city":DataFormCubit.get(context).cityOriginID,
+    "destination_country":DataFormCubit.get(context).countryDestinationID,
+    "destination_state":DataFormCubit.get(context).stateDestinationID,
+    "destination_city":DataFormCubit.get(context).cityDestinationID,
+    "weight":VehiclesCubit.get(context).weightController.text,
+    "instructions":VehiclesCubit.get(context).instructionsController.text,
+    }
+    );
 
   }
   static addVehicle({context})async{
@@ -225,8 +225,8 @@ class VehicleRepo {
     "destination_country":DataFormCubit.get(context).countryDestinationID,
     "destination_state":DataFormCubit.get(context).stateDestinationID,
     "destination_city":DataFormCubit.get(context).cityDestinationID,
-     "weight":VehiclesCubit.get(context).weightController,
-      "instructions":VehiclesCubit.get(context).instructionsController,
+     "weight":VehiclesCubit.get(context).weightController.text,
+      "instructions":VehiclesCubit.get(context).instructionsController.text,
         } );
 
   }
