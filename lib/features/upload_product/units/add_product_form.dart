@@ -640,10 +640,9 @@ class _FormState extends State<Form> {
                               child: CustomButton(
                                 text: widget.isEdit?'Edit Product':widget.isFilter?'Search':'Add new product',
                                 color: ColorManager.yellow,
-                                function: () {
+                                function: ()async {
                                   widget.isEdit?
-                                  ProductsCubit.get(context).editProductCubit(
-                                    GetProductModel(
+                                 await ProductsCubit.get(context).editProductCubit(GetProductModel(
                                       id: widget.productModel!.id,
                                           buyOrSell: buyOrSell,
                                           productName: ProductsCubit
@@ -664,8 +663,10 @@ class _FormState extends State<Form> {
                                               .text,
                                           productImage: ProductsCubit
                                               .get(context)
-                                              .img64)):
-                                      widget.isFilter? ProductsCubit.get(context).searchProducts(GetProductModel(
+                                              .img64))
+                                      :
+                                      widget.isFilter?
+                                      await ProductsCubit.get(context).searchProducts(GetProductModel(
                                           buyOrSell: buyOrSell,
                                         productTypeId: productId,
                                         countryPost: countryId,
@@ -698,6 +699,7 @@ class _FormState extends State<Form> {
                                           productImage: ProductsCubit
                                               .get(context)
                                               .img64));
+                                  Navigator.pop(context);
                                 },
                               ),
                             ),

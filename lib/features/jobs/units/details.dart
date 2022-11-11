@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../core/data/models/jobs/GetJop_model.dart';
-import '../../../core/data/models/loads/GetLoads_model.dart';
-import '../../../core/data/models/vehicle/vehicles.dart';
+import 'package:hoga_load/core/data/models/jobs/get_jop.dart';
 import '../../../widgets/widgets/custom_appbar.dart';
 import '../../../widgets/widgets/custom_container_jop_detail.dart';
-import '../../../widgets/widgets/custom_container_load_detail.dart';
 import '../../../widgets/widgets/custom_scaffold.dart';
 class Detail extends StatefulWidget {
   Detail(this.jop, {super.key}) ;
-  GetJopModel? jop;
+  GetJop? jop;
 
   @override
   State<Detail> createState() => _DetailState();

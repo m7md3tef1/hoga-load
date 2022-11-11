@@ -1,4 +1,5 @@
 import '../../../core/data/models/loads/GetLoads_model.dart';
+import '../../../core/data/models/vehicle/vehicles.dart';
 
 abstract class AddLoadStates {}
 
@@ -10,7 +11,7 @@ class AddFailed extends AddLoadStates {}
 
 
 class GetLoadsSuccess extends AddLoadStates {
-  List<GetLoadsModel> loadList = [];
+  List<Vehicles> loadList = [];
   GetLoadsSuccess(this.loadList);
 }
 
@@ -20,7 +21,7 @@ class GetLoadsFailed extends AddLoadStates {
 }
 
 class GetSearchSuccess extends AddLoadStates {
-  List<GetLoadsModel> loadList = [];
+  List<Vehicles> loadList = [];
   GetSearchSuccess(this.loadList);
 }
 

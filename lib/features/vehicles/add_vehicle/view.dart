@@ -28,12 +28,16 @@ part 'units/instructon.dart';
 part 'units/vehicle_type.dart';
 part 'units/vehicles_size.dart';
 class AddVehiclesView extends StatelessWidget {
-   AddVehiclesView({Key? key,this.vehiclesModel,this.isEdit=false,this.index,this.isLoad=false}) : super(key: key);
+   AddVehiclesView({Key? key,this.vehiclesModel,this.isEdit=false,this.index,
+     this.isLoad=false,this.isLoadEdit=false,this.isLoadFilter=false}) : super(key: key);
   Vehicles? vehiclesModel;
   bool isEdit;
   int? index;
   bool isLoad;
-  @override
+   bool isLoadFilter;
+   bool isLoadEdit;
+
+   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
       body: SafeArea(
@@ -47,7 +51,8 @@ class AddVehiclesView extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CustomAppbar(title:isLoad?"Add a New Load":isEdit?"Edit Vehicle": 'Add a New Vehicle'),
+                CustomAppbar(title:isLoadEdit?'Edit Load':
+                isLoadFilter?'Search':isLoad?"Add a New Load":isEdit?"Edit Vehicle": 'Add a New Vehicle'),
                 Expanded(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
@@ -82,15 +87,52 @@ class AddVehiclesView extends StatelessWidget {
                           ),
                           InkWell(
                               onTap: ()async{
-                                isLoad?  await LoadsCubit.get(context).addLoadsCubit(context:context):
+                                if(isLoadFilter){
+                                 await LoadsCubit.get(context).getLoad(
+                                      context:context,
+                                      isFilter: true,
+                                      equipmentSize2:
+                                      VehiclesCubit.get(context).equipmentType.toString()
+                                          .replaceAll(",","-").replaceAll("[","").replaceAll("]","").
+                                      replaceAll(" ",""),
+                                      attributes2:
+                                      VehiclesCubit.get(context).attributes.toString()
+                                          .replaceAll(",","-").replaceAll("[","").replaceAll("]","").
+                                      replaceAll(" ",""),
+                                      vehicleSize2:
+                                      VehiclesCubit.get(context).vehcleSize.toString()
+                                          .replaceAll(",","-").replaceAll("[","").replaceAll("]","").
+                                      replaceAll(" ",""),
+                                      vehicleType2:
+                                      VehiclesCubit.get(context).vehcleType.toString()
+                                          .replaceAll(",","-").replaceAll("[","").replaceAll("]","").
+                                      replaceAll(" ","")
 
-                                isEdit==false?
-                                await VehiclesCubit.get(context).addVehicleCubit(context:context):
-                                await VehiclesCubit.get(context).editVehicleCubit
-                                  (context:context,vehicleId:vehiclesModel!.id);
+                                  );
+                                  Navigator.pop(context);
+
+
+                                }else if(isLoadEdit){
+
+     await LoadsCubit.get(context).editLoadsCubit(context:context,vehicleId:vehiclesModel!.id );
+     Navigator.pop(context);}
+
+     else{
+
+                                  isLoad?  await VehiclesCubit.get(context).addVehicleCubit(context:context,isLoad:true):
+
+                                  isEdit==false?
+                                  await VehiclesCubit.get(context).addVehicleCubit(context:context,isLoad: false):
+                                  await VehiclesCubit.get(context).editVehicleCubit
+                                    (context:context,vehicleId:vehiclesModel!.id);
+                                }
+
+
 
                               },
-                              child: CustomButton(text:isLoad?"Add Load":
+                              child: CustomButton(
+
+                                  text:isLoadEdit?'Edit Load':isLoad?"Add Load":isLoadFilter?'Search':
                               isEdit?"Edit Vehicle": 'Add new vehicle', color: ColorManager.yellow)),
 
                         ],

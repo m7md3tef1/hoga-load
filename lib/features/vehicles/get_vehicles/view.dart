@@ -12,7 +12,6 @@ import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
 import 'package:hoga_load/widgets/widgets/custom_row.dart';
 import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
-
 part '../get_vehicles/units/body.dart';
 class VehiclesView extends StatelessWidget {
   const VehiclesView({Key? key}) : super(key: key);

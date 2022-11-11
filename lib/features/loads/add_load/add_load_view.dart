@@ -5,23 +5,19 @@ import 'package:hoga_load/core/widgets/custom_card.dart';
 import 'package:hoga_load/features/loads/cubit/getLoad_cubit.dart';
 import 'package:hoga_load/features/vehicles/add_vehicle/view.dart';
 import 'package:hoga_load/widgets/widgets/custom_appbar.dart';
-import 'package:hoga_load/widgets/widgets/custom_button.dart';
-import 'package:hoga_load/widgets/widgets/custom_checkbox.dart';
+
 import 'package:hoga_load/widgets/widgets/custom_scaffold.dart';
-import 'package:hoga_load/widgets/widgets/custom_text.dart';
-import 'package:hoga_load/widgets/widgets/custom_text_field.dart';
 
-import '../../../core/data/models/loads/GetLoads_model.dart';
-import '../../../core/master_cubit/getDataForm_cubit.dart';
-import '../../vehicles/get_vehicles/cubit/vehicle_cubit.dart';
+import '../../../widgets/widgets/custom_button.dart';
 
 
-part '../add_load/units/attributes.dart';
-part '../add_load/units/equipment.dart';
-part '../add_load/units/form.dart';
-part '../add_load/units/instructon.dart';
-part '../add_load/units/vehicle_type.dart';
-part '../add_load/units/vehicles_size.dart';
+
+//part '../add_load/units/attributes.dart';
+//part '../add_load/units/equipment.dart';
+//part '../add_load/units/form.dart';
+//part '../add_load/units/instructon.dart';
+//part '../add_load/units/vehicle_type.dart';
+//part '../add_load/units/vehicles_size.dart';
 
 class AddLoadsView extends StatelessWidget {
   const AddLoadsView({Key? key}) : super(key: key);
@@ -77,6 +73,18 @@ class AddLoadsView extends StatelessWidget {
                             padding: EdgeInsets.only(top: 22),
                             child: Instructions(),
                           )),
+                      InkWell(
+                          onTap: ()async{
+                          await LoadsCubit.get(context).addLoadsCubit(context:context);
+
+//                            isEdit==false?
+//                            await VehiclesCubit.get(context).addVehicleCubit(context:context):
+//                            await VehiclesCubit.get(context).editVehicleCubit
+//                              (context:context,vehicleId:vehiclesModel!.id);
+
+                          },
+                          child: CustomButton(text:"Add Load",color: ColorManager.yellow)),
+
                     ],
                   ),
                 ),

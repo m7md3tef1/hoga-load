@@ -1,4 +1,5 @@
 import '../../../core/data/models/jobs/GetJop_model.dart';
+import '../../../core/data/models/jobs/get_jop.dart';
 
 abstract class AddJopStates {}
 
@@ -19,7 +20,7 @@ class AddTestFailed extends AddJopStates{
 }
 
 class GetJopSuccess extends AddJopStates {
-  List<GetJopModel> jopList = [];
+  List<GetJop> jopList = [];
   GetJopSuccess(this.jopList);
 }
 
@@ -29,8 +30,12 @@ class GetJopFailed extends AddJopStates {
 }
 
 class GetSearchSuccess extends AddJopStates {
-  List<GetJopModel> jopList = [];
+  List<GetJop> jopList = [];
   GetSearchSuccess(this.jopList);
+}
+class GetSearchSuccess2 extends AddJopStates {
+  List<GetJopModel> jopList = [];
+  GetSearchSuccess2(this.jopList);
 }
 
 class GetSearchFailed extends AddJopStates {

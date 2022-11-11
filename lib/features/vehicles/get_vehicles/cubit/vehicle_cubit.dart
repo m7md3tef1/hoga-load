@@ -179,7 +179,7 @@ bool isAccessToken=true;
           }else{
             vehicleList=value,
             emit(GetVehicleSuccess(value)),
-            vehicleClearData(context),
+          //  vehicleClearData(context),
 
 
           },
@@ -188,7 +188,7 @@ bool isAccessToken=true;
 
             emit(GetVehicleFailed(error.toString())),
           print(error),
-          vehicleClearData(context),
+         // vehicleClearData(context),
 
 
         });
@@ -325,7 +325,7 @@ bool isAccessToken=true;
       }
     });
   }
-  addVehicleCubit({context}){
+  addVehicleCubit({context,isLoad}){
 
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
@@ -333,7 +333,7 @@ bool isAccessToken=true;
         showToast(msg: "Check your internet connection and try again", state: ToastedStates.ERROR);
 
       } else {
-        VehicleRepo.addVehicle(context: context)
+        VehicleRepo.addVehicle(context: context,isLoad:isLoad)
             .then((value) => {
           print('Add Vehicle Success'),
           print(value),

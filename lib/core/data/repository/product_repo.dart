@@ -3,25 +3,46 @@ import 'package:hoga_load/core/data/models/jobs/GetJop_model.dart';
 import '../../keys/keys.dart';
 import '../api/api.dart';
 import '../local/cacheHelper.dart';
+import '../models/jobs/get_jop.dart';
 import '../models/product/GetProduct_model.dart';
 
 class ProductRepo{
-  static Future<List<GetJopModel>> getJop(url,self,{GetJopModel? productModel}) async {
+  static Future<List<GetJop>> getJop(url,self,{GetJop? productModel,city2,country2,state2,jopTypeId,jopCategortId,isFilter}) async {
     String token= await CacheHelper.getString(SharedKeys.token);
-    var response = await Api().getHttp(url: url,authToken: token,self: self );
+    var response;
+    print(city2);
+    print(jopCategortId);
+    print(state2);
+    print(country2);
 
-    List<GetJopModel> productsList = [];
+
+    isFilter?
+    response = await Api().getHttp(url: url,authToken: token,self: self,
+    data: {
+//      "city":city2,
+//      "country":country2,
+//      "state":state2,
+//      "job_types":jopTypeId,
+//      "categories":jopCategortId,
+
+
+    }
+    ):
+
+    response = await Api().getHttp(url: url,authToken: token,self: self );
+
+    List<GetJop> productsList = [];
     for (int i = 0; i < response['records'].length; i++) {
-      GetJopModel blogModel =
-      GetJopModel.fromJson(response['records'][i]);
+      GetJop blogModel =
+      GetJop.fromJson(response['records'][i]);
       productsList.add(blogModel);
     }
     return productsList;
   }
 
-  static Future<List<GetProductModel>> getProducts(url,self,{GetProductModel? productModel}) async {
+  static Future<List<GetProductModel>> getProducts(url,self,{GetProductModel? productModel,val}) async {
     String token= await CacheHelper.getString(SharedKeys.token);
-    var response = await Api().getHttp(url: url,authToken: token,self: self );
+    var response = await Api().getHttp(url: url,authToken: token,self: self,data: {"search":val} );
 
     List<GetProductModel> productsList = [];
     for (int i = 0; i < response['records'].length; i++) {
@@ -91,4 +112,18 @@ class ProductRepo{
         data:jopModel!.toJson() );
 
   }
+
+  static Future<List<GetJopModel>> searchJob(url,self,{GetJopModel? productModel}) async {
+    String token= await CacheHelper.getString(SharedKeys.token);
+    var response = await Api().getHttp(url: url,authToken: token,data: productModel!.toJson());
+
+    List<GetJopModel> productsList = [];
+    for (int i = 0; i < response['records'].length; i++) {
+      GetJopModel blogModel =
+      GetJopModel.fromJson(response['records'][i]);
+      productsList.add(blogModel);
+    }
+    return productsList;
+  }
+
 }

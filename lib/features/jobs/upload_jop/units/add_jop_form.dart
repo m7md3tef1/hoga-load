@@ -1,8 +1,11 @@
 part of '../add_view.dart';
 
 class FormInfo extends StatefulWidget {
-  const FormInfo({Key? key}) : super(key: key);
-
+  FormInfo({Key? key,this.isFilter=false,this.jopModel,this.isEdit=false,this.index}) : super(key: key);
+  bool isFilter;
+  GetJop? jopModel;
+  bool isEdit;
+  int? index;
   @override
   State<FormInfo> createState() => _FormInfoState();
 }
@@ -15,14 +18,52 @@ class _FormInfoState extends State<FormInfo> {
   String? jopTitle='';
   String? jopType='';
 
-  int? jopCategoryId;
 
+  int? jopCategoryId;
   int? jopTypeId1;
   int? countryId;
   int? stateId;
   int? cityId;
-  int? jopId;
+  @override
+  void initState() {
+    super.initState();
+    if(widget.isEdit) {
+      country = widget.jopModel!.country!.title!;
+      state = widget.jopModel!.state!.title!;
+      city = widget.jopModel!.city!.title!;
+      jopCategory = widget.jopModel!.country!.title!;
+      //  jopTitle=widget.jopModel!.title!;
+      jopType = widget.jopModel!.jobType!.title!;
 
+      jopCategoryId = widget.jopModel!.category!.id!;
+      jopTypeId1 = widget.jopModel!.jobType!.id!;
+      countryId = widget.jopModel!.country!.id!;
+      stateId = widget.jopModel!.state!.id!;
+      cityId = widget.jopModel!.city!.id!;
+
+
+      JopCubit
+          .get(context)
+          .descController
+          .text = widget.jopModel!.description!;
+      JopCubit
+          .get(context)
+          .titleController
+          .text = widget.jopModel!.title!;
+      JopCubit
+          .get(context)
+          .shiftController
+          .text = widget.jopModel!.shiftTime!;
+      JopCubit
+          .get(context)
+          .salaryController
+          .text = widget.jopModel!.salary!;
+      JopCubit
+          .get(context)
+          .noOfPostController
+          .text = widget.jopModel!.noOfPosts!.toString();
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return CustomCard(
@@ -467,12 +508,39 @@ class _FormInfoState extends State<FormInfo> {
                   child: Padding(
                     padding: EdgeInsets.only(top: 50.sp, bottom: 15.sp),
                     child: CustomButton(
-                      text: 'Add new Jop',
+                      text:widget.isFilter?'Search': widget.isEdit?'Edit Jop':'Add new Jop',
                       color: ColorManager.yellow,
                       function: () {
-                        JopCubit.get(context).addJopCubit(
+                        if( widget.isFilter){
+                          JopCubit.get(context).getJops(
+                            jopCategortId:jopCategoryId ,
+                            isFilter:true,
                             context: context,
-                            productModel: GetJopModel(
+                            jopTypeId:jopTypeId1 ,
+                            country2: countryId,
+                            state2: stateId,
+                            city2: cityId,
+
+                          );
+                          Navigator.pop(context);
+                        }else{
+
+                          widget.isEdit?
+                          JopCubit.get(context).editJopCubit(GetJopModel(
+                            jopCategortId:jopCategoryId ,
+                            jopTypeId:jopTypeId1 ,
+                            title: JopCubit.get(context).titleController.text,
+                            salaryInt: int.parse(JopCubit.get(context).salaryController.text),
+                            noOfPosts: int.parse(JopCubit.get(context).noOfPostController.text),
+                            shiftTime: JopCubit.get(context).shiftController.text,
+                            country2: countryId,
+                            state2: stateId,
+                            city2: cityId,
+                            description: JopCubit.get(context).descController.text,))
+                              :
+                          JopCubit.get(context).addJopCubit(
+                              context: context,
+                              productModel: GetJopModel(
                                 jopCategortId:jopCategoryId ,
                                 jopTypeId:jopTypeId1 ,
                                 title: JopCubit.get(context).titleController.text,
@@ -483,6 +551,11 @@ class _FormInfoState extends State<FormInfo> {
                                 state2: stateId,
                                 city2: cityId,
                                 description: JopCubit.get(context).descController.text,));
+                        }
+
+
+
+
                       },
                     ),
                   ),

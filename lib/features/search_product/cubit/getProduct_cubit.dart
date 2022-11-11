@@ -33,14 +33,15 @@ class ProductsCubit extends Cubit<AddProductStates> {
   bool isAccessToken=true;
   bool  testLoading=false;
   bool  myVehiclesLoading=false;
-  getProduct({self}){
+  getProduct({self,val}){
+    emit(AddProductLoading());
     myVehiclesLoading=true;
 
     connectivity.checkConnectivity().then((value)async{
       if(ConnectivityResult.none == value){
         emit(NetworkFailed("Check your internet connection and try again"));
       }else{
-        ProductRepo.getProducts('products',self).then((value) => {
+        ProductRepo.getProducts('products',self,val: val).then((value) => {
         myVehiclesLoading=false,
 
             print('..................................'),
@@ -90,15 +91,20 @@ class ProductsCubit extends Cubit<AddProductStates> {
             print(value),
             searchList=value,
             emit(GetSearchSuccess(searchList)),
+            showToast(msg: 'success', state: ToastedStates.SUCCESS)
 
 
           }else{
             emit(GetSearchFailed('Nothing found try again')),
+            showToast(msg: 'success', state: ToastedStates.SUCCESS)
+
 
           }
 
         }).onError((error, stackTrace) => {
           emit(GetSearchFailed(error.toString())),
+          showToast(msg: error.toString(), state: ToastedStates.ERROR),
+
           print(error)
 
         });
@@ -108,14 +114,10 @@ class ProductsCubit extends Cubit<AddProductStates> {
   }
 
   addProductCubit({context,GetProductModel? productModel}){
-
-
-
      connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
         showToast(msg: "Check your internet connection and try again", state: ToastedStates.ERROR);
-
       } else {
         emit(AddProductLoading());
         ProductRepo.addProduct(context: context,productModel: productModel)

@@ -78,7 +78,8 @@ class _FormInfoState extends State<FormInfo> {
             children: [
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 17.h, horizontal: 14.w),
-                child:widget.isFilter?
+                child:
+                widget.isFilter?
                 const SizedBox():
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -95,14 +96,16 @@ class _FormInfoState extends State<FormInfo> {
                 ),
               ),
               widget.isFilter?
-              const SizedBox(): SizedBox(
+              const SizedBox():
+              SizedBox(
                 width: 1.sw,
                 child: const Divider(
                   thickness: 1,
                 ),
               ),
               widget.isFilter?
-              const SizedBox():CustomTextField(
+              const SizedBox():
+              CustomTextField(
                 height: 64.h,
                 readOnly: true,
                 name: 'Availability Date',

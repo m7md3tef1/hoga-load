@@ -26,7 +26,8 @@ class _UploadedState extends State<Uploaded> {
           return VehiclesCubit.get(context).testLoading?
              const Expanded(child: Center(child: CircularProgressIndicator(color: ColorManager.yellow,))):
 
-          VehiclesCubit.get(context).isAccessToken?CustomCard(
+          VehiclesCubit.get(context).isAccessToken?
+          CustomCard(
             widget: Padding(
               padding:  EdgeInsets.symmetric(horizontal: 11.sp),
               child: Column(
@@ -50,7 +51,8 @@ class _UploadedState extends State<Uploaded> {
                 ],
               ),
             ),
-          ): UpgradeMember();
+          ):
+          UpgradeMember();
 
 
         }

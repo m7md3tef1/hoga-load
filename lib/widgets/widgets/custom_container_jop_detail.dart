@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hoga_load/core/app_images/app_images.dart';
 import 'package:hoga_load/core/color_manager/color_manager.dart';
+import 'package:hoga_load/core/data/models/jobs/get_jop.dart';
 import 'package:hoga_load/core/widgets/custom_card.dart';
-import 'package:hoga_load/features/blogs/blog_details.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 
-import '../../core/data/models/jobs/GetJop_model.dart';
-import '../../core/data/models/loads/GetLoads_model.dart';
-import '../../core/data/models/vehicle/vehicles.dart';
-import '../../core/router/router.dart';
 
 class CustomContainerJop extends StatelessWidget {
-  final GetJopModel jop;
+  final GetJop jop;
   const CustomContainerJop(this.jop, {Key? key}) : super(key: key);
 
   @override

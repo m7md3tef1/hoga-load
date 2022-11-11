@@ -288,7 +288,8 @@ class Body extends StatelessWidget {
                                       ),
                                     );
                                   });
-                            } else if (state is VehicleLoading) {
+                            } else
+                              if (state is VehicleLoading) {
                               return Column(
                                 children: const [
                                   Center(

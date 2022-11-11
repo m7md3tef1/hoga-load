@@ -12,7 +12,7 @@ import '../../core/data/models/vehicle/vehicles.dart';
 import '../../core/router/router.dart';
 
 class CustomContainerLoad extends StatelessWidget {
-  final GetLoadsModel load;
+  final Vehicles load;
   const CustomContainerLoad(this.load, {Key? key}) : super(key: key);
 
   @override

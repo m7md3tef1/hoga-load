@@ -35,7 +35,7 @@ class _UploadedLoadState extends State<UploadedLoad> {
                   CustomCardTitle(text: 'UPLOADED LOADS',),
 //                  LoadsCubit.get(context).myVehiclesLoading?
 //                  const Expanded(child: Center(child: CircularProgressIndicator(color: ColorManager.yellow,))):
-                  LoadsCubit.get(context).myVehicleList.isEmpty?Expanded(
+                  LoadsCubit.get(context).myloadList.isEmpty?Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
