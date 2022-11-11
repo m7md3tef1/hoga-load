@@ -338,7 +338,7 @@ print('addddddd');
           print('Add Vehicle Success'),
           print(value),
           emit(AddSuccess()),
-        //  vehicleClearData(context),
+          vehicleClearData(context),
 
           showToast(msg: 'Add Success', state: ToastedStates.SUCCESS),
 
