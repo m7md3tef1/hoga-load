@@ -30,7 +30,7 @@ class HomeCubit extends Cubit<HomeStates> {
   void changeBottom(int index,context) {
     currentIndex = index;
     if(currentIndex==3)VehiclesCubit.get(context).getVehicleCubit(self: 0);
-    if(currentIndex==2)LoadsCubit.get(context).getLoad(self: 0,isFilter: false);
+    if(currentIndex==2)LoadsCubit.get(context).getLoad(self: 0,isFilter: false,context: context);
     if(currentIndex==1)ProductsCubit.get(context).getProduct();
     if(currentIndex==4)JopCubit.get(context).getJops(self: 0,isFilter: false);
 

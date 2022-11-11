@@ -29,8 +29,12 @@ class MyTable extends StatelessWidget {
                     //VehiclesCubit.get(context).editVehicleCubit(context:context,vehicleId:VehiclesCubit.get(context).vehicleList[index].id);
 
                   } ,
-                  deleteFunc:(){
-                    LoadsCubit.get(context).deleteLoadsCubit(LoadsCubit.get(context).myloadList[index].id);
+                  deleteFunc:()async{
+                   await LoadsCubit.get(context).deleteLoadsCubit(LoadsCubit.get(context).myloadList[index].id);
+                  await LoadsCubit.get(context).getLoad(self: 1,context: context);
+                   Navigator.pop(context);
+
+
                   } ,
                   tableWeight:"${LoadsCubit.get(context).myloadList[index].weight}" ,
                   tableNumber: "${index+1}",

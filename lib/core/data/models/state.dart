@@ -3,7 +3,7 @@ class State {
     this.id,
     this.title,});
 
-  State.fromJson(dynamic json) {
+  State.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
   }

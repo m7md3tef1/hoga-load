@@ -1,10 +1,13 @@
 part of '../view.dart';
 
 class FormInfo extends StatefulWidget {
-   FormInfo({Key? key,this.isFilter=false,this.vehiclesModel,this.isEdit=false,this.index}) : super(key: key);
+   FormInfo({Key? key,this.isFilter=false,this.vehiclesModel,
+     this.isEdit=false,this.index,this.isEditLoad=false}) : super(key: key);
    bool isFilter;
    Vehicles? vehiclesModel;
    bool isEdit;
+   bool isEditLoad;
+
    int? index;
   @override
   State<FormInfo> createState() => _FormInfoState();
@@ -25,7 +28,7 @@ class _FormInfoState extends State<FormInfo> {
   @override
   void initState() {
     super.initState();
-   if(widget.isEdit){
+   if(widget.isEdit||widget.isEditLoad){
      date=widget.vehiclesModel!.availabilityDate!;
      cityDestination=widget.vehiclesModel!.destinationCity!.title!;
      cityOrigin=widget.vehiclesModel!.originCity!.title!;

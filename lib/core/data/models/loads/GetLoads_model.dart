@@ -38,58 +38,58 @@ class GetLoadsModel {
 
   GetLoadsModel.fromJson(dynamic json) {
     id = json['id'];
-    availabilityDate = json['availability_date'];
-    originCountry = json['origin_country'] != null
-        ? OriginCountry.fromJson(json['origin_country'])
-        : null;
-    originState = json['origin_state'] != null
-        ? OriginState.fromJson(json['origin_state'])
-        : null;
-    originCity = json['origin_city'] != null
-        ? OriginCity.fromJson(json['origin_city'])
-        : null;
-    destinationCountry = json['destination_country'] != null
-        ? DestinationCountry.fromJson(json['destination_country'])
-        : null;
-    destinationState = json['destination_state'] != null
-        ? DestinationState.fromJson(json['destination_state'])
-        : null;
-    destinationCity = json['destination_city'] != null
-        ? DestinationCity.fromJson(json['destination_city'])
-        : null;
-    if (json['equipment_types'] != null) {
-      equipmentTypes = [];
-      json['equipment_types'].forEach((v) {
-        equipmentTypes!.add(EquipmentTypes.fromJson(v));
-      });
-    }
-    if (json['attributes'] != null) {
-      attributes = [];
-      json['attributes'].forEach((v) {
-        attributes!.add(Attributes.fromJson(v));
-      });
-    }
-    if (json['vehicle_sizes'] != null) {
-      vehicleSizes = [];
-      json['vehicle_sizes'].forEach((v) {
-        vehicleSizes!.add(VehicleSizes.fromJson(v));
-      });
-    }
-    if (json['vehicle_types'] != null) {
-      vehicleTypes = [];
-      json['vehicle_types'].forEach((v) {
-        vehicleTypes!.add(VehicleTypes.fromJson(v));
-      });
-    }
-    weight = json['weight'];
-    instructions = json['instructions'];
-    user = (json['user'] != null ? User.fromJson(json['user']) : null)!;
-    if (json['viewd_by'] != null) {
-      viewdBy = [];
-      json['viewd_by'].forEach((v) {
-        viewdBy!.add(ViewdBy.fromJson(v));
-      });
-    }
+//    availabilityDate = json['availability_date'];
+//    originCountry = json['origin_country'] != null
+//        ? OriginCountry.fromJson(json['origin_country'])
+//        : null;
+//    originState = json['origin_state'] != null
+//        ? OriginState.fromJson(json['origin_state'])
+//        : null;
+//    originCity = json['origin_city'] != null
+//        ? OriginCity.fromJson(json['origin_city'])
+//        : null;
+//    destinationCountry = json['destination_country'] != null
+//        ? DestinationCountry.fromJson(json['destination_country'])
+//        : null;
+//    destinationState = json['destination_state'] != null
+//        ? DestinationState.fromJson(json['destination_state'])
+//        : null;
+//    destinationCity = json['destination_city'] != null
+//        ? DestinationCity.fromJson(json['destination_city'])
+//        : null;
+//    if (json['equipment_types'] != null) {
+//      equipmentTypes = [];
+//      json['equipment_types'].forEach((v) {
+//        equipmentTypes!.add(EquipmentTypes.fromJson(v));
+//      });
+//    }
+//    if (json['attributes'] != null) {
+//      attributes = [];
+//      json['attributes'].forEach((v) {
+//        attributes!.add(Attributes.fromJson(v));
+//      });
+//    }
+//    if (json['vehicle_sizes'] != null) {
+//      vehicleSizes = [];
+//      json['vehicle_sizes'].forEach((v) {
+//        vehicleSizes!.add(VehicleSizes.fromJson(v));
+//      });
+//    }
+//    if (json['vehicle_types'] != null) {
+//      vehicleTypes = [];
+//      json['vehicle_types'].forEach((v) {
+//        vehicleTypes!.add(VehicleTypes.fromJson(v));
+//      });
+//    }
+//    weight = json['weight'];
+//    instructions = json['instructions'];
+//    user = (json['user'] != null ? User.fromJson(json['user']) : null)!;
+//    if (json['viewd_by'] != null) {
+//      viewdBy = [];
+//      json['viewd_by'].forEach((v) {
+//        viewdBy!.add(ViewdBy.fromJson(v));
+//      });
+//    }
   }
   int? id;
   String? availabilityDate;

@@ -3,7 +3,7 @@ class JobType {
     this.id,
     this.title,});
 
-  JobType.fromJson(dynamic json) {
+  JobType.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
   }

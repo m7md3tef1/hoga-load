@@ -3,7 +3,7 @@ class City {
     this.id,
     this.title,});
 
-  City.fromJson(dynamic json) {
+  City.fromJson(Map<String, dynamic> json) {
     id = json['id']??0;
     title = json['title']??'other';
   }

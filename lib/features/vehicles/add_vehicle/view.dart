@@ -63,7 +63,7 @@ class AddVehiclesView extends StatelessWidget {
                            Padding(
                             padding: const EdgeInsets.only(top:22),
                             child:
-                            FormInfo(vehiclesModel: vehiclesModel,isEdit: isEdit,index: index,),
+                            FormInfo(vehiclesModel: vehiclesModel,isEdit: isEdit,index: index,isEditLoad: isLoadEdit,),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top:22),
@@ -115,14 +115,17 @@ class AddVehiclesView extends StatelessWidget {
                                 }else if(isLoadEdit){
 
      await LoadsCubit.get(context).editLoadsCubit(context:context,vehicleId:vehiclesModel!.id );
-     Navigator.pop(context);}
+    // Navigator.pop(context);
+     }
 
      else{
 
                                   isLoad?  await VehiclesCubit.get(context).addVehicleCubit(context:context,isLoad:true):
 
                                   isEdit==false?
-                                  await VehiclesCubit.get(context).addVehicleCubit(context:context,isLoad: false):
+                                  await VehiclesCubit.get(context).addVehicleCubit(
+                                      context:context,isLoad: false):
+
                                   await VehiclesCubit.get(context).editVehicleCubit
                                     (context:context,vehicleId:vehiclesModel!.id);
                                 }

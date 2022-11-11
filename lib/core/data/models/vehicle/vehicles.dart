@@ -1,3 +1,4 @@
+import 'package:hoga_load/core/data/models/vehicle/Addvehicle_model.dart';
 import 'package:hoga_load/core/data/models/vehicle/Attributes.dart';
 import 'package:hoga_load/core/data/models/vehicle/user.dart';
 
@@ -41,12 +42,12 @@ class Vehicles {
   Vehicles.fromJson(Map<dynamic, dynamic>json) {
     id = json['id'];
     availabilityDate = json['availability_date'];
-    originCountry = json['origin_country'] != null ? OriginCountry.fromJson(json['origin_country']) : null;
-    originState = json['origin_state'] != null ? OriginState.fromJson(json['origin_state']) : null;
-    originCity = json['origin_city'] != null ? OriginCity.fromJson(json['origin_city']) : null;
-    destinationCountry = json['destination_country'] != null ? DestinationCountry.fromJson(json['destination_country']) : null;
-    destinationState = json['destination_state'] != null ? DestinationState.fromJson(json['destination_state']) : null;
-    destinationCity = json['destination_city'] != null ? DestinationCity.fromJson(json['destination_city']) : null;
+    originCountry = json['origin_country'] != null ? AddVehicle.fromJson(json['origin_country']) : null;
+    originState = json['origin_state'] != null ? AddVehicle.fromJson(json['origin_state']) : null;
+    originCity = json['origin_city'] != null ? AddVehicle.fromJson(json['origin_city']) : null;
+    destinationCountry = json['destination_country'] != null ? AddVehicle.fromJson(json['destination_country']) : null;
+    destinationState = json['destination_state'] != null ? AddVehicle.fromJson(json['destination_state']) : null;
+    destinationCity = json['destination_city'] != null ? AddVehicle.fromJson(json['destination_city']) : null;
     if (json['equipment_types'] != null) {
       equipmentTypes = [];
       json['equipment_types'].forEach((v) {
@@ -88,12 +89,12 @@ class Vehicles {
   }
   int? id;
   String? availabilityDate;
-  OriginCountry? originCountry;
-  OriginState? originState;
-  OriginCity? originCity;
-  DestinationCountry? destinationCountry;
-  DestinationState? destinationState;
-  DestinationCity? destinationCity;
+  AddVehicle? originCountry;
+  AddVehicle? originState;
+  AddVehicle? originCity;
+  AddVehicle? destinationCountry;
+  AddVehicle? destinationState;
+  AddVehicle? destinationCity;
   List<EquipmentTypes>? equipmentTypes;
   List<Attributes>? attributes;
   List<VehicleSizes>? vehicleSizes;

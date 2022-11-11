@@ -3,7 +3,7 @@ class Category {
     this.id,
     this.title,});
 
-  Category.fromJson(dynamic json) {
+  Category.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
   }

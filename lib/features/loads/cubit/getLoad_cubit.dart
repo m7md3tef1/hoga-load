@@ -22,6 +22,7 @@ class LoadsCubit extends Cubit<AddLoadStates> {
   List<Vehicles> loadList=[];
   List<Vehicles>myloadList=[];
  // List<Vehicles>myVehicleLoadList=[];
+  List<GetLoadsModel> loadList1=[];
 
 
   List equipmentType=[];
@@ -32,45 +33,60 @@ class LoadsCubit extends Cubit<AddLoadStates> {
   bool isAccessToken=true;
   bool  testLoading=true;
   bool  myVehiclesLoading=true;
-  getLoad({self,val,equipmentSize2,attributes2,vehicleSize2,vehicleType2,isFilter,context}){
+  getLoad({self,
+    val
+    ,equipmentSize2,attributes2,vehicleSize2,vehicleType2,
+
+    isFilter
+  ,context
+
+  }){
     myVehiclesLoading=true;
     emit(AddLoadLoading());
     connectivity.checkConnectivity().then((value)async{
       if(ConnectivityResult.none == value){
         emit(NetworkFailed("Check your internet connection and try again"));
       }else{
-        LoadsRepo.getLoads(self,val: val,
+        LoadsRepo.getLoads(self,
+            val: val,
             context: context,isFilter: isFilter,
             vehicleSize: vehicleSize2,vehicleType: vehicleType2,attributes: attributes2,equipmentSize: equipmentSize2
 
         ).then((value) => {
           myVehiclesLoading=false,
-
+          print(isFilter),
+          print('Get Load Response'),
           print(value),
           if(self==1){
             myloadList=value,
             //myVehicleLoadList=value,
 
-            print('Get Vehice Response'),
+            print('Get Load Response'),
             print(myloadList.length),
 
-          }else{
-            loadList=value,
-            emit(GetLoadsSuccess(value)),
-            if(isFilter=true){
+          }else if(isFilter==true){
               VehiclesCubit.get(context).vehicleClearData(context),
-              showToast(msg: 'Success', state: ToastedStates.SUCCESS)
+              showToast(msg: 'Success', state: ToastedStates.SUCCESS),
+              print('Get Load Response filter'),
+
+            }else
+             {
+                loadList=value,
+                emit(GetLoadsSuccess(value)),
+                print('Get Load Response normal'),
 
             }
 
 
-          },
+//          },
         }).onError((error, stackTrace) => {
           myVehiclesLoading=true,
 
           emit(GetLoadsFailed(error.toString())),
           print(error),
           // vehicleClearData(context),
+          print('Get Load Response Eror'),
+
 
 
         });
@@ -78,32 +94,33 @@ class LoadsCubit extends Cubit<AddLoadStates> {
 
     });
   }
-//  getLoad({self}){
-//    connectivity.checkConnectivity().then((value)async{
-//      if(ConnectivityResult.none == value){
-//        emit(NetworkFailed("Check your internet connection and try again"));
-//      }else{
-//        LoadsRepo.getLoads(self).then((value) => {
-//          print('..................................'),
-//          print(value),
-//          loadList=value,
-//          emit(GetLoadsSuccess(value))
-//        }).onError((error, stackTrace) => {
-//          emit(GetLoadsFailed(error.toString())),
-//          print(error)
-//
-//        });
-//      }
-//
-//    });
-//  }
+  getLoad1({self}){
+    connectivity.checkConnectivity().then((value)async{
+      if(ConnectivityResult.none == value){
+        emit(NetworkFailed("Check your internet connection and try again"));
+      }else{
+        LoadsRepo.getLoads1(self).then((value) => {
+          print('..................................'),
+          print(value),
+          loadList1=value,
+          emit(GetLoadsSuccess1(value))
+        }).onError((error, stackTrace) => {
+          print('errr'),
+          emit(GetLoadsFailed(error.toString())),
+          print(error)
+
+        });
+      }
+
+    });
+  }
 
   deleteLoadsCubit(vehicleId){
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
       } else {
-        VehicleRepo.deleteVehicle(vehicleId)
+        LoadsRepo.deleteLoads(vehicleId)
             .then((value) => {
           print('Delete Vehicle Success'),
           print(value),
@@ -112,7 +129,7 @@ class LoadsCubit extends Cubit<AddLoadStates> {
           showToast(msg: 'Delete Success', state: ToastedStates.SUCCESS),
 
         })
-            .onError((error, stackTrace) =>
+            .catchError((error, stackTrace) =>
         {emit(DeleteFailed()),
           print(error),
           showToast(msg: error.toString(), state: ToastedStates.ERROR),
@@ -134,6 +151,8 @@ class LoadsCubit extends Cubit<AddLoadStates> {
 
           emit(EditSuccess()),
           showToast(msg: 'Edit Success', state: ToastedStates.SUCCESS),
+          VehiclesCubit.get(context).vehicleClearData(context),
+
 
         })
             .catchError((error, stackTrace) =>

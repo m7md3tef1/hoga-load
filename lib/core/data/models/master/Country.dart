@@ -3,7 +3,7 @@ class Country {
     this.id,
     this.title,});
 
-  Country.fromJson(dynamic json) {
+  Country.fromJson(Map<String, dynamic> json) {
     id = json['id']??0;
     title = json['title']??'';
   }

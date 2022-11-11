@@ -326,7 +326,7 @@ bool isAccessToken=true;
     });
   }
   addVehicleCubit({context,isLoad}){
-
+print('addddddd');
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         emit(NetworkFailed("Check your internet connection and try again"));
@@ -338,13 +338,13 @@ bool isAccessToken=true;
           print('Add Vehicle Success'),
           print(value),
           emit(AddSuccess()),
-          vehicleClearData(context),
+        //  vehicleClearData(context),
 
           showToast(msg: 'Add Success', state: ToastedStates.SUCCESS),
 
         }).catchError((error) => {
           emit(AddFailed(error.toString())),
-          vehicleClearData(context),
+         // vehicleClearData(context),
 
           print('Add Vehicle Failed'),
           print(error),

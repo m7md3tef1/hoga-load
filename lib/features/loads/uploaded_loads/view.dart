@@ -31,7 +31,7 @@ class _UploadedLoadsViewState extends State<UploadedLoadsView> {
   @override
   void initState() {
     super.initState();
-    LoadsCubit.get(context).getLoad(self: 1,isFilter: false);
+    LoadsCubit.get(context).getLoad(self: 1,isFilter: false,context: context);
   }
   @override
   Widget build(BuildContext context) {

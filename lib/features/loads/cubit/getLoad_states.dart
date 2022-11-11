@@ -15,6 +15,11 @@ class GetLoadsSuccess extends AddLoadStates {
   GetLoadsSuccess(this.loadList);
 }
 
+class GetLoadsSuccess1 extends AddLoadStates {
+  List<GetLoadsModel> loadList = [];
+  GetLoadsSuccess1(this.loadList);
+}
+
 class GetLoadsFailed extends AddLoadStates {
   final String msg;
   GetLoadsFailed(this.msg);

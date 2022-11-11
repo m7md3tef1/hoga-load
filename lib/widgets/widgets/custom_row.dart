@@ -37,10 +37,12 @@ class CustomSearchRow extends StatelessWidget {
                       index == 1
                           ? VehiclesCubit.get(context)
                               .getVehicleCubit(val:val.trim())
-                          : index == 2
+                          :
+                      index == 2
                               ? LoadsCubit.get(context)
                           .getLoad(val:val.trim(),isFilter: false)
-                              : index == 3
+                              :
+                      index == 3
                                   ? ProductsCubit.get(context)
                                       .getProduct(val:val.trim(),self: 0 )
                                   : index == 4

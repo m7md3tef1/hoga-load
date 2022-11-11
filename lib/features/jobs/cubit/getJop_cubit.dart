@@ -55,7 +55,7 @@ class JopCubit extends Cubit<AddJopStates> {
 
               jopList = value,
               emit(GetJopSuccess(value)),
-              if(isFilter=true){
+              if(isFilter==true){
                 jopClearData(context),
                 showToast(msg: 'Success', state: ToastedStates.SUCCESS)
 

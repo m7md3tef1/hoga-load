@@ -11,7 +11,7 @@ class User {
     this.id,});
 
   User.fromJson(dynamic json) {
-    firstName = json['first_name']??'';
+    //firstName = json['first_name']??'';
     lastName = json['last_name']??'';
     email = json['email']??'';
     contactNumber = json['contact_number']??'';
