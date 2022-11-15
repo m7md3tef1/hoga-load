@@ -23,12 +23,14 @@ String? desc;
             ],
           ),
         ),
-        collapsed: Column(
+
+
+        expanded: Column(
           children: [
             CustomText(text: desc,fontSize: 14.sp,fontWeight: FontWeight.w600,color: const Color(0xFF7B7B7B),),
           ],
         ),
-        expanded: const Text('', softWrap: true, ),
+        collapsed: const Text('', softWrap: true, ),
 
       ),
     );

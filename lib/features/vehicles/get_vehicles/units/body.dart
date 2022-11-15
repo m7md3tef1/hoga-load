@@ -69,7 +69,6 @@ class Body extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 print(state.vehicleList[index].equipmentTypes2!
                                     .toString());
-                                print('nnnnnnnnnnnnn');
                                 final vehicle = state.vehicleList[index];
                                 return Container(
                                   color: index.isEven
@@ -290,7 +289,7 @@ class Body extends StatelessWidget {
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: 6,
                               itemBuilder: (context, index) {
-                                print('llllllll');
+                                print('loading');
 
                                 return Container(
                                   color: index.isEven
@@ -372,7 +371,6 @@ class Body extends StatelessWidget {
                                 );
                               });
                         } else {
-                          print('nnnnnnnnnnnnn');
                           return ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount:
@@ -382,7 +380,6 @@ class Body extends StatelessWidget {
                                     .vehicleList[index]
                                     .equipmentTypes2!
                                     .toString());
-                                print('nnnnnnnnnnnnn');
 
                                 return Container(
                                   color: index.isEven

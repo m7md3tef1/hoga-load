@@ -50,6 +50,7 @@ class CustomAppbar extends StatelessWidget {
                             Home.scaffoldStateKey.currentState!.openDrawer();
                           }
                           //MagicRouter.navigateTo( const OnDrawer());
+                          //Scaffold.of(context).openDrawer();
                         },
                         child: SvgPicture.asset(AppImages.menu)),
                   Expanded(
