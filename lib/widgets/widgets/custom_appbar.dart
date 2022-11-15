@@ -41,18 +41,28 @@ class CustomAppbar extends StatelessWidget {
                             : MainAxisAlignment.center,
                 children: [
                   if (hideIcons == null || !hideIcons!)
-                    InkWell(
-                        onTap: () {
-                          print('clicked');
-                          if (scaffoldKey != null) {
-                            scaffoldKey!.currentState!.openDrawer();
-                          } else {
-                            Home.scaffoldStateKey.currentState!.openDrawer();
-                          }
-                          //MagicRouter.navigateTo( const OnDrawer());
-                          //Scaffold.of(context).openDrawer();
-                        },
-                        child: SvgPicture.asset(AppImages.menu)),
+                    Builder(
+                      builder: (context) {
+                        return InkWell(
+                            onTap: () {
+                              print('clicked');
+                              print(scaffoldKey);
+                              Scaffold.of(context).openDrawer();
+
+                              if (scaffoldKey != null) {
+                                print('clicked2');
+
+                                scaffoldKey!.currentState!.openDrawer();
+                              } else {
+
+                                Home.scaffoldStateKey.currentState!.openDrawer();
+
+                              }
+                              //MagicRouter.navigateTo( const OnDrawer());
+                            },
+                            child: SvgPicture.asset(AppImages.menu));
+                      }
+                    ),
                   Expanded(
                     flex: 1,
                     child: Center(

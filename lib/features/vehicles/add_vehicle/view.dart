@@ -81,6 +81,8 @@ class AddVehiclesView extends StatelessWidget {
                               vehiclesModel: vehiclesModel,
                               isEdit: isEdit,
                               index: index,
+                              isFilter: isLoadFilter,
+
                             ),
                           ),
                           Padding(
