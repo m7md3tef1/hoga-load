@@ -13,6 +13,11 @@ String? desc;
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: ExpandablePanel(
+        theme: const ExpandableThemeData(
+            tapHeaderToExpand: false,
+            tapBodyToCollapse:true,
+
+        ),
         header: Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: Column(
@@ -24,10 +29,13 @@ String? desc;
           ),
         ),
         collapsed: Column(
+
           children: [
-            CustomText(text: desc,fontSize: 14.sp,fontWeight: FontWeight.w600,color: const Color(0xFF7B7B7B),),
+            CustomText(
+              text: desc,fontSize: 14.sp,fontWeight: FontWeight.w600,color: const Color(0xFF7B7B7B),),
           ],
         ),
+
         expanded: const Text('', softWrap: true, ),
 
       ),

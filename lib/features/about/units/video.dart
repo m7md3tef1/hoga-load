@@ -43,8 +43,18 @@ class _VideoState extends State<Video> {
           ),
 
         ),
-        Icon(
-          _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+        InkWell(
+          onTap: (){
+            setState(() {
+              _controller.value.isPlaying
+                  ? _controller.pause()
+                  : _controller.play();
+            });
+          },
+          child: Icon(
+
+            _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,size: 30,
+          ),
         ),
 
       ],

@@ -519,7 +519,7 @@ class _FormInfoState extends State<FormInfo> {
                             child: Container(
                                 height: 30,
                                 width: 30,
-                                child: CircularProgressIndicator()))
+                                child: const CircularProgressIndicator()))
                         : CustomButton(
                             text: widget.isFilter
                                 ? 'Search'

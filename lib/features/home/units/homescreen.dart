@@ -27,10 +27,10 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     height: 38.h,
                   ),
-                   Video(),
+                   const Video(),
                   const Values(),
                   const Contact(),
-                  const Bottom(),
+                   Bottom(),
 
 
                 ],

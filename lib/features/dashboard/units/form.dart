@@ -30,7 +30,7 @@ class FormView extends StatelessWidget {
               ? Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
-                  child: Center(
+                  child: const Center(
                       child: CircularProgressIndicator(
                     color: Colors.orange,
                   )),
@@ -76,10 +76,10 @@ class FormView extends StatelessWidget {
                             keyboardType: TextInputType.streetAddress,
                           ),
                           if (state is UpdateLoading)
-                            Padding(
+                            const Padding(
                               padding:
-                                  const EdgeInsets.only(top: 17, bottom: 27),
-                              child: const Center(
+                                  EdgeInsets.only(top: 17, bottom: 27),
+                              child: Center(
                                 child: CircularProgressIndicator(
                                     color: ColorManager.primaryColor),
                               ),

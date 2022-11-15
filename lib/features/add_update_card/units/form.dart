@@ -549,33 +549,38 @@ class _FormState extends State<Form> {
                 ),
                 SizedBox(
                   width: 322.h,
-                  child: Divider(
+                  child: const Divider(
                     thickness: 1,
                   ),
                 ),
                 SizedBox(
                   height: 22.h,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: Row(
-                        children: [
-                          CustomText(
-                            text: 'Skip',
-                            fontSize: 17.sp,
-                            fontWeight: FontWeight.w600,
-                            color: const Color(0xFF0D6EFD),
-                          ),
-                          const Icon(
-                            Icons.keyboard_double_arrow_right_outlined,
-                            color: Color(0xFF0D6EFD),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                InkWell(
+                  onTap: (){
+                    MagicRouter.navigateTo(const Home());
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: Row(
+                          children: [
+                            CustomText(
+                              text: 'Skip',
+                              fontSize: 17.sp,
+                              fontWeight: FontWeight.w600,
+                              color: const Color(0xFF0D6EFD),
+                            ),
+                            const Icon(
+                              Icons.keyboard_double_arrow_right_outlined,
+                              color: Color(0xFF0D6EFD),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: 22.h,

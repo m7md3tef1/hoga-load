@@ -4,6 +4,7 @@ import 'package:hoga_load/core/color_manager/color_manager.dart';
 import 'package:hoga_load/features/home/units/homebage/buttonContainer.dart';
 import 'package:hoga_load/features/home/units/homebage/swiper1.dart';
 import 'package:hoga_load/features/home/units/homebage/swiper2.dart';
+import 'package:hoga_load/features/home/units/homebage/tab_view.dart';
 import 'package:hoga_load/features/home/units/homebage/vehicle_container.dart';
 import 'package:hoga_load/widgets/widgets/custom_text.dart';
 
@@ -14,8 +15,15 @@ import 'expandable.dart';
 import 'features_container.dart';
 import 'listview.dart';
 
-class Bottom extends StatelessWidget {
-  const Bottom({Key? key}) : super(key: key);
+class Bottom extends StatefulWidget {
+  Bottom({Key? key}) : super(key: key);
+
+  @override
+  State<Bottom> createState() => _BottomState();
+}
+
+class _BottomState extends State<Bottom> {
+  int i = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -83,17 +91,46 @@ class Bottom extends StatelessWidget {
             ),
             Row(
               children: [
-                ButtonContainer(ColorManager.primaryColor, 'LOADS & VEHICLES'),
+                InkWell(
+                    onTap: () {
+                      setState(() {
+                        i = 1;
+                      });
+                    },
+                    child: ButtonContainer(
+                        i == 1
+                            ? ColorManager.primaryColor
+                            : const Color(0xFFA9A9A9),
+                        'LOADS & VEHICLES')),
                 SizedBox(
                   width: 4.h,
                 ),
-                ButtonContainer(const Color(0xFFA9A9A9), 'JOBS'),
+                InkWell(
+                    onTap: () {
+                      setState(() {
+                        i = 2;
+                      });
+                    },
+                    child: ButtonContainer(
+                        i == 2
+                            ? ColorManager.primaryColor
+                            : const Color(0xFFA9A9A9),
+                        'JOBS')),
                 SizedBox(
                   width: 4.h,
                 ),
                 Expanded(
-                    child:
-                        ButtonContainer(const Color(0xFFA9A9A9), 'PRODUCTS')),
+                    child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            i = 3;
+                          });
+                        },
+                        child: ButtonContainer(
+                            i == 3
+                                ? ColorManager.primaryColor
+                                : const Color(0xFFA9A9A9),
+                            'PRODUCTS'))),
                 SizedBox(
                   width: 10.h,
                 ),
@@ -102,79 +139,26 @@ class Bottom extends StatelessWidget {
             SizedBox(
               height: 25.h,
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 15.w, right: 15.w),
-              child: CustomText(
-                text:
+            i == 1
+                ? TabView(
                     'Loads and Vehicle management allows you to connect with other users who are either booking a load or moving from one location to another.',
-                color: const Color(0xFF535353),
-                align: TextAlign.start,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            SizedBox(
-              height: 9.h,
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 15.w, right: 15.w),
-              child: Row(
-                children: [
-                  const Image(image: AssetImage('assets/images/Vector.png')),
-                  CustomText(
-                    text: ' List and search of Loads',
-                    color: ColorManager.primaryColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 9.h,
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 15.w, right: 15.w),
-              child: CustomText(
-                text:
+                    ' List and search of Loads',
                     'Items according to the type, size, durability and convenience can be uploaded in our system and matching vehicle owners can connect with you directly.',
-                color: const Color(0xFF535353),
-                align: TextAlign.start,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 15.w, right: 15.w),
-              child: Row(
-                children: [
-                  const Image(image: AssetImage('assets/images/Vector.png')),
-                  CustomText(
-                    text: ' List and search of Vehicles',
-                    color: ColorManager.primaryColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 9.h,
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 15.w, right: 15.w),
-              child: CustomText(
-                text:
-                    'Vehicle owners can list their available vehicle movement according to vehicle type, vehicle size, attributes and type of containers to get contacted from load providers.',
-                color: const Color(0xFF535353),
-                align: TextAlign.start,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            SizedBox(
-              height: 25.h,
-            ),
+                    ' List and search of Vehicles',
+                    'Vehicle owners can list their available vehicle movement according to vehicle type, vehicle size, attributes and type of containers to get contacted from load providers.')
+                : i == 2
+                    ? TabView(
+                        'A user can post available jobs in different locations that are related to logistics industry.',
+                        ' Post Jobs related to type of contract',
+                        'Full Time, Part Time, Contractual, Internship and Freelancing jobs can be posted relevant to the industry.',
+                        ' Jobs related to Category and Job Title can be posted',
+                        'Various jobs according to the category and with different job titles can be listed on the portal for a quick response from relevant candidates.')
+                    : TabView(
+                        'Hegaload system can be used for listing available items for sale and list items which we require with their relevant images and description.',
+                        ' List item available for Sale',
+                        'Upload items that are available for sale so that user can contact you directly for their required item.',
+                        ' Mention your required items',
+                        'A user can also post items that he needs to purchase with description and approximate price.'),
             Container(
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(15.r)),

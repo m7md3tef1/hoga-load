@@ -23,16 +23,20 @@ class CustomAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          color: Colors.white,
-          height: 65,
-          width: 1.sw,
-          child: Center(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.sp),
-              child: Row(
+    return Container(
+      color: Colors.white,
+      height: 100.h,
+      width: 1.sw,
+      child: Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15.sp),
+          child: Column(
+            children: [
+               Center(child: Image(
+                  height: 60.h,
+                  width: 1.sw,
+                  image: AssetImage(AppImages.logo))),
+              Row(
                 mainAxisAlignment:
                     (hideIcons == null || !hideIcons!) && icon != null
                         ? MainAxisAlignment.spaceBetween
@@ -70,10 +74,10 @@ class CustomAppbar extends StatelessWidget {
                         child: const Icon(Icons.account_circle_outlined)),
                 ],
               ),
-            ),
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
 }
